@@ -4,7 +4,7 @@
 
 **X and Y of the project**  
 
-**X (Trips):** *Represents the trips the user is planning to take, including details of the destination(city, country), trip type (e.g., Business, Solo, Family), start date, end date etc.*
+**X (Trips):** *Represents the trips the user is planning to take, including details of the destination(city, country), trip type (e.g., Business, Solo, Family)*
 
 **Y (DestinationItinerary):** *Represents the full itinerary for a particular destination, comprising activities, hotel details, flight information, and other related information.*
 
