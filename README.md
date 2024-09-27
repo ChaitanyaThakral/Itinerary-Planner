@@ -25,5 +25,16 @@ A budgeting feature which will help users manage their travel expenses effective
 - Bloggers
 
 **Why is this project of interest to you?**  
-As an international student with a passion for travel, I often find myself needing to return to my home country during the holidays. However, managing my travel plans can be quite challenging. Currently, I either jot down notes in an unorganized manner or store them in various folders on my laptop, which makes it difficult to keep track of everything. Creating a checklist becomes cumbersome, especially when I have to manually delete items once I've packed them. Therefore, a Travel Itinerary Planner will be a great tool to tackle this problem.
+As an international student with a passion for travel, I often find myself needing to return to my home country during the holidays. However, managing my travel plans can be quite challenging. Currently, I either jot down notes in an unorganized manner or store them in various folders on my laptop, which makes it difficult to keep track of everything. Creating a checklist becomes cumbersome, especially when I have to manually delete items once I've packed them. Therefore, a Travel Itinerary Planner will be a great tool to tackle these problems.
+
+## User Strories  
+- As a user, I want to be able to add a destination (X) to my travel itinerary (Y) so that I can manage the details of my trip.
+- As a user, I want to be able to view all the tasks and related information for a particular destination for a speciifc day.
+- As a user, I want to create a checklist of all items that I may need for my trip.
+- As a user, I want to set a budget for each activity and be able to review and analyze my daily spending to determine if I am staying within my budget or exceeding it.
+- As a user, I want to edit or change any existing plans for the day for a particular destination.
+- As a user, I want to be able to generate a summary report of my travel itinerary, including total expenses, number of destinations, and activities.
+
+
+
 
