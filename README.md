@@ -4,10 +4,9 @@
 
 **X and Y of the project**  
 
-**X (Trips):** *Represents the trips the user is planning to take, including details of the destination(city, country), trip type (e.g., Business, Solo, Family)*
+**X (DestinationItinerary):** *Represents the full itinerary for a particular destination, comprising activities, hotel details, flight information, and other related information.*
 
-**Y (DestinationItinerary):** *Represents the full itinerary for a particular destination, comprising activities, hotel details, flight information, and other related information.*
-
+**Y (Trips):** *Represents the trips the user is planning to take, including details of the destination(city, country), trip type (e.g., Business, Solo, Family)*
 
 
 **What will the application do?**  
@@ -28,7 +27,7 @@ A budgeting feature which will help users manage their travel expenses effective
 As an international student with a passion for travel, I often find myself needing to return to my home country during the holidays. However, managing my travel plans can be quite challenging. Currently, I either jot down notes in an unorganized manner or store them in various folders on my laptop, which makes it difficult to keep track of everything. Creating a checklist becomes cumbersome, especially when I have to manually delete items once I've packed them. Therefore, a Travel Itinerary Planner will be a great tool to tackle these problems.
 
 ## User Strories  
-- As a user, I want to be able to add a trip (X:Trips) to my travel itinerary (Y:DestinationItinerary), including details such as destination,      dates, and activities, so that I can effectively plan and manage the various aspects of my trip.
+- As a user, I want to be able to add a destination itinerary (X) to my trips (Y), including details such as destination, dates, and activities, so that I can effectively plan and manage the various aspects of my trip.
 - As a user, I want to be able to view all the tasks and related information for a particular destination for a speciifc day.
 - As a user, I want to create a checklist of all items that I may need for my trip.
 - As a user, I want to set a budget for each activity and be able to review and analyze my daily spending to determine if I am staying within my budget or exceeding it.
