@@ -27,83 +27,83 @@ public class Activity {
     }
 
     public String getActivityName(){
-        return null;
+        return this.activityName;
     }
 
     public String getLocation(){
-        return null;
+        return this.location;
     }
 
     public String getDate(){
-        return null;
+        return this.date;
     }
 
     public int getDuration(){
-        return 0;
+        return this.duration;
     }
     
     public String getTime(){
-        return null;
+        return this.time;
     }
 
     public String getDescription(){
-        return null;
+        return this.description;
     }
     
     public double getCost(){
-        return 0.0;
+        return this.cost;
     }
 
     public Boolean getStatus(){
-        return false;
+        return this.status;
     }
 
     //MODIFIES:this
     //EFFECTS: Set the activity name to the newly provided Activity name.
     public void setActivityName(String activityName){
-        //stub
+        this.activityName=activityName;
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Location  to the newly provided Location.
     public void setLocation(String location){
-        //stub
+        this.location=location;
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Date to the newly provided Date.
     public void setDate(String date){
-       //stub
+       this.date=date;
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Duration to the newly provided Duration.
     public void setDuration(int duration){
-        //stub
+        this.duration=duration;
     }
     
     //MODIFIES:this
     //EFFECTS: Set the time to the newly provided time.
     public void setTime(String time){
-        //stub
+        this.time=time;
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Descrition to the newly provided Description
     public void setDescription(String description){
-        //stub
+        this.description=description;
     }
     
     //MODIFIES:this
     //EFFECTS: Set the Cost to the newly provided Cost.
     public void setCost(double cost){
-        //stub
+        this.cost=cost;
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Status to the newly provided Status.
     public void setStatus(Boolean status){
-       //stub
+       this.status=status;
     }
 
 
