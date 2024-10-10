@@ -9,13 +9,21 @@ public class Activity {
     private int duration;// in minutes
     private String time;
     private String description;
-    private double cost;
+    public double cost;
     private boolean status;
 
     public Activity(String activityName, String location, String string,int duration,String time,
                     String description,double cost,boolean status){
-         //Stub
+        this.activityName=activityName;
+        this.location=location;
+        this.date=date;
+        this.duration=duration;
+        this.time=time;
+        this.description=description;
+        this.cost=cost;
+        this.status=status;
     }
+
     
     
 }
