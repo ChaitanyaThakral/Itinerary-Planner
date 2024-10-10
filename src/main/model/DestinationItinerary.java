@@ -8,8 +8,8 @@ public class DestinationItinerary {
     private int dayNumber;
     private List<Activity> activity;
 
-    public DestinationItinerary(String date,int dayNumber){
-        //Stub
+    public DestinationItinerary(String date,int dayNumber, List<Activity> activity2){
+     //stub
     }
 
     public String getDate(){
@@ -24,15 +24,15 @@ public class DestinationItinerary {
         return null;
     }
 
-    public void setDate(){
+    public void setDate(String date){
         //stub
     }
 
-    public void setDayNumber(){
+    public void setDayNumber(int dayNumber){
         //stub
     }
 
-    public void addActivity(){
+    public void addActivity(Activity activity){
         //stub
     }
 
