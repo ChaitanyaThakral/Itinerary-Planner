@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Activity {
     private String activityName;
     private String location;
