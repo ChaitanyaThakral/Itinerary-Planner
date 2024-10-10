@@ -60,49 +60,49 @@ public class Activity {
 
     //MODIFIES:this
     //EFFECTS: Set the activity name to the newly provided Activity name.
-    public void setActivityName(){
+    public void setActivityName(String activityName){
         //stub
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Location  to the newly provided Location.
-    public void setLocation(){
+    public void setLocation(String location){
         //stub
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Date to the newly provided Date.
-    public void setDate(){
+    public void setDate(String date){
        //stub
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Duration to the newly provided Duration.
-    public void setDuration(){
+    public void setDuration(int duration){
         //stub
     }
     
     //MODIFIES:this
     //EFFECTS: Set the time to the newly provided time.
-    public void setTime(){
+    public void setTime(String time){
         //stub
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Descrition to the newly provided Description
-    public void setDescription(){
+    public void setDescription(String description){
         //stub
     }
     
     //MODIFIES:this
     //EFFECTS: Set the Cost to the newly provided Cost.
-    public void setCost(){
+    public void setCost(double cost){
         //stub
     }
 
     //MODIFIES:this
     //EFFECTS: Set the Status to the newly provided Status.
-    public void setStatus(){
+    public void setStatus(Boolean status){
        //stub
     }
 
