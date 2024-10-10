@@ -32,8 +32,8 @@ public class Trips {
 
     //MODIFIES: this
     //EFFECTS: add the given activity to our list of destination itinerary.
-    public List<DestinationItinerary> addDestinationItineraries(DestinationItinerary activity){
-    return null;
+    public void addDestinationItineraries(DestinationItinerary activity){
+    //stub
     }
     
     public String getCity() {
