@@ -5,7 +5,7 @@ public class Item {
     private Boolean status;
 
 
-    //EFFECTS: Constructs an item with its name and packing status.
+    //EFFECTS: Constructs an item with its name and packing status (upon construction status set to false).
     public Item(String name,Boolean Status){
         //stub
     }
