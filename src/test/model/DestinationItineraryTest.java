@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
 
 public class DestinationItineraryTest {
     private DestinationItinerary i1;
@@ -36,16 +37,18 @@ public class DestinationItineraryTest {
         assertEquals(activity, i1.getActivity());
     }
 
-    void testSetDate(){
+    @Test
+    public void testSetDate(){
         i1.setDate("2024-09-11");
         assertEquals("2024-09-11", i1.getDate());   
     }
 
+    @Test
     public void testSetDayNumber(){
         i1.setDayNumber(1);
         assertEquals(1, i1.getDayNumber());   
     }
-
+    @Test
     public void testAddActivity(){
         i1.addActivity(a2);
         List<Activity> test= new ArrayList<Activity>();
@@ -55,6 +58,7 @@ public class DestinationItineraryTest {
         assertEquals(2,i1.getActivity().size());
     }
 
+    @Test
     public void testGetTotalCost(){
        assertEquals(100,i1.getTotalCost());
        i1.addActivity(a2);
