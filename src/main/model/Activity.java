@@ -9,11 +9,12 @@ public class Activity {
     private String description;
     public double cost;
     private boolean status;
+    private Budget budget;
 
     //EFFECTS: creates an activity with its name,location of the activity, date, duratiom,
     // time taken to complete the activity, description, cost, Status of completion (boolean)
     public Activity(String activityName, String location, String date,int duration,String time,
-                    String description,double cost,boolean status){
+                    String description,double cost,boolean status,Budget budget){
         this.activityName=activityName;
         this.location=location;
         this.date=date;
@@ -22,6 +23,7 @@ public class Activity {
         this.description=description;
         this.cost=cost;
         this.status=status;
+        this.budget=budget;
     }
 
     public String getActivityName(){
@@ -56,6 +58,14 @@ public class Activity {
         return this.status;
     }
 
+    public Budget getBudget(){
+        return this.budget;
+    }
+
+    public Boolean budgetCheck(){
+        return this.cost<=budget.getBudgetLimit();
+    }
+    
     //MODIFIES:this
     //EFFECTS: Set the activity name to the newly provided Activity name.
     public void setActivityName(String activityName){
