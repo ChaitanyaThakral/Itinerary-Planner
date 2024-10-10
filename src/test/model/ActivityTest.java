@@ -63,6 +63,9 @@ public class ActivityTest {
     public void setStatus(){
         a1.setStatus(false);
         assertFalse(a1.getStatus());
+
+        a1.setStatus(true);
+        assertTrue(a1.getStatus());
     }
 
     
