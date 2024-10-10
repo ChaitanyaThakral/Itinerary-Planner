@@ -5,8 +5,8 @@ public class Budget {
     private double budgetLimit;
 
     //EFFECTS: constructs a budget with its limit
-    // and expenditure of what one has spent till now.
-    public Budget(){
+    // and expenditure of what one has spent till now(intial value at 0.0).
+    public Budget(double budgetLimit,double currentExpenditure){
         //stub
     }
 
