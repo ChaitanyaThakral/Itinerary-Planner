@@ -1,7 +1,7 @@
 package model;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+
 
 public class DestinationItinerary {
     private String date;
@@ -11,41 +11,49 @@ public class DestinationItinerary {
     // EFFECTS: constructs a Destination Itinerary with date, dayNumber 
     //and List of all the activities user may be doing.
     public DestinationItinerary(String date,int dayNumber, List<Activity> activity){
-     //stub
+        this.date=date;
+        this.dayNumber=dayNumber;
+        this.activity=activity;
     }
 
     public String getDate(){
-        return null;
+        return this.date;
     }
 
     public int getDayNumber(){
-        return 0;
+        return this.dayNumber;
     }
 
     public List<Activity> getActivity(){
-        return null;
+        return this.activity;
     }
-
     //MODIFIES:this
     //EFFECTS: Set the date to the provided new date.
     public void setDate(String date){
-        //stub
+       this.date=date;
     }
     
     //MODIFIES:this
     //EFFECTS: Set the day number to the provided new day number.
     public void setDayNumber(int dayNumber){
-        //stub
+        this.dayNumber=dayNumber;
     }
-    
+
     //MODIFIES:this
     //EFFECTS: add a new activity to the list of activities.
-    public void addActivity(Activity activity){
-        //stub
+    public void addActivity(Activity newActivity){
+       activity.add(newActivity);
     }
 
     //EFFECTS: returns the total cost of the activity.
     public double getTotalCost(){
-        return 0;
+        double sum =0;
+        for (int i =0;i<this.activity.size();i++){
+            Activity act=activity.get(i);
+            sum=sum+act.cost;
+        }
+        return sum;
     }
 }
+
+

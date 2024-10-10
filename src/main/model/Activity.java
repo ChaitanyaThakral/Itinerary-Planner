@@ -12,7 +12,7 @@ public class Activity {
     public double cost;
     private boolean status;
 
-    public Activity(String activityName, String location, String string,int duration,String time,
+    public Activity(String activityName, String location, String date,int duration,String time,
                     String description,double cost,boolean status){
         this.activityName=activityName;
         this.location=location;
