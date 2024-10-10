@@ -7,33 +7,40 @@ public class Budget {
     //EFFECTS: constructs a budget with its limit
     // and expenditure of what one has spent till now(intial value at 0.0).
     public Budget(double budgetLimit,double currentExpenditure){
-        //stub
+        this.budgetLimit=budgetLimit;
+        this.currentExpenditure=currentExpenditure;
     }
 
     //EFFETCS: return the amount of money spent till now.
     public double getCurrentExpenditure(){
-        return 0.0;
+        return this.currentExpenditure;
     }
 
     //EFFETCS: retun the budget limit set for the activity.
     public double getBudgetLimit(){
-        return 0.0;
+        return this.budgetLimit;
     }
 
     //MODIFIES:this
     //EFFECTS: increase the budget limit by the given amount.
     public void increaseBudgetLimit(double amount){
-        //stub
+        this.budgetLimit=this.budgetLimit+amount;
     }
 
     //MODIFIES:this
     //EFFECTS: increase the current expenditure by the given amount.
     public void increaseCurrentExpenditure(double amount){
-        //stub
+       this.currentExpenditure=this.currentExpenditure+amount;
     }
 
     //EFFECTS: check if the user has exceeded the limit set for the activity.
-    public Boolean checkBudget(){
-        return false;
+    //If budget is exceeded it returns true.
+    public Boolean budgetExceed(){
+        if (this.currentExpenditure>this.budgetLimit){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
