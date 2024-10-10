@@ -2,7 +2,6 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,16 +9,22 @@ import org.junit.jupiter.api.Test;
 public class TripsTest {
     private Trips trip;
     private List<DestinationItinerary> itinerary; 
+    private List<Activity> activity;
     private Activity a1;
-    private Activity a2;
+    
     
     @BeforeEach
     void runBefore() {
+        itinerary=new ArrayList<DestinationItinerary>();
+
         trip=new Trips("Vancouver","Canada","Solo");
+
         a1= new Activity("Surfing", "Vancouver", "2024-09-10",
-         60,"10:00 AM", "Did surfing with family", 100.0, true);
-        a2= new Activity("Eating", "Vancouver", "2024-09-10",
-        20,"11:00 AM", "Ate Noodles with family", 30.0, true);
+        60,"10:00 AM", "Did surfing with family", 100.0, true);
+
+        activity=new ArrayList<Activity>();
+
+        activity.add(a1);
     }
 
     @Test
@@ -27,6 +32,7 @@ public class TripsTest {
         assertEquals("Vancouver",trip.getCity());
         assertEquals("Canada",trip.getCountry());
         assertEquals("Solo",trip.getTripType());
+        assertEquals(0,itinerary.size());
     }
 
     @Test
@@ -51,7 +57,7 @@ public class TripsTest {
 
     @Test
     void testaddDestinationItineraries(){
-        DestinationItinerary Entry = new DestinationItinerary("2024-09-10", 1);
+        DestinationItinerary Entry = new DestinationItinerary("2024-09-10", 1,activity);
         trip.addDestinationItineraries(Entry); //added our entry to the trip
 
         itinerary=trip.getDestinationItinerary();
