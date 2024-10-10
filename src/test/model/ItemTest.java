@@ -7,24 +7,24 @@ public class ItemTest {
     private Item i1;
     
     @BeforeEach
-    void runBefore(){
+    public void runBefore(){
         i1= new Item("Passport", false);
     }
 
     @Test
-    void testItem(){
+    public void testItem(){
         assertEquals("Passport",i1.getName());
         assertFalse(i1.getStatus());
     }
 
     @Test
-    void testSetName(){
+    public void testSetName(){
         i1.setName("Sunglasses");
         assertEquals("Sunglasses",i1.getName());
     }
 
     @Test
-    void testSetStatus(){
+    public void testSetStatus(){
         i1.setStatus(true);
         assertTrue(i1.getStatus());
     }
