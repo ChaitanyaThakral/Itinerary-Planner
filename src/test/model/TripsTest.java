@@ -20,7 +20,7 @@ public class TripsTest {
         trip=new Trips("Vancouver","Canada","Solo");
 
         a1= new Activity("Surfing", "Vancouver", "2024-09-10",
-        60,"10:00 AM", "Did surfing with family", 100.0, true);
+        60,"10:00 AM", "Did surfing with family", 100.0, true,new Budget(1000, 0));
 
         activity=new ArrayList<Activity>();
 

@@ -1,10 +1,7 @@
 package model;
 import org.junit.jupiter.api.Test;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
-import java.util.ArrayList;
 
 
 public class ChecklistTest {

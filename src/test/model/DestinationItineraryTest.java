@@ -18,10 +18,10 @@ public class DestinationItineraryTest {
     @BeforeEach
     void runBefore(){
         a1= new Activity("Surfing", "Vancouver", "2024-09-10",
-        60,"10:00 AM", "Did surfing with family", 100.0, true);
+        60,"10:00 AM", "Did surfing with family", 100.0, true,new Budget(1000, 0));
 
         a2= new Activity("Eating", "Vancouver", "2024-09-10",
-        20,"11:00 AM", "Ate Noodles with family", 30.0, true);
+        20,"11:00 AM", "Ate Noodles with family", 30.0, true,new Budget(1000, 0));
 
         activity=new ArrayList<Activity>();
 
