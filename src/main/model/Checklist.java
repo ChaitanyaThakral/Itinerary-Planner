@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Checklist {
@@ -6,33 +7,39 @@ public class Checklist {
 
     //EFFECTS: creates a checklist with the list of items present.
     public Checklist(){
-        //stub
+        checklist=new ArrayList<Item>();
     }
 
     //EFFECTS:return the total number of items in the checklist
     public int totalItems(){
-        return 0;
+        return checklist.size();
     }
 
     //EFFECTS:return the total number of items in the checklist yet to pack.
     public int remainingItems(){
-        return 0;
+        int count=0;
+        for (int i =0;i<checklist.size();i++){
+        if (checklist.get(i).getStatus()==false){
+            count++;
+        }
+        }
+        return count;
     }
 
     //MODIFIES:this
     //EFFECTS: add a new item into the checklist.
     public void addItem(Item item){
-        //stub
+        checklist.add(item);
     }
 
     //EFFECTS: return the list of all the items in the checklist.
     public List<Item> getChecklist(){
-        return null;
+        return checklist;
     }
 
     //MODIFIES:this
     //EFFECTS: removes an items from the list.
     public void removeItem(Item item){
-        //stub
+       checklist.remove(item);
     }
 }
