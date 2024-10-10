@@ -21,7 +21,7 @@ public class Checklist {
 
     //MODIFIES:this
     //EFFECTS: add a new item into the checklist.
-    public void addItem(){
+    public void addItem(Item item){
         //stub
     }
 
@@ -32,7 +32,7 @@ public class Checklist {
 
     //MODIFIES:this
     //EFFECTS: removes an items from the list.
-    public void removeItem(){
+    public void removeItem(Item item){
         //stub
     }
 }
