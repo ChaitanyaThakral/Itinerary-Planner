@@ -24,8 +24,10 @@ public class BudgetTest {
     }
 
     @Test
-    public void testCheckBudget(){
-        assertFalse(budget.checkBudget());
+    public void testbudgetExceed(){
+        assertFalse(budget.budgetExceed());
+        budget.increaseCurrentExpenditure(2000);
+        assertTrue(budget.budgetExceed());
     }
     
 }
