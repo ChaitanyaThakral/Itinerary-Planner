@@ -1,6 +1,8 @@
 package model;
 
-/* Creates an item with its name and packing status i.e. whether the item is packed or not.  */
+/* Represents an item with its name and packing status i.e. whether the item is packed or not.
+ * Item has Name of item (has to be String), 
+ * status: has to be boolean (representing whether the item is packed or not)*/
 public class Item {
     private String name;
     private Boolean status;
