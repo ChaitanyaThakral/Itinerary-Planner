@@ -53,6 +53,11 @@ public class TripMaker {
             break;
 
             case 2:
+            itineraryCreation();
+            break;
+
+
+            case 3:
             System.out.println("Exiting the Application");
             break;
 
@@ -78,6 +83,41 @@ public class TripMaker {
         System.out.println("You are travelling to "+ cityName+ " in " + countryName +" and your Trip type is meant to be " + tripType);
     }
 
+    public void itineraryCreation(){
+        System.out.println("Please enter the date ");
+        String date = scanner.nextLine();
+
+        System.out.println("Please enter the day Number (like Day 1 or Day2 , just a number)");
+        int dayNumber=scanner.nextInt();
+
+        System.out.println("Now lets add your activites for the day "+dayNumber );
+
+        Boolean wantMoreActivity=true;
+        List<Activity> activityList= new ArrayList<>();
+
+        while(wantMoreActivity){
+            Activity activity= activityCreation();
+            activityList.add(activity);
+            System.out.println("Do you want to add more activities for the same day? (true/false)");
+            wantMoreActivity = scanner.nextBoolean();
+            scanner.nextLine();
+        }
+        DestinationItinerary listOfitinerary = new DestinationItinerary(date, dayNumber, activityList);
+        this.destinationItinerary.add(listOfitinerary); // helps in viewActivities method becuase we use this field in for loop.
+        trip.addDestinationItineraries(listOfitinerary);
+    }
+/*
+ * REQUIRES: String nameActivity,String locationActivity,String dateActivity,
+ * int durationActivity,String timeActivity,String descriptionActivity,double costActivity,
+ * Boolean statusActivity,double budgetLimit,double currentExpenditure
+ * 
+ * EFFECTS: allows the user to create an activity with the inputted name,location,date,duratiom,time,description,cost,status(activity completed or not),
+ * and budget
+ */
+
+    public Activity  activityCreation(){
+        return null;
+    }
 
 
 
