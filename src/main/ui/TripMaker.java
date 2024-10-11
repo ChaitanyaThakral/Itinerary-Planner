@@ -78,8 +78,11 @@ public class TripMaker {
             viewActivies();
             break;
 
-
             case 4:
+            makeChecklist();
+            break;
+
+            case 5:
             System.out.println("Exiting the Application");
             break;
 
@@ -205,7 +208,24 @@ public class TripMaker {
             System.out.println("No activities found for that day");
         }
     }
-
+//REQUIRES: name of the item to be string and stutus to be Boolean.
+//EFFETCS: Creates a checklist containing the items which has to be packed. item has name and pack status.
+    public void makeChecklist(){
+        System.out.println("Lets create a checklist");
+        boolean moreRun = true;
+        checklist= new Checklist();
+        while (moreRun){
+            System.out.println("Please enter the name of the item");
+            String nameItem = scanner.nextLine();
+            System.out.println("Please enter the status of the item (if Packed type -true/ not packed type -false)");
+            boolean statusItem= scanner.nextBoolean();
+            scanner.nextLine();
+            checklist.addItem(new Item(nameItem, statusItem));
+            System.out.println("Do you want to add more items (true/false)");
+            moreRun= scanner.nextBoolean();
+            scanner.nextLine();
+        }        
+    }
     
 
 
