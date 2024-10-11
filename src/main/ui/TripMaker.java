@@ -91,6 +91,7 @@ public class TripMaker {
 
             case 7:
             System.out.println("Exiting the Application");
+            System. exit(0);
             break;
 
 
