@@ -3,7 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/*contructs a trip with city, country, type of the trip and list of itinerary associated with that trip */
+/*Represents a trip with city, country, type of the trip and list of itinerary associated with that trip 
+ * Trip specifies a city where the user is going to , country where the user is going to, type of the trip 
+ * solo, buisness or family trip, itinerary of the trip of what all the activities user may have for his trip
+*/
 public class Trips {
     private String city;
     private String country;
