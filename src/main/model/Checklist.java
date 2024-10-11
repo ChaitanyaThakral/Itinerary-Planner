@@ -3,8 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Creates a checklist with all the list of items which one may require before the trip, 
-user can add,remove,find,remaining items in the checklist */
+/*Represents a checklist with all the list of items which one may require before the trip, 
+user can add,remove,find,remaining items in the checklist 
+checklist is initialized as list of Item.*/
 
 public class Checklist {
     private List<Item> checklist;
@@ -45,5 +46,17 @@ public class Checklist {
     //EFFECTS: removes an items from the list.
     public void removeItem(Item item) {
         checklist.remove(item);
+    }
+
+    // EFFECTS: returns a list of all the items which are yet to be packed.
+    public List<Item> remainItemName() {
+        List<Item> itemList = new ArrayList<>();
+        for (int i = 0;i < checklist.size();i++) {
+            if (checklist.get(i).getStatus() == false) {
+                itemList.add(checklist.get(i));              
+            }
+        }
+        return itemList;
+
     }
 }
