@@ -28,4 +28,16 @@ public class TripMaker {
     scanner= new Scanner(System.in);
     destinationItinerary = new ArrayList<>();
     }
+//EFFECTS: prints all the options available to the user.
+    public void  displayOptions(){
+        System.out.println("Please Choose any options from the provided menu");
+        System.out.println("1:Create a Trip");
+        System.out.println("2:Add itinerary to the Trip created");
+        System.out.println("3:View all the tasks and related information for a particular destination for a specific day");
+        System.out.println("4:Make a checklist for the items which is to be carried");
+        System.out.println("5:View the Checklist of all the items");
+        System.out.println("6:Check if you went over budget and analyze your data");
+        System.out.println("7:Exit the application");
+    }
+
 }  
