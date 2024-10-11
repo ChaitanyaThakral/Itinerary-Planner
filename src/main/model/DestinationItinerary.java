@@ -2,8 +2,11 @@ package model;
 
 import java.util.List;
 
-/*Creates a Destination Itinerary with date, dayNumber 
-and List of all the activities user may be doing  throughout the trip*/
+/* Represents a Destination Itinerary with date, dayNumber 
+and List of all the activities user may be doing  throughout the trip
+model has date: date of itinerary.(has to be String), dayNumber: day number of trip (like Day 1)(has to int)
+activity: Comprises of the list of activity.
+*/ 
 
 public class DestinationItinerary {
     private String date;
