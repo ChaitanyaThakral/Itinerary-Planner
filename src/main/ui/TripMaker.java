@@ -116,7 +116,44 @@ public class TripMaker {
  */
 
     public Activity  activityCreation(){
-        return null;
+        
+        System.out.println("Please enter the name of the Activity");
+        String nameActivity = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Please enter the Location of the Activity");
+        String locationActivity= scanner.nextLine();
+
+        System.out.println("Please enter the Date of the Activity");
+        String dateActivity=scanner.nextLine();
+
+        System.out.println("Please enter the Duration of the Activity");
+        int durationActivity=scanner.nextInt();
+
+        System.out.println("Please enter the Time of the Activity");
+        String timeActivity=scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Please enter the Descrition of the Activity");
+        String descriptionActivity=scanner.nextLine();
+        
+        System.out.println("Please enter the Cost of the Activity");
+        double costActivity=scanner.nextDouble();
+
+        System.out.println("Please enter the Status of the Activity (if completed type true/ if incompleted type false)");
+        Boolean statusActivity=scanner.nextBoolean();
+
+        System.out.println("We will now set Budget of the Activity");
+        System.out.println("Please enter the budget limit for this activity");
+        double bl=scanner.nextDouble();
+        System.out.println("Please enter the Current spending you have done for this activity");
+        double ce=scanner.nextDouble();
+
+        Budget b= new Budget(bl,ce);
+
+        return new Activity(nameActivity, locationActivity, dateActivity, durationActivity,
+        timeActivity, descriptionActivity, costActivity, statusActivity, b);
+
     }
 
 
