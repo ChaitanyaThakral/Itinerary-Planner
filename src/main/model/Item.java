@@ -6,9 +6,9 @@ public class Item {
 
 
     //EFFECTS: Constructs an item with its name and packing status (upon construction status set to false).
-    public Item(String name,Boolean Status){
+    public Item(String name,Boolean status){
        this.name=name;
-       this.status=false;
+       this.status=status;
     }
 
     public String getName(){
