@@ -26,15 +26,27 @@ public class TripMaker {
     private Checklist checklist;
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
-    // user,
-    // destinationItinerary list to manage the itinerary of the trip.
+    // user, destinationItinerary list to manage the itinerary of the trip.
+    // checklist to manage the checklist and
+    // Calls the run() method to start the application.
     public TripMaker() {
         scanner = new Scanner(System.in);
         destinationItinerary = new ArrayList<>();
+        checklist = new Checklist();
         run();
     }
+
     // EFFETCS: keep running the console interface until user has inputted all his
-    // data.
+    // data and made the travel itenerary.
+    /*
+     * EFFECTS: Continuously displays menu options and processes user choices until
+     * the user decides to exit. Calls displayOptions() to show the available
+     * actions,
+     * it also calls choice() to get user input, and choiceMaker(choice) to handle
+     * the selected option. Ask user after each action to decide whether to
+     * return to the menu or quit the travel iternerary application.
+     * If the user returns to main menu, it redisplays the menu options.
+     */
 
     public void run() {
         boolean keepRunning = true;
@@ -43,7 +55,7 @@ public class TripMaker {
         while (keepRunning) {
             int choice = choice();
             choiceMaker(choice);
-            System.out.println("Do you want to go to menu or quit (press true to go to menu /press false for exit)");
+            System.out.println("Do you want to go to menu or quit (type true to go to menu /type false for exit)");
             keepRunning = scanner.nextBoolean();
             if (keepRunning) {
                 displayOptions();
@@ -52,7 +64,7 @@ public class TripMaker {
 
     }
 
-    // EFFECTS: prints all the options available to the user.
+    // EFFECTS: prints all the options available to the user to create an itenerary.
 
     public void displayOptions() {
         System.out.println("Please Choose any options from the provided menu");
@@ -61,8 +73,9 @@ public class TripMaker {
         System.out.println("3:View all the tasks for a specific day");
         System.out.println("4:Make a checklist for the items which is to be carried");
         System.out.println("5:View the Checklist of all the items");
-        System.out.println("6:Check if you went over budget and analyze your data");
-        System.out.println("7:Exit the application");
+        System.out.println("6:Edit the checklist");
+        System.out.println("7:Check if you went over budget and analyze your data");
+        System.out.println("8:Exit the application");
     }
     // EFFECTS: allows the user to choose between different choices by taking
     // integer input from the user.
@@ -73,6 +86,10 @@ public class TripMaker {
         scanner.nextLine();
         return choice;
     }
+
+    // MODIFIES: this
+    // EFFECTS: inputs the user's choice and calls the corresponding method
+    // based on the choice made by the user.
 
     @SuppressWarnings("methodlength")
     public void choiceMaker(int choice) {
@@ -99,10 +116,14 @@ public class TripMaker {
                 break;
 
             case 6:
-                overBudget();
+                editChecklist();
                 break;
 
             case 7:
+                overBudget();
+                break;
+
+            case 8:
                 System.out.println("Exiting the Application");
                 System.exit(0);
 
@@ -113,7 +134,9 @@ public class TripMaker {
 
         }
     }
-    // REQUIRES: String cityName ,String countryName and String tripType.
+    // REQUIRES: String cityName ,String countryName and String tripType are all not
+    // null
+    // MODIFIES: The trip variable is updated with a new Trips object.
     // EFFECTS: allows the user to create a trip by inputting city name, country
     // name, and trip type.
 
@@ -128,54 +151,52 @@ public class TripMaker {
         String tripType = scanner.nextLine();
 
         trip = new Trips(cityName, countryName, tripType);
-        System.out.println(" travel to :" + cityName + " in :" + countryName + " Trip type : " + tripType);
+        System.out.println(" travel to - " + cityName + " in - " + countryName + " Trip type - " + tripType);
     }
-    // REQUIRES: String date,int dayNumber.
-    // EFFETCS: add itinerary to the trip created, and run if the user want to add
-    // more activites.
+    // REQUIRES: String date,int dayNumber and trip is not null.
+    // MODIFIES: destinationItinerary
+    // EFFETCS: add itinerary to the trip created, and continue running if the user
+    // want to add more activites.
 
     public void itineraryCreation() {
-        if (trip==null){
+        if (trip == null) {
             System.out.println("Please create a trip first before adding an itinerary");
-        }
-        else{
+        } else {
             System.out.println("Please enter the date ");
-        String date = scanner.nextLine();
-
-        System.out.println("Please enter the day Number (like Day 1 or Day2 , just a number)");
-        int dayNumber = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.println("Now lets add your activites for the day " + dayNumber);
-
-        Boolean wantMoreActivity = true;
-        List<Activity> activityList = new ArrayList<>();
-
-        while (wantMoreActivity) {
-            Activity activity = activityCreation();
-            activityList.add(activity);
-            System.out.println("Do you want to add more activities for the same day? (true/false)");
-            wantMoreActivity = scanner.nextBoolean();
+            String date = scanner.nextLine();
+            System.out.println("Please enter the day Number (like Day 1 or Day 2 , an integer)");
+            int dayNumber = scanner.nextInt();
             scanner.nextLine();
+            System.out.println("Now lets add your activites for the day " + dayNumber);
+            Boolean wantMoreActivity = true;
+            List<Activity> activityList = new ArrayList<>();
+            while (wantMoreActivity) {
+                Activity activity = activityCreation();
+                activityList.add(activity);
+                System.out.println("Do you want to add more activities for the same day? (true/false)");
+                wantMoreActivity = scanner.nextBoolean();
+                scanner.nextLine();
+            }
+            DestinationItinerary listOfitinerary = new DestinationItinerary(date, dayNumber, activityList);
+            this.destinationItinerary.add(listOfitinerary);
+            trip.addDestinationItineraries(listOfitinerary);
         }
-        DestinationItinerary listOfitinerary = new DestinationItinerary(date, dayNumber, activityList);
-        this.destinationItinerary.add(listOfitinerary);
-        trip.addDestinationItineraries(listOfitinerary);
-        }
-        
+
     }
     /*
      * REQUIRES: String nameActivity,String locationActivity,String dateActivity,
-     * int durationActivity,String timeActivity,String descriptionActivity,double
-     * costActivity,
-     * Boolean statusActivity,double budgetLimit,double currentExpenditure
+     * int durationActivity is a positive integer,String timeActivity,String
+     * descriptionActivity,double
+     * costActivity is not negative,
+     * Boolean statusActivity,double budgetLimit is not negative, double
+     * currentExpenditure is not negative
      * 
      * EFFECTS: allows the user to create an activity with the inputted
-     * name,location,
-     * date,duratiom,time,description,cost,status(activity completed or not),
+     * name,location, date,duratiom,time,description,cost,status(activity completed
+     * or not),
      * and budget
      */
-    
+
     @SuppressWarnings("methodlength")
     public Activity activityCreation() {
 
@@ -188,11 +209,11 @@ public class TripMaker {
         System.out.println("Please enter the Date of the Activity");
         String dateActivity = scanner.nextLine();
 
-        System.out.println("Please enter the Duration of the Activity");
+        System.out.println("Please enter the Duration (in minutes (integer)) of the Activity");
         int durationActivity = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Please enter the Time of the Activity");
+        System.out.println("Please enter the Time of the Activity (like 10:00AM)");
         String timeActivity = scanner.nextLine();
 
         System.out.println("Please enter the Descrition of the Activity");
@@ -218,6 +239,8 @@ public class TripMaker {
                 timeActivity, descriptionActivity, costActivity, statusActivity, b);
 
     }
+
+    // REQUIRES: destinationItinerary is not empty.
     // EFFECTS: take day number as user input and provide the user with the activity
     // for that particular day.
     // if no activity for that day it prints no activity
@@ -230,7 +253,7 @@ public class TripMaker {
                 System.out.println("Your activities for Day Number : " + dn + " is as follows:");
                 for (Activity a : i.getActivity()) {
                     System.out.println("the name of the activity was :" + a.getActivityName());
-                    System.out.println("the lcoation of the activity was : " + a.getLocation());
+                    System.out.println("the location of the activity was : " + a.getLocation());
                     System.out.println("the date of the activity was : " + a.getDate());
                     System.out.println("the duration of the activity was : " + a.getDuration());
                     System.out.println("the time of the activity was : " + a.getTime());
@@ -246,7 +269,9 @@ public class TripMaker {
             System.out.println("No activities found for that day");
         }
     }
-    // REQUIRES: name of the item to be string and stutus to be Boolean.
+
+    // REQUIRES: name of the item to be string and status to be Boolean.
+    // MODIFIES: checklist (this)
     // EFFETCS: Creates a checklist containing the items which has to be packed.
     // item has name and pack status.
 
@@ -261,11 +286,149 @@ public class TripMaker {
             boolean statusItem = scanner.nextBoolean();
             scanner.nextLine();
             checklist.addItem(new Item(nameItem, statusItem));
-            System.out.println("Do you want to add more items (true/false)");
+            System.out.println("Do you want to add more items in the checklist (true/false)");
             moreRun = scanner.nextBoolean();
             scanner.nextLine();
         }
     }
+
+    // EFFECTS: print all the avaiable choices that the user has in editing the
+    // checklist.
+    public void printCheck() {
+        System.out.println("What do you want to do in the checklist");
+        System.out.println("1: Get total items in the checklist");
+        System.out.println("2:Get number of remaining items in the checklist (which are not packed)");
+        System.out.println("3:Get the name of the remaining items which are not packed");
+        System.out.println("4:Add an item to the checklist");
+        System.out.println("5: Remove an item from the checklist");
+
+    }
+
+    // REQUIRES: checklist is not null.
+    // EFFECTS: allow the user for input based on available choices calls the
+    // corresponding method
+    // based on the choice made by the user.
+
+    public void takeInputCheck() {
+        System.out.println("Please enter what you want to do from the options above");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1:
+                totalItem();
+                break;
+
+            case 2:
+                remainItem();
+                break;
+
+            case 3:
+                remainName();
+                break;
+
+            case 4:
+                addItem();
+                break;
+
+            case 5:
+                removeItem();
+                break;
+
+            default:
+                System.out.println("Please enter a valid option");
+
+        }
+    }
+
+    // MODIFIES: checklist(this)
+    // EFFECTS: Allows the user to edit the checklist repeatedly until they decide
+    // to stop.
+    // Prints the current checklist and prompts the user for input each iteration.
+    // Updates the checklist based on user input through the takeInputCheck()
+    // method.
+    public void editChecklist() {
+        boolean editCheck = true;
+        while (editCheck) {
+            printCheck();
+            takeInputCheck();
+
+            System.out.println("Do you want to keep editing checklist (true/false)");
+            editCheck = scanner.nextBoolean();
+
+        }
+    }
+    // REQUIRES: checklist is not null.
+    // EFFCTS: prints the name of all the items which are not packet yet.
+
+    public void remainName() {
+        if (checklist.remainItemName().isEmpty()) {
+            System.out.println("the checklist has no item which is unpacked");
+        } else {
+            for (int i = 0; i < checklist.remainItemName().size(); i++) {
+                if (checklist.remainItemName().get(i).getStatus() == false) {
+                    System.out.println("Name of the item : " + checklist.remainItemName().get(i).getName());
+                }
+            }
+
+        }
+    }
+
+    // REQUIRES: checklist is not null.
+    // EFFECTS: prints the total number of items in the checklist.
+    public void totalItem() {
+        System.out.println("The total number of items in the checklist: " + checklist.totalItems());
+    }
+
+    // REQUIRES: checklist is not null.
+    // EFFECTS: prints the total number of items which are not packet yet.
+    public void remainItem() {
+        System.out.println("number of items which are not packed: " + checklist.remainingItems());
+    }
+
+    // MODIFIES: checklist (this)
+    // EFFECTS: Adds a new item with the given name and status to the checklist.
+    public void addItem() {
+        System.out.println("Please enter the name of the item");
+        String itemName = scanner.nextLine();
+        System.out.println("please enter the Status of the item");
+        boolean itemStatus = scanner.nextBoolean();
+        Item newItem = new Item(itemName, itemStatus);
+        checklist.addItem(newItem);
+
+    }
+
+    // REQUIRES: The checklist should not be null.
+    // MODIFIES: checklist (this)
+    // EFFECTS: remove the item of the specified index from the checklist and prints
+    // the name of the item which was removed
+    // and if all the items are packed it displays a message that no more items can
+    // be removed.
+    public void removeItem() {
+        if (checklist == null) {
+            System.out.println("there are no item to remove in checklist , please add some items first");
+        } else {
+            List<Item> items = checklist.getChecklist();
+            System.out.println("This is the list of all the items in your checklist");
+            for (int i = 0; i < items.size(); i++) {
+                System.out.println("index: " + i + " Name: " + items.get(i).getName()
+                        + " is it Packed? " + items.get(i).getStatus());
+            }
+            System.out.println("Please enter the index of the item you want to remove");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            if (index >= 0 && index < items.size()) {
+                Item toRemove = items.get(index);
+                checklist.removeItem(toRemove);
+                System.out.println("The item named " + toRemove.getName() + " was removed");
+            } else {
+                System.out.println("No item at that index found");
+            }
+
+        }
+
+    }
+
     // EFFETCS: print the checklist and if no checklist present presents prints no
     // checklist print
 
@@ -279,6 +442,7 @@ public class TripMaker {
             }
         }
     }
+    // REQUIRES: destinationItinerary is not null.
     // EFFECTS: calculates the toal spending done on activities on that particular
     // day and give warning to user if
     // spending>limit and tell if spending<limit, if no activity prints no activity
