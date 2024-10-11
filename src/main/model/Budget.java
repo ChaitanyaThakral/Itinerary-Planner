@@ -1,7 +1,9 @@
 package model;
 
-/* creating a budget with a budget limit the amount the person has decided to
-spend on a particualr activity and current Expenditure the amount the user has already spent on the activity. */
+/* Represents a budget with a budget limit the amount the person has decided to
+spend on a particualr activity and current Expenditure the amount the user has already spent on the activity.
+Budget has currentExpenditure: the total amount of money user has spent on the activity so far,
+ *  budgetLimit: the maximum amount of money limit for a activity. */
 public class Budget {
     private double currentExpenditure;
     private double budgetLimit;
