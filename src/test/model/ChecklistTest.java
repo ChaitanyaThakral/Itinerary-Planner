@@ -1,51 +1,65 @@
 package model;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChecklistTest {
     private Checklist checklist;
     private Item i1;
     private Item i2;
     private Item i3;
-    
+    private Item i4;
+
     @BeforeEach
-    void runBefore(){
-        checklist=new Checklist();
-        i1= new Item("Passport", false);
-        i2= new Item("Sunglasses", false);
-        i3= new Item("Photo",false);
+    void runBefore() {
+        checklist = new Checklist();
+        i1 = new Item("Passport", false);
+        i2 = new Item("Sunglasses", false);
+        i3 = new Item("Photo", false);
+        i4 = new Item("Book", true);
         checklist.addItem(i1);
         checklist.addItem(i2);
+        checklist.addItem(i4);
     }
 
     @Test
-    void testChecklist(){
-        assertEquals(2,checklist.totalItems());
-        assertEquals(i1,checklist.getChecklist().get(0));
-        assertEquals(i2,checklist.getChecklist().get(1));
+    void testChecklist() {
+        assertEquals(3, checklist.totalItems());
+        assertEquals(i1, checklist.getChecklist().get(0));
+        assertEquals(i2, checklist.getChecklist().get(1));
     }
 
-    @Test 
-    void testAddItem(){
-        assertEquals(2,checklist.totalItems());
+    @Test
+    void testAddItem() {
+        assertEquals(3, checklist.totalItems());
         checklist.addItem(i3);
-        assertEquals(3,checklist.totalItems());
+        assertEquals(4, checklist.totalItems());
     }
 
     @Test
-    void testRemoveItem(){
-        assertEquals(2,checklist.totalItems());
+    void testRemoveItem() {
+        assertEquals(3, checklist.totalItems());
         checklist.removeItem(i2);
-        assertEquals(1,checklist.totalItems());
+        assertEquals(2, checklist.totalItems());
     }
 
     @Test
-    void testRmainingItems(){
+    void testRmainingItems() {
         i1.setStatus(true);
         checklist.addItem(i3);
-        assertEquals(2,checklist.remainingItems());
+        assertEquals(2, checklist.remainingItems());
+    }
+
+    @Test
+    public void testRemainItemName() {
+        List<Item> item = new ArrayList<>();
+        item.add(i1);
+        item.add(i2);
+        assertEquals(item, checklist.remainItemName());
+
     }
 
 }
