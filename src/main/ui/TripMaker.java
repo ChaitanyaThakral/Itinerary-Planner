@@ -124,6 +124,7 @@ public class TripMaker {
 
         System.out.println("Please enter the day Number (like Day 1 or Day2 , just a number)");
         int dayNumber=scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Now lets add your activites for the day "+dayNumber );
 
@@ -155,7 +156,7 @@ public class TripMaker {
         
         System.out.println("Please enter the name of the Activity");
         String nameActivity = scanner.nextLine();
-        scanner.nextLine();
+        
 
         System.out.println("Please enter the Location of the Activity");
         String locationActivity= scanner.nextLine();
@@ -165,19 +166,24 @@ public class TripMaker {
 
         System.out.println("Please enter the Duration of the Activity");
         int durationActivity=scanner.nextInt();
+        scanner.nextLine();
+        
 
         System.out.println("Please enter the Time of the Activity");
         String timeActivity=scanner.nextLine();
-        scanner.nextLine();
+        
 
         System.out.println("Please enter the Descrition of the Activity");
         String descriptionActivity=scanner.nextLine();
         
+        
         System.out.println("Please enter the Cost of the Activity");
         double costActivity=scanner.nextDouble();
+        scanner.nextLine();
 
         System.out.println("Please enter the Status of the Activity (if completed type true/ if incompleted type false)");
         Boolean statusActivity=scanner.nextBoolean();
+        scanner.nextLine();
 
         System.out.println("We will now set Budget of the Activity");
         System.out.println("Please enter the budget limit for this activity");
