@@ -36,7 +36,7 @@ public class Budget {
     }
 
     //EFFECTS: check if the user has exceeded the limit set for the activity.
-    //If budget is exceeded it returns true.
+    //If budget is exceeded it returns true, otherwise returns false. 
     public Boolean budgetExceed() {
         if (this.currentExpenditure > this.budgetLimit) {
             return true; 
