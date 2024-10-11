@@ -10,7 +10,8 @@ public class Trips {
     private String tripType;
     private List<DestinationItinerary> itinerary; 
 
-// EFFECTS: contructs a trip with city, country, type of the trip and list of itinerary.On creation the itinerary list is empty.
+// EFFECTS: contructs a trip with city, country, type of the trip and list of itinerary
+//.On creation the itinerary list is empty.
     public Trips(String city, String country, String tripType) {
         this.city = city;
         this.country = country;
