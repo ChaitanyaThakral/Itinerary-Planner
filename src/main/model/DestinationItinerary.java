@@ -1,7 +1,7 @@
 package model;
 import java.util.List;
 
-
+/*Creates a Destination Itinerary with date, dayNumber and List of all the activities user may be doing  throughout the trip*/
 public class DestinationItinerary {
     private String date;
     private int dayNumber;

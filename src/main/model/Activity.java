@@ -1,5 +1,8 @@
 package model;
-
+/* 
+ * Creates an Activity that the user will do throughout a particular day with all the important details like:
+ *  activityName,location,date,duration in minutes,time,description,cost,status,budget for an activity.
+*/
 public class Activity {
     private String activityName;
     private String location;
@@ -65,7 +68,7 @@ public class Activity {
     public Boolean budgetCheck(){
         return this.cost<=budget.getBudgetLimit();
     }
-    
+
     //MODIFIES:this
     //EFFECTS: Set the activity name to the newly provided Activity name.
     public void setActivityName(String activityName){

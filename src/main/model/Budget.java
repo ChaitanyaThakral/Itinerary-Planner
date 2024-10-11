@@ -1,5 +1,7 @@
 package model;
 
+/* creating a budget with a budget limit the amount the person has decided to
+spend on a particualr activity and current Expenditure the amount the user has already spent on the activity. */
 public class Budget {
     private double currentExpenditure;
     private double budgetLimit;

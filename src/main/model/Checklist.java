@@ -1,7 +1,7 @@
 package model;
 import java.util.ArrayList;
 import java.util.List;
-
+/*Creates a checklist with all the list of items which one may require before the trip, user can add,remove,find,remaining items in the checklist */
 public class Checklist {
     private List<Item> checklist;
 
