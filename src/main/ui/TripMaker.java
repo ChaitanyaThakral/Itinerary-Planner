@@ -164,7 +164,28 @@ public class TripMaker {
 //EFFECTS: take day number as user input and provide the user with the activity for that particular day.
 // if no activity for that day it prints no activity
     public void viewActivies(){
-       //stub
+        System.out.println("Please enter the day number for which you want to view your activity");
+        int dn= scanner.nextInt();
+        for (DestinationItinerary i : destinationItinerary){
+            if (i.getDayNumber()==dn){
+                System.out.println("Your activities for Day Number : " + dn +" is as follows:" );
+                for (Activity a: i.getActivity()){
+                    System.out.println("the name of the activity was :"+ a.getActivityName());
+                    System.out.println("the lcoation of the activity was : "+ a.getLocation());
+                    System.out.println("the date of the activity was : "+ a.getDate());
+                    System.out.println("the duration of the activity was : "+ a.getDuration());
+                    System.out.println("the time of the activity was : "+ a.getTime());
+                    System.out.println("the description of the activity was : "+ a.getDescription());
+                    System.out.println("the cost of the activity was : "+ a.getCost());
+                    System.out.println("the status(completed or not) of the activity was : "+ a.getStatus());
+                    System.out.println("the budget(Limit) of the activity was : "+ a.getBudget().getBudgetLimit());
+                    System.out.println("the amount of money spent was : "+ a.getBudget().getCurrentExpenditure());
+                }      
+            }
+        }
+        if (destinationItinerary.isEmpty()){
+            System.out.println("No activities found for that day");
+        }
     }
 
 
