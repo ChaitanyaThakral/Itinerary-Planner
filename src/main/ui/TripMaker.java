@@ -56,10 +56,15 @@ public class TripMaker {
             itineraryCreation();
             break;
 
-
             case 3:
+            viewActivies();
+            break;
+
+
+            case 4:
             System.out.println("Exiting the Application");
             break;
+
 
             default:
             System.out.println("Please choose some valid option available");
@@ -111,7 +116,8 @@ public class TripMaker {
  * int durationActivity,String timeActivity,String descriptionActivity,double costActivity,
  * Boolean statusActivity,double budgetLimit,double currentExpenditure
  * 
- * EFFECTS: allows the user to create an activity with the inputted name,location,date,duratiom,time,description,cost,status(activity completed or not),
+ * EFFECTS: allows the user to create an activity with the inputted name,location,
+ * date,duratiom,time,description,cost,status(activity completed or not),
  * and budget
  */
 
@@ -155,6 +161,12 @@ public class TripMaker {
         timeActivity, descriptionActivity, costActivity, statusActivity, b);
 
     }
+//EFFECTS: take day number as user input and provide the user with the activity for that particular day.
+// if no activity for that day it prints no activity
+    public void viewActivies(){
+       //stub
+    }
+
 
 
 
