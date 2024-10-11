@@ -48,7 +48,11 @@ public class TripMaker {
     }
     public void choiceMaker(int choice){
         switch(choice){
-            case 1:
+            case 1: 
+            tripCreation();
+            break;
+
+            case 2:
             System.out.println("Exiting the Application");
             break;
 
@@ -58,6 +62,13 @@ public class TripMaker {
 
         }
     }
+//REQUIRES: String cityName ,String countryName and  String tripType.
+//EFFECTS: allows the user to create a trip by inputting city name, country name, and trip type.
+    public void tripCreation(){
+        
+      //stub
+    }
+
 
 
 
