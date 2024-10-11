@@ -50,7 +50,12 @@ public class Checklist {
 
     // EFFECTS: returns a list of all the items which are yet to be packed.
     public List<Item> remainItemName() {
-        return null;
-
+        List<Item> itemList = new ArrayList<>();
+        for (int i = 0;i < checklist.size();i++) {
+            if (checklist.get(i).getStatus() == false) {
+                itemList.add(checklist.get(i));              
+            }
+        }
+        return itemList;
     }
 }
