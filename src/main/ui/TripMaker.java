@@ -27,7 +27,25 @@ public class TripMaker {
     public TripMaker(){
     scanner= new Scanner(System.in);
     destinationItinerary = new ArrayList<>();
+    run();
     }
+//EFFETCS: keep running the console interface until user has inputted all his data.
+    public void run(){
+        boolean keepRunning =true;
+        displayOptions();
+        while(keepRunning){
+            int choice=choice();
+            choiceMaker(choice);
+            System.out.println("Do you want to perform any other action and go to menu or quit (press true to go to menu /press false for exit)");
+            keepRunning=scanner.nextBoolean();
+            if (keepRunning){
+                displayOptions();
+            }
+        }
+       
+    }
+    
+
 //EFFECTS: prints all the options available to the user.
     public void  displayOptions(){
         System.out.println("Please Choose any options from the provided menu");
@@ -187,6 +205,10 @@ public class TripMaker {
             System.out.println("No activities found for that day");
         }
     }
+
+    
+
+
 
 
 
