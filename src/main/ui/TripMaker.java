@@ -25,19 +25,21 @@ public class TripMaker {
     private List<DestinationItinerary> destinationItinerary;
     private Checklist checklist;
 
-//EFFECTS: constructs a TripMaker object with Scanner to take input from the user, 
-//destinationItinerary list to manage the itinerary of the trip.
+    // EFFECTS: constructs a TripMaker object with Scanner to take input from the
+    // user,
+    // destinationItinerary list to manage the itinerary of the trip.
     public TripMaker() {
         scanner = new Scanner(System.in);
         destinationItinerary = new ArrayList<>();
         run();
     }
-//EFFETCS: keep running the console interface until user has inputted all his data.
+    // EFFETCS: keep running the console interface until user has inputted all his
+    // data.
 
     public void run() {
         boolean keepRunning = true;
         displayOptions();
-       
+
         while (keepRunning) {
             int choice = choice();
             choiceMaker(choice);
@@ -47,12 +49,12 @@ public class TripMaker {
                 displayOptions();
             }
         }
-       
-    }
-    
-//EFFECTS: prints all the options available to the user.
 
-    public void  displayOptions() {
+    }
+
+    // EFFECTS: prints all the options available to the user.
+
+    public void displayOptions() {
         System.out.println("Please Choose any options from the provided menu");
         System.out.println("1:Create a Trip");
         System.out.println("2:Add itinerary to the Trip created");
@@ -62,7 +64,8 @@ public class TripMaker {
         System.out.println("6:Check if you went over budget and analyze your data");
         System.out.println("7:Exit the application");
     }
-//EFFECTS: allows the user to choose between different choices by taking integer input from the user.
+    // EFFECTS: allows the user to choose between different choices by taking
+    // integer input from the user.
 
     public int choice() {
         System.out.println("Please enter your choice");
@@ -71,46 +74,48 @@ public class TripMaker {
         return choice;
     }
 
+    @SuppressWarnings("methodlength")
     public void choiceMaker(int choice) {
 
-        switch(choice) {
-            case 1: 
-            tripCreation();
-            break;
+        switch (choice) {
+            case 1:
+                tripCreation();
+                break;
 
             case 2:
-            itineraryCreation();
-            break;
+                itineraryCreation();
+                break;
 
             case 3:
-            viewActivies();
-            break;
+                viewActivies();
+                break;
 
             case 4:
-            makeChecklist();
-            break;
+                makeChecklist();
+                break;
 
             case 5:
-            viewChecklist();
-            break;
-            
+                viewChecklist();
+                break;
+
             case 6:
-            overBudget();
-            break;
+                overBudget();
+                break;
 
             case 7:
-            System.out.println("Exiting the Application");
-            System. exit(0);
-            
-            break;
+                System.out.println("Exiting the Application");
+                System.exit(0);
+
+                break;
             default:
-            System.out.println("Please choose some valid option available");
-            break;
+                System.out.println("Please choose some valid option available");
+                break;
 
         }
     }
-//REQUIRES: String cityName ,String countryName and  String tripType.
-//EFFECTS: allows the user to create a trip by inputting city name, country name, and trip type.
+    // REQUIRES: String cityName ,String countryName and String tripType.
+    // EFFECTS: allows the user to create a trip by inputting city name, country
+    // name, and trip type.
 
     public void tripCreation() {
         System.out.println("Please enter you Destination (city) Name:");
@@ -121,12 +126,13 @@ public class TripMaker {
 
         System.out.println("Please enter your Trip type (solo,family,buisness)");
         String tripType = scanner.nextLine();
-        
-        trip = new Trips(cityName,countryName,tripType);
+
+        trip = new Trips(cityName, countryName, tripType);
         System.out.println(" travel to " + cityName + " in " + countryName + "  Trip type " + tripType);
     }
-//REQUIRES: String date,int dayNumber.
-//EFFETCS: add itinerary to the trip created, and run if the user want to add more activites.
+    // REQUIRES: String date,int dayNumber.
+    // EFFETCS: add itinerary to the trip created, and run if the user want to add
+    // more activites.
 
     public void itineraryCreation() {
         System.out.println("Please enter the date ");
@@ -149,24 +155,26 @@ public class TripMaker {
             scanner.nextLine();
         }
         DestinationItinerary listOfitinerary = new DestinationItinerary(date, dayNumber, activityList);
-        this.destinationItinerary.add(listOfitinerary);  
+        this.destinationItinerary.add(listOfitinerary);
         trip.addDestinationItineraries(listOfitinerary);
     }
-/*
- * REQUIRES: String nameActivity,String locationActivity,String dateActivity,
- * int durationActivity,String timeActivity,String descriptionActivity,double costActivity,
- * Boolean statusActivity,double budgetLimit,double currentExpenditure
- * 
- * EFFECTS: allows the user to create an activity with the inputted name,location,
- * date,duratiom,time,description,cost,status(activity completed or not),
- * and budget
- */
-
+    /*
+     * REQUIRES: String nameActivity,String locationActivity,String dateActivity,
+     * int durationActivity,String timeActivity,String descriptionActivity,double
+     * costActivity,
+     * Boolean statusActivity,double budgetLimit,double currentExpenditure
+     * 
+     * EFFECTS: allows the user to create an activity with the inputted
+     * name,location,
+     * date,duratiom,time,description,cost,status(activity completed or not),
+     * and budget
+     */
+    
+    @SuppressWarnings("methodlength")
     public Activity activityCreation() {
-        
+
         System.out.println("Please enter the name of the Activity");
         String nameActivity = scanner.nextLine();
-        
 
         System.out.println("Please enter the Location of the Activity");
         String locationActivity = scanner.nextLine();
@@ -177,16 +185,13 @@ public class TripMaker {
         System.out.println("Please enter the Duration of the Activity");
         int durationActivity = scanner.nextInt();
         scanner.nextLine();
-        
 
         System.out.println("Please enter the Time of the Activity");
         String timeActivity = scanner.nextLine();
-        
 
         System.out.println("Please enter the Descrition of the Activity");
         String descriptionActivity = scanner.nextLine();
-        
-        
+
         System.out.println("Please enter the Cost of the Activity");
         double costActivity = scanner.nextDouble();
         scanner.nextLine();
@@ -201,14 +206,15 @@ public class TripMaker {
         System.out.println("Please enter the Current spending you have done for this activity");
         double ce = scanner.nextDouble();
 
-        Budget b = new Budget(bl,ce);
+        Budget b = new Budget(bl, ce);
 
         return new Activity(nameActivity, locationActivity, dateActivity, durationActivity,
-        timeActivity, descriptionActivity, costActivity, statusActivity, b);
+                timeActivity, descriptionActivity, costActivity, statusActivity, b);
 
     }
-//EFFECTS: take day number as user input and provide the user with the activity for that particular day.
-// if no activity for that day it prints no activity
+    // EFFECTS: take day number as user input and provide the user with the activity
+    // for that particular day.
+    // if no activity for that day it prints no activity
 
     public void viewActivies() {
         System.out.println("Please enter the day number for which you want to view your activity");
@@ -216,7 +222,7 @@ public class TripMaker {
         for (DestinationItinerary i : destinationItinerary) {
             if (i.getDayNumber() == dn) {
                 System.out.println("Your activities for Day Number : " + dn + " is as follows:");
-                for (Activity a: i.getActivity()) {
+                for (Activity a : i.getActivity()) {
                     System.out.println("the name of the activity was :" + a.getActivityName());
                     System.out.println("the lcoation of the activity was : " + a.getLocation());
                     System.out.println("the date of the activity was : " + a.getDate());
@@ -227,15 +233,16 @@ public class TripMaker {
                     System.out.println("the status(completed or not) of the activity was : " + a.getStatus());
                     System.out.println("the budget(Limit) of the activity was : " + a.getBudget().getBudgetLimit());
                     System.out.println("the amount of money spent was : " + a.getBudget().getCurrentExpenditure());
-                }      
+                }
             }
         }
         if (destinationItinerary.isEmpty()) {
             System.out.println("No activities found for that day");
         }
     }
-//REQUIRES: name of the item to be string and stutus to be Boolean.
-//EFFETCS: Creates a checklist containing the items which has to be packed. item has name and pack status.
+    // REQUIRES: name of the item to be string and stutus to be Boolean.
+    // EFFETCS: Creates a checklist containing the items which has to be packed.
+    // item has name and pack status.
 
     public void makeChecklist() {
         System.out.println("Lets create a checklist");
@@ -251,13 +258,14 @@ public class TripMaker {
             System.out.println("Do you want to add more items (true/false)");
             moreRun = scanner.nextBoolean();
             scanner.nextLine();
-        }        
+        }
     }
-//EFFETCS: print the checklist and if no checklist present presents prints no checklist print
+    // EFFETCS: print the checklist and if no checklist present presents prints no
+    // checklist print
 
     public void viewChecklist() {
         System.out.println("Here is your checklist");
-        if  (checklist == null) {
+        if (checklist == null) {
             System.out.println("checklist not found, please be sure to make the checklist first");
         } else {
             for (Item item : checklist.getChecklist()) {
@@ -265,8 +273,10 @@ public class TripMaker {
             }
         }
     }
-//EFFECTS: calculates the toal spending done on activities on that particular day and give warning to user if 
-//spending>limit and tell if spending<limit, if no activity prints no activity found cannot make budget.
+    // EFFECTS: calculates the toal spending done on activities on that particular
+    // day and give warning to user if
+    // spending>limit and tell if spending<limit, if no activity prints no activity
+    // found cannot make budget.
 
     public void overBudget() {
         System.out.println("Please enter the specific day number for which you want to review you budget");
@@ -286,7 +296,6 @@ public class TripMaker {
         }
 
         System.out.println("total amount spent : " + spending + " total limit : " + limit);
-        
 
         if (destinationItinerary.isEmpty()) {
             System.out.println("No activities found for that day cannot make budget analysis");
