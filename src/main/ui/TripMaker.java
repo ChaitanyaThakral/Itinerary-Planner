@@ -83,6 +83,11 @@ public class TripMaker {
             break;
 
             case 5:
+            viewChecklist();
+            break;
+
+
+            case 6:
             System.out.println("Exiting the Application");
             break;
 
@@ -226,6 +231,20 @@ public class TripMaker {
             scanner.nextLine();
         }        
     }
+//EFFETCS: print the checklist and if no checklist present presents prints no checklist print
+    public void viewChecklist(){
+        System.out.println("Here is your checklist");
+        if  (checklist == null ) {
+            System.out.println("checklist not found, please be sure to make the checklist first");
+        }
+        else{
+        for(Item item : checklist.getChecklist()){
+            System.out.println("Item name "+ item.getName()+ " , Item is packed? "+ item.getStatus() );
+         }
+        }
+    }
+
+
     
 
 
