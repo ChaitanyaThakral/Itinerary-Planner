@@ -1,8 +1,19 @@
 package model;
 
 /* 
- * Creates an Activity that the user will do throughout a particular day with all the important details like:
- *  activityName,location,date,duration in minutes,time,description,cost,status,budget for an activity.
+ * Represents an activity within a travel itinerary.That the user will 
+ * go throughout a particular day with all the important details like:
+ *  activityName, location, date, duration in minutes, time, description, cost, status, budget for an activity.
+ * 
+ * Activity has activityName: the name of the activity user will perform (has to be String)
+ *  location: the location where the activity is done. (has to be String)
+ * date: the date when the activity is scheduled. (has to be String)
+ *  duration: the duration of the activity in minutes. (has to be int)
+ * time: time the activity took place at (has to be String)(like "10:00 AM")
+ * description: description of the activity.(has to be String)
+ * cost: the total cost for the activity.(has to be double)
+ *  status: indicates whether the activity was completed or not.(has to be boolean)
+ * budget: an instance of the Budget class representing the budget for this activity.
 */
 
 public class Activity {
@@ -66,6 +77,9 @@ public class Activity {
     public Budget getBudget() {
         return this.budget;
     }
+
+    //EFFECTS: Checks if the cost of the activity is within the budget limit.
+    //return true if the cost is less than or equal to the budget limit and  false if not.
 
     public Boolean budgetCheck() {
         return this.cost <= budget.getBudgetLimit();
