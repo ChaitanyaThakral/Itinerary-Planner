@@ -45,7 +45,6 @@ public class TripMaker {
        
     }
     
-
 //EFFECTS: prints all the options available to the user.
     public void  displayOptions(){
         System.out.println("Please Choose any options from the provided menu");
@@ -85,9 +84,12 @@ public class TripMaker {
             case 5:
             viewChecklist();
             break;
-
-
+            
             case 6:
+            overBudget();
+            break;
+
+            case 7:
             System.out.println("Exiting the Application");
             break;
 
@@ -243,13 +245,38 @@ public class TripMaker {
          }
         }
     }
+//EFFECTS: calculates the toal spending done on activities on that particular day and give warning to user if 
+//spending>limit and tell if spending<limit, if no activity prints no activity found cannot make budget.
+    public void overBudget(){
+        System.out.println("Please enter the specific day number for which you want to review you budget");
+        int day= scanner.nextInt();
+        double spending=0.0;
+        double limit=0.0;
+        for (DestinationItinerary i : destinationItinerary){
+            if (i.getDayNumber()==day){
 
+                for (Activity activity : i.getActivity()){
+                    spending=spending + activity.getBudget().getCurrentExpenditure();
+                    limit=limit + activity.getBudget().getBudgetLimit();
 
-    
+                }
+                break;
+            }
+        }
 
+        System.out.println("The total amount spent was "+ spending);
+        System.out.println("The total limit of the budget was "+ limit);
 
+        if (destinationItinerary.isEmpty()){
+            System.out.println("No activities found for that day cannot make budget analysis");
+        }
 
+        if (spending > limit){
+            System.out.println("you went over the buget limit, need to reduce the spending");
+        }
+        if (spending < limit){
+            System.out.println("you were not over buget limit");
+        }
+    }
 
-
-
-}  
+}
