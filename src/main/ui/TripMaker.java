@@ -115,7 +115,8 @@ public class TripMaker {
         trip=new Trips(cityName,countryName,tripType);
         System.out.println("You are travelling to "+ cityName+ " in " + countryName +" and your Trip type is meant to be " + tripType);
     }
-
+//REQUIRES: String date,int dayNumber.
+//EFFETCS: add itinerary to the trip created, and run if the user want to add more activites.
     public void itineraryCreation(){
         System.out.println("Please enter the date ");
         String date = scanner.nextLine();
