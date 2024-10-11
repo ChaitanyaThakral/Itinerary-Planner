@@ -10,60 +10,60 @@ public class ActivityTest {
     private Budget b1;
 
     @BeforeEach
-    void runBefore(){
-        b1=new Budget(1000, 0);
-        a1= new Activity("Surfing", "Vancouver", "2024-09-10",
-        60,"10:00 AM", "Did surfing with family", 100.0, true,b1);
-        a2= new Activity("Eating", "Vancouver", "2024-09-10",
-        20,"11:00 AM", "Ate Noodles with family", 30.0, true,new Budget(10, 0));
+    void runBefore() {
+        b1 = new Budget(1000, 0);
+        a1 = new Activity("Surfing", "Vancouver", "2024-09-10",
+                60, "10:00 AM", "Did surfing with family", 100.0, true, b1);
+        a2 = new Activity("Eating", "Vancouver", "2024-09-10",
+                20, "11:00 AM", "Ate Noodles with family", 30.0, true, new Budget(10, 0));
     }
 
     @Test
-    public void testSetActivityName(){
-       a1.setActivityName("Swimming");
-       assertEquals("Swimming",a1.getActivityName());
-       a1.setActivityName("Boating");
-       assertEquals("Boating",a1.getActivityName());
+    public void testSetActivityName() {
+        a1.setActivityName("Swimming");
+        assertEquals("Swimming", a1.getActivityName());
+        a1.setActivityName("Boating");
+        assertEquals("Boating", a1.getActivityName());
     }
 
     @Test
-    public void testSetLocation(){
+    public void testSetLocation() {
         a1.setLocation("Delhi");
-        assertEquals("Delhi",a1.getLocation());
+        assertEquals("Delhi", a1.getLocation());
     }
 
     @Test
-    public void testSetDate(){
-       a1.setDate("2024-09-11");
-       assertEquals("2024-09-11", a1.getDate());
+    public void testSetDate() {
+        a1.setDate("2024-09-11");
+        assertEquals("2024-09-11", a1.getDate());
     }
 
     @Test
-    public void testSetDuration(){
+    public void testSetDuration() {
         a1.setDuration(100);
-        assertEquals(100,a1.getDuration());
+        assertEquals(100, a1.getDuration());
     }
-    
+
     @Test
-    public void testSetTime(){
+    public void testSetTime() {
         a1.setTime("11:00 AM");
-        assertEquals("11:00 AM",a1.getTime());
+        assertEquals("11:00 AM", a1.getTime());
     }
 
     @Test
-    public void testSetDescription(){
+    public void testSetDescription() {
         a1.setDescription("Went to Surf");
-        assertEquals("Went to Surf",a1.getDescription());
-    }
-    
-    @Test
-    public void testSetCost(){
-        a1.setCost(90.00);
-        assertEquals(90.00,a1.getCost());
+        assertEquals("Went to Surf", a1.getDescription());
     }
 
     @Test
-    public void testSetStatus(){
+    public void testSetCost() {
+        a1.setCost(90.00);
+        assertEquals(90.00, a1.getCost());
+    }
+
+    @Test
+    public void testSetStatus() {
         a1.setStatus(false);
         assertFalse(a1.getStatus());
 
@@ -72,14 +72,14 @@ public class ActivityTest {
     }
 
     @Test
-    public void testBudgetCheck(){
+    public void testBudgetCheck() {
         assertTrue(a1.budgetCheck());
         assertFalse(a2.budgetCheck());
     }
 
     @Test
-    public void testGetBudget(){
-        assertEquals(b1,a1.getBudget());
+    public void testGetBudget() {
+        assertEquals(b1, a1.getBudget());
     }
-    
+
 }
