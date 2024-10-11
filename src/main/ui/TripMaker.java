@@ -46,6 +46,19 @@ public class TripMaker {
         scanner.nextLine();
         return choice;
     }
+    public void choiceMaker(int choice){
+        switch(choice){
+            case 1:
+            System.out.println("Exiting the Application");
+            break;
+
+            default:
+            System.out.println("Please choose some valid option available");
+            break;
+
+        }
+    }
+
 
 
 }  
