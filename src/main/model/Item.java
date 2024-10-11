@@ -7,28 +7,28 @@ public class Item {
 
 
     //EFFECTS: Constructs an item with its name and packing status (upon construction status set to false).
-    public Item(String name,Boolean status){
-       this.name=name;
-       this.status=status;
+    public Item(String name,Boolean status) {
+        this.name = name;
+        this.status = status;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public Boolean getStatus(){
+    public Boolean getStatus() {
         return this.status;
     }
 
     //MODIFIES:this
     //EFFECTS: sets the name to the new provided name.
-    public void setName(String name){
-        this.name=name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     //MODIFIES:this
     //EFFECTS: sets the status to the new provided status.
-    public void setStatus(Boolean status){
-        this.status=status;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }
