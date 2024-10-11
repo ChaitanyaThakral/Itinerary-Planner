@@ -39,5 +39,13 @@ public class TripMaker {
         System.out.println("6:Check if you went over budget and analyze your data");
         System.out.println("7:Exit the application");
     }
+//EFFECTS: allows the user to choose between different choices by taking integer input from the user.
+    public int choice(){
+        System.out.println("Please enter your choice");
+        int choice=scanner.nextInt();
+        scanner.nextLine();
+        return choice;
+    }
+
 
 }  
