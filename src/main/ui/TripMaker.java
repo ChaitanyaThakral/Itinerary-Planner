@@ -65,8 +65,17 @@ public class TripMaker {
 //REQUIRES: String cityName ,String countryName and  String tripType.
 //EFFECTS: allows the user to create a trip by inputting city name, country name, and trip type.
     public void tripCreation(){
+        System.out.println("Please enter you Destination (city) Name:");
+        String cityName = scanner.nextLine();
+
+        System.out.println("Please enter you Destination (country) Name:");
+        String countryName = scanner.nextLine();
+
+        System.out.println("Please enter your Trip type (solo,family,buisness)");
+        String tripType = scanner.nextLine();
         
-      //stub
+        trip=new Trips(cityName,countryName,tripType);
+        System.out.println("You are travelling to "+ cityName+ " in " + countryName +" and your Trip type is meant to be " + tripType);
     }
 
 
