@@ -128,14 +128,18 @@ public class TripMaker {
         String tripType = scanner.nextLine();
 
         trip = new Trips(cityName, countryName, tripType);
-        System.out.println(" travel to " + cityName + " in " + countryName + "  Trip type " + tripType);
+        System.out.println(" travel to :" + cityName + " in :" + countryName + " Trip type : " + tripType);
     }
     // REQUIRES: String date,int dayNumber.
     // EFFETCS: add itinerary to the trip created, and run if the user want to add
     // more activites.
 
     public void itineraryCreation() {
-        System.out.println("Please enter the date ");
+        if (trip==null){
+            System.out.println("Please create a trip first before adding an itinerary");
+        }
+        else{
+            System.out.println("Please enter the date ");
         String date = scanner.nextLine();
 
         System.out.println("Please enter the day Number (like Day 1 or Day2 , just a number)");
@@ -157,6 +161,8 @@ public class TripMaker {
         DestinationItinerary listOfitinerary = new DestinationItinerary(date, dayNumber, activityList);
         this.destinationItinerary.add(listOfitinerary);
         trip.addDestinationItineraries(listOfitinerary);
+        }
+        
     }
     /*
      * REQUIRES: String nameActivity,String locationActivity,String dateActivity,
