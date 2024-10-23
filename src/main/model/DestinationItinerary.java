@@ -67,7 +67,7 @@ public class DestinationItinerary implements Writeable {
     }
 
     // REQUIRES: the DestinationItinerary instance should not be null.
-    // EFFECTS: returns a JSONObject representation of this Destination Itinerary
+    // EFFECTS: returns a JSONObject representation of this Destination Itinerary instance
     // with date, dayNumber and List of all the activities.
     @Override
     public JSONObject toJson() {

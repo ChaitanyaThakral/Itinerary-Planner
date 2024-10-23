@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writeable;
+
 /* 
  * Represents an activity within a travel itinerary.That the user will 
  * go throughout a particular day with all the important details like:
@@ -16,7 +20,7 @@ package model;
  * budget: an instance of the Budget class representing the budget for this activity.
 */
 
-public class Activity {
+public class Activity implements Writeable  {
     private String activityName;
     private String location;
     private String date;
@@ -27,11 +31,13 @@ public class Activity {
     private boolean status;
     private Budget budget;
 
-    //EFFECTS: creates an activity with its name,location of the activity, date, duratiom,
-    // time taken to complete the activity, description, cost, Status of completion (boolean)
-    public Activity(String activityName, String location, String date,int duration,String time,
-                    String description,double cost,boolean status,Budget budget) {
-        this.activityName = activityName; 
+    // EFFECTS: creates an activity with its name,location of the activity, date,
+    // duratiom,
+    // time taken to complete the activity, description, cost, Status of completion
+    // (boolean) and budget.
+    public Activity  (String activityName, String location, String date, int duration, String time,
+            String description, double cost, boolean status, Budget budget) {
+        this.activityName = activityName;
         this.location = location;
         this.date = date;
         this.duration = duration;
@@ -57,7 +63,7 @@ public class Activity {
     public int getDuration() {
         return this.duration;
     }
-    
+
     public String getTime() {
         return this.time;
     }
@@ -65,73 +71,83 @@ public class Activity {
     public String getDescription() {
         return this.description;
     }
-    
+
     public double getCost() {
         return this.cost;
     }
 
     public Boolean getStatus() {
-        return this.status; 
+        return this.status;
     }
 
     public Budget getBudget() {
         return this.budget;
     }
 
-    //EFFECTS: Checks if the cost of the activity is within the budget limit.
-    //return true if the cost is less than or equal to the budget limit and  false if not.
+    // EFFECTS: Checks if the cost of the activity is within the budget limit.
+    // return true if the cost is less than or equal to the budget limit and false
+    // if not.
 
     public Boolean budgetCheck() {
         return this.cost <= budget.getBudgetLimit();
     }
 
-    //MODIFIES:this
-    //EFFECTS: Set the activity name to the newly provided Activity name.
+    // MODIFIES:this
+    // EFFECTS: Set the activity name to the newly provided Activity name.
     public void setActivityName(String activityName) {
         this.activityName = activityName;
     }
 
-    //MODIFIES:this
-    //EFFECTS: Set the Location  to the newly provided Location.
+    // MODIFIES:this
+    // EFFECTS: Set the Location to the newly provided Location.
     public void setLocation(String location) {
-        this.location = location; 
+        this.location = location;
     }
 
-    //MODIFIES:this
-    //EFFECTS: Set the Date to the newly provided Date.
+    // MODIFIES:this
+    // EFFECTS: Set the Date to the newly provided Date.
     public void setDate(String date) {
         this.date = date;
     }
 
-    //MODIFIES:this
-    //EFFECTS: Set the Duration to the newly provided Duration.
+    // MODIFIES:this
+    // EFFECTS: Set the Duration to the newly provided Duration.
     public void setDuration(int duration) {
         this.duration = duration;
     }
-    
-    //MODIFIES:this
-    //EFFECTS: Set the time to the newly provided time.
+
+    // MODIFIES:this
+    // EFFECTS: Set the time to the newly provided time.
     public void setTime(String time) {
         this.time = time;
     }
 
-    //MODIFIES:this
-    //EFFECTS: Set the Descrition to the newly provided Description
+    // MODIFIES:this
+    // EFFECTS: Set the Descrition to the newly provided Description
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    //MODIFIES:this
-    //EFFECTS: Set the Cost to the newly provided Cost.
+
+    // MODIFIES:this
+    // EFFECTS: Set the Cost to the newly provided Cost.
     public void setCost(double cost) {
         this.cost = cost;
     }
 
-    //MODIFIES:this
-    //EFFECTS: Set the Status to the newly provided Status.
+    // MODIFIES:this
+    // EFFECTS: Set the Status to the newly provided Status.
     public void setStatus(Boolean status) {
         this.status = status;
     }
 
+    // REQUIRES: the Acitivity instance should not be null.
+    // EFFECTS: returns a JSONObject representation of this Acitivity instance with
+    // its name, location of the activity, date, duratiom, time taken to complete the
+    // activity, description,cost, Status of completion (boolean) and budget.
+
+    @Override
+    public JSONObject toJson() {
+        return null;
+    }
 
 }
