@@ -78,10 +78,10 @@ public class TripsTest {
         JSONObject tr = trip.toJson();
         JSONArray trItinerary = tr.getJSONArray("itinerary");
 
-        assertEquals("Vancouver", tr.getString("city"));
-        assertEquals("Canada", tr.getString("country"));
-        assertEquals("Solo",tr.getString("tripType"));
-        assertTrue(tr.has("itinerary"));
+        assertEquals("Vancouver", tr.getString("City"));
+        assertEquals("Canada", tr.getString("Country"));
+        assertEquals("Solo",tr.getString("Trip Type"));
+        assertTrue(tr.has("Itinerary"));
         assertEquals(1, trItinerary.length()); 
 
     }

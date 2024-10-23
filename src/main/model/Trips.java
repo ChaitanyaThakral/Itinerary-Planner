@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import persistence.Writeable;
@@ -73,8 +74,22 @@ public class Trips implements Writeable{
     //city, country, type of the trip and list of itinerary.
      @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject tr = new JSONObject();
+        tr.put("City", this.city);
+        tr.put("Country", this.country);
+        tr.put("Trip Type", this.tripType);
+
+        JSONArray trItinerary = new JSONArray();
+        for (DestinationItinerary object : this.itinerary) {
+            trItinerary.put(object.toJson())
+        }
+
+        tr.put("Itinerary",trItinerary);
+
+        return tr;
+
     }
+
 
 }
 
