@@ -1,9 +1,13 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,5 +67,23 @@ public class DestinationItineraryTest {
         i1.addActivity(a2);
         assertEquals(130, i1.getTotalCost());
 
+    }
+
+    @Test
+    public void testToJson() {
+        i1.addActivity(a2);
+
+        JSONObject iJsonObject = i1.toJson();
+
+        i1.toJson();
+
+        assertEquals("2024-09-10", iJsonObject.getString("date"));
+        assertEquals(1, iJsonObject.getInt("dayNumber"));
+        assertTrue(iJsonObject.has("activities"));
+
+        JSONArray iJsonArray = iJsonObject.getJSONArray("activities");
+        assertEquals(2, iJsonArray.length());
+
+        
     }
 }

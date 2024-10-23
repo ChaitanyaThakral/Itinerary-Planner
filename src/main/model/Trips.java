@@ -81,7 +81,7 @@ public class Trips implements Writeable{
 
         JSONArray trItinerary = new JSONArray();
         for (DestinationItinerary object : this.itinerary) {
-            trItinerary.put(object.toJson())
+            trItinerary.put(object.toJson());
         }
 
         tr.put("Itinerary",trItinerary);
