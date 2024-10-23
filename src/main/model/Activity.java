@@ -147,7 +147,19 @@ public class Activity implements Writeable  {
 
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject aObject = new JSONObject();
+
+        aObject.put("activityName", this.activityName);
+        aObject.put("location", this.location);
+        aObject.put("date", this.date);
+        aObject.put("time", this.time);
+        aObject.put("description", this.description);
+        aObject.put("cost", this.cost);
+        aObject.put("status", this.status);
+        aObject.put("status", this.status);
+        aObject.put("budget", this.budget.toJson());
+
+        return aObject;
     }
 
 }
