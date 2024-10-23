@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.json.JSONObject;
+
 public class BudgetTest {
     private Budget budget;
 
@@ -32,4 +34,15 @@ public class BudgetTest {
         assertTrue(budget.budgetExceed());
     }
 
+
+    @Test
+    public void testToJson(){
+        JSONObject budgetJsonObject = budget.toJson();
+
+        budget = new Budget(1000.0, 0.0);
+        
+        assertEquals(1000.0,budgetJsonObject.getDouble("budgetLimit"));
+        assertEquals(0.0,budgetJsonObject.getDouble("currentExpenditure"));
+
+    }
 }
