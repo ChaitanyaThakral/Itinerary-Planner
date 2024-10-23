@@ -38,8 +38,6 @@ public class BudgetTest {
     @Test
     public void testToJson(){
         JSONObject budgetJsonObject = budget.toJson();
-
-       
         
         assertEquals(1000.0,budgetJsonObject.getDouble("budgetLimit"));
         assertEquals(0.0,budgetJsonObject.getDouble("currentExpenditure"));

@@ -1,6 +1,8 @@
 package model;
 
 import org.junit.jupiter.api.Test;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
@@ -60,6 +62,17 @@ public class ChecklistTest {
         item.add(i2);
         assertEquals(item, checklist.remainItemName());
 
+    }
+
+    @Test 
+    public void testToJason(){
+        JSONObject checklistJsonObject = checklist.toJson();
+
+        JSONArray checkArray = checklistJsonObject.getJSONArray("checklist");
+        assertTrue(checklistJsonObject.has("checklist"));
+        assertEquals(3, checkArray.length()); 
+
+        
     }
 
 }
