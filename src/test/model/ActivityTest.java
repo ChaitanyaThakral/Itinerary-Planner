@@ -62,7 +62,7 @@ public class ActivityTest {
     @Test
     public void testSetCost() {
         a1.setCost(90.00);
-        assertEquals(90.00, a1.getCost());
+        assertEquals(90.00, a1.getCost(),0.0001);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class ActivityTest {
         assertEquals(b1, a1.getBudget());
     }
 
-    @SuppressWarnings("deprecation")
+    
     @Test
     public void testToJson(){
         JSONObject aJsonObject = a1.toJson();
@@ -96,12 +96,12 @@ public class ActivityTest {
         assertEquals(60,aJsonObject.getInt("duration"));
         assertEquals("10:00 AM",aJsonObject.getString("time"));
         assertEquals("Did surfing with family",aJsonObject.getString("description"));
-        assertEquals(100.0, aJsonObject.getDouble("cost"));
+        assertEquals(100.0, aJsonObject.getDouble("cost"),0.0001);
         assertTrue(aJsonObject.getBoolean("status"));
 
         JSONObject budgetObject = aJsonObject.getJSONObject("budget");
-        assertEquals(1000,budgetObject.getDouble("budgetLimit"));
-        assertEquals(0,budgetObject.getDouble("currentExpenditure"));
+        assertEquals(1000,budgetObject.getDouble("budgetLimit"),0.0001);
+        assertEquals(0,budgetObject.getDouble("currentExpenditure"),0.0001);
 
     }
 

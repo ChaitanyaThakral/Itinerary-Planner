@@ -84,7 +84,7 @@ public class Trips implements Writeable{
             trItinerary.put(object.toJson());
         }
 
-        tr.put("Itinerary",trItinerary);
+        tr.put("itinerary",trItinerary);
 
         return tr;
 

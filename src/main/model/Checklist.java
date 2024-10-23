@@ -3,27 +3,31 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
+import persistence.Writeable;
+
 /*Represents a checklist with all the list of items which one may require before the trip, 
 user can add,remove,find,remaining items in the checklist 
 checklist is initialized as list of Item.*/
 
-public class Checklist {
+public class Checklist  implements Writeable {
     private List<Item> checklist;
 
-    //EFFECTS: creates a checklist with the list of items present.
+    // EFFECTS: creates a checklist with the list of items present.
     public Checklist() {
         checklist = new ArrayList<Item>();
     }
 
-    //EFFECTS:return the total number of items in the checklist
+    // EFFECTS:return the total number of items in the checklist
     public int totalItems() {
         return checklist.size();
     }
 
-    //EFFECTS:return the total number of items in the checklist yet to pack.
+    // EFFECTS:return the total number of items in the checklist yet to pack.
     public int remainingItems() {
         int count = 0;
-        for (int i = 0;i < checklist.size();i++) {
+        for (int i = 0; i < checklist.size(); i++) {
             if (checklist.get(i).getStatus() == false) {
                 count++;
             }
@@ -31,19 +35,19 @@ public class Checklist {
         return count;
     }
 
-    //MODIFIES:this
-    //EFFECTS: add a new item into the checklist.
+    // MODIFIES:this
+    // EFFECTS: add a new item into the checklist.
     public void addItem(Item item) {
         checklist.add(item);
     }
 
-    //EFFECTS: return the list of all the items in the checklist.
+    // EFFECTS: return the list of all the items in the checklist.
     public List<Item> getChecklist() {
         return checklist;
     }
 
-    //MODIFIES:this
-    //EFFECTS: removes an items from the list.
+    // MODIFIES:this
+    // EFFECTS: removes an items from the list.
     public void removeItem(Item item) {
         checklist.remove(item);
     }
@@ -51,11 +55,20 @@ public class Checklist {
     // EFFECTS: returns a list of all the items which are yet to be packed.
     public List<Item> remainItemName() {
         List<Item> itemList = new ArrayList<>();
-        for (int i = 0;i < checklist.size();i++) {
+        for (int i = 0; i < checklist.size(); i++) {
             if (checklist.get(i).getStatus() == false) {
-                itemList.add(checklist.get(i));              
+                itemList.add(checklist.get(i));
             }
         }
         return itemList;
     }
+
+    // REQUIRES: the Checklist instance should not be null.
+    // EFFECTS: returns a JSONObject representation of this Checklist instance,
+    // including the list of items present.
+    @Override
+    public JSONObject toJson() {
+        return null;
+    }
+
 }

@@ -81,7 +81,7 @@ public class TripsTest {
         assertEquals("Vancouver", tr.getString("City"));
         assertEquals("Canada", tr.getString("Country"));
         assertEquals("Solo",tr.getString("Trip Type"));
-        assertTrue(tr.has("Itinerary"));
+        assertTrue(tr.has("itinerary"));
         assertEquals(1, trItinerary.length()); 
 
     }

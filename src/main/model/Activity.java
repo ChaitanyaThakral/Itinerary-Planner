@@ -152,6 +152,7 @@ public class Activity implements Writeable  {
         aObject.put("activityName", this.activityName);
         aObject.put("location", this.location);
         aObject.put("date", this.date);
+        aObject.put("duration", this.duration);
         aObject.put("time", this.time);
         aObject.put("description", this.description);
         aObject.put("cost", this.cost);
