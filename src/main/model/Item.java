@@ -43,6 +43,11 @@ public class Item implements Writeable {
     // with its name and packing status.
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject itemObject = new JSONObject();
+
+        itemObject.put("name", this.name);
+        itemObject.put("status", this.status);
+
+        return itemObject;
     }
 }

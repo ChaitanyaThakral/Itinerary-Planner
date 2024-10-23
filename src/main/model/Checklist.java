@@ -76,7 +76,7 @@ public class Checklist  implements Writeable {
             checkArray.put(object.toJson());
         }
 
-        check.put("itinerary",checkArray);
+        check.put("checklist",checkArray);
 
         return check;
     }
