@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import persistence.Writeable;
@@ -68,7 +69,16 @@ public class Checklist  implements Writeable {
     // including the list of items present.
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject check = new JSONObject();
+
+        JSONArray checkArray = new JSONArray();
+        for (Item object : this.checklist) {
+            checkArray.put(object.toJson());
+        }
+
+        check.put("itinerary",checkArray);
+
+        return check;
     }
 
 }
