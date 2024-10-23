@@ -1,6 +1,9 @@
 package model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -80,6 +83,26 @@ public class ActivityTest {
     @Test
     public void testGetBudget() {
         assertEquals(b1, a1.getBudget());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    public void testToJson(){
+        JSONObject aJsonObject = a1.toJson();
+        
+        assertEquals("Surfing",aJsonObject.getString("activityName"));
+        assertEquals("Vancouver",aJsonObject.getString("location"));
+        assertEquals("2024-09-10",aJsonObject.getString("date"));
+        assertEquals(60,aJsonObject.getInt("duration"));
+        assertEquals("10:00 AM",aJsonObject.getString("time"));
+        assertEquals("Did surfing with family",aJsonObject.getString("description"));
+        assertEquals(100.0, aJsonObject.getDouble("cost"));
+        assertTrue(aJsonObject.getBoolean("status"));
+
+        JSONObject budgetObject = aJsonObject.getJSONObject("budget");
+        assertEquals(1000,budgetObject.getDouble("budgetLimit"));
+        assertEquals(0,budgetObject.getDouble("currentExpenditure"));
+
     }
 
 }
