@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.json.JSONObject;
+
 public class ItemTest {
     private Item i1;
 
@@ -29,6 +31,15 @@ public class ItemTest {
     public void testSetStatus() {
         i1.setStatus(true);
         assertTrue(i1.getStatus());
+    }
+
+    @Test
+    public void testToJason() {
+        
+        JSONObject itemJsonObject = i1.toJson();
+        assertEquals("Passport", itemJsonObject.getString("name"));
+        assertEquals(false, itemJsonObject.getBoolean("status"));
+
     }
 
 }
