@@ -33,6 +33,8 @@ As an international student with a passion for travel, I often find myself needi
 - As a user, I want to set a budget for each activity and be able to review and analyze my daily spending to determine if I am staying within my budget or exceeding it.
 - As a user, I want to edit or change any existing plans for the day for a particular destination.
 - As a user, I want to be able to generate a summary report of my travel itinerary, including total expenses, number of destinations, and activities.
+- As a user, I want the option to save the entire state of my itinerary, including trips, activities, budgets, and checklists to a file.
+- As a user, I want the option to load the previously saved state of my itinerary from a file, allowing me to resume exactly where I left off.
 
 
 
