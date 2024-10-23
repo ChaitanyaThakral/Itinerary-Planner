@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import persistence.Writeable;
@@ -70,7 +71,19 @@ public class DestinationItinerary implements Writeable {
     // with date, dayNumber and List of all the activities.
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject di = new JSONObject();
+        di.put("date", this.date);
+        di.put("dayNumber", this.dayNumber);
+
+        JSONArray diArray = new JSONArray();
+        for (Activity act : this.activity) {
+            diArray.put(act.toJson());
+        }
+
+        di.put("activities",diArray);
+
+        return di;
+
     }
 
 }
