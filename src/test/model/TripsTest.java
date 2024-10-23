@@ -3,6 +3,9 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,4 +70,19 @@ public class TripsTest {
         // checking the size of list(should be 1 only one element added)
     }
 
+    @Test
+    void testToJson(){
+        DestinationItinerary entry = new DestinationItinerary("2024-09-10", 1, activity);
+        trip.addDestinationItineraries(entry); 
+
+        JSONObject tr = trip.toJson();
+        JSONArray trItinerary = tr.getJSONArray("itinerary");
+
+        assertEquals("Vancouver", tr.getString("city"));
+        assertEquals("Canada", tr.getString("country"));
+        assertEquals("Solo",tr.getString("tripType"));
+        assertTrue(tr.has("itinerary"));
+        assertEquals(1, trItinerary.length()); 
+
+    }
 }
