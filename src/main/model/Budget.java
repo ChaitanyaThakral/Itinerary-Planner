@@ -57,12 +57,12 @@ public class Budget implements Writeable {
     // with budgetLimit and CurrentExpenditure.
     @Override
     public JSONObject toJson() {
-        JSONObject bObject = new JSONObject();
+        JSONObject budgetObject = new JSONObject();
 
-        bObject.put("budgetLimit", this.budgetLimit);
-        bObject.put("currentExpenditure", this.currentExpenditure);
+        budgetObject.put("budgetLimit", this.budgetLimit);
+        budgetObject.put("currentExpenditure", this.currentExpenditure);
 
-        return bObject;
+        return budgetObject;
     }
 
 }

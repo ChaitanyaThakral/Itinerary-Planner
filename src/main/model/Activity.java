@@ -35,7 +35,7 @@ public class Activity implements Writeable  {
     // duratiom,
     // time taken to complete the activity, description, cost, Status of completion
     // (boolean) and budget.
-    public Activity  (String activityName, String location, String date, int duration, String time,
+    public Activity(String activityName, String location, String date, int duration, String time,
             String description, double cost, boolean status, Budget budget) {
         this.activityName = activityName;
         this.location = location;
@@ -147,20 +147,20 @@ public class Activity implements Writeable  {
 
     @Override
     public JSONObject toJson() {
-        JSONObject aObject = new JSONObject();
+        JSONObject activityObject = new JSONObject();
 
-        aObject.put("activityName", this.activityName);
-        aObject.put("location", this.location);
-        aObject.put("date", this.date);
-        aObject.put("duration", this.duration);
-        aObject.put("time", this.time);
-        aObject.put("description", this.description);
-        aObject.put("cost", this.cost);
-        aObject.put("status", this.status);
-        aObject.put("status", this.status);
-        aObject.put("budget", this.budget.toJson());
+        activityObject.put("activityName", this.activityName);
+        activityObject.put("location", this.location);
+        activityObject.put("date", this.date);
+        activityObject.put("duration", this.duration);
+        activityObject.put("time", this.time);
+        activityObject.put("description", this.description);
+        activityObject.put("cost", this.cost);
+        activityObject.put("status", this.status);
+        activityObject.put("status", this.status);
+        activityObject.put("budget", this.budget.toJson());
 
-        return aObject;
+        return activityObject;
     }
 
 }
