@@ -40,7 +40,7 @@ public class JsonWriterTest {
     private Checklist emptyChecklist;
 
     @BeforeEach
-    void runBefore() {
+    public void runBefore() {
         writer = new JsonWriter("./data/myFile.json");
         trip = new Trips("Vancouver", "Canada", "Solo");
         reader = new JsonReader("./data/myFile.json");
@@ -64,7 +64,7 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testInvalidFile() {
+    public void testInvalidFile() {
         try {
             JsonWriter writer1 = new JsonWriter("my\\0illegalFile.json");
             writer1.open();
@@ -75,7 +75,7 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testEmptyTrip() {
+    public void testEmptyTrip() {
         try {
             writer.open();
             writer.writeTrips(trip);
@@ -94,7 +94,7 @@ public class JsonWriterTest {
     
 
     @Test
-    void testTripWithItinerary() {
+    public void testTripWithItinerary() {
         try {
             writer.open();
             writer.writeTrips(trip);
@@ -130,7 +130,7 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testEmptyChecklist() {
+    public void testEmptyChecklist() {
         try {
             writerChecklist.open();
             writerChecklist.writeChecklist(emptyChecklist);
@@ -147,7 +147,7 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testChecklist() {
+    public void testChecklist() {
         try {
             writerChecklist.open();
             writerChecklist.writeChecklist(checklist);
