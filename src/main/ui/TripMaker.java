@@ -2,6 +2,8 @@ package ui;
 
 import java.util.Scanner;
 import model.Trips;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import model.Activity;
 import model.DestinationItinerary;
 import model.Budget;
@@ -9,6 +11,8 @@ import model.Checklist;
 import model.Item;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /*
  * The trip maker allows a user to make a console based interface 
@@ -16,7 +20,8 @@ import java.util.List;
  * View all the tasks and related information for a particular destination for a specific day,
  * Make a checklist for the all items which is to be carried, View the Checklist of all the items,
  * Check if you went over budget and analyze your data of the budget and Exit the application.
- * It allows the user to manage the trip easily.
+ * It also allows the user to save the trip and checklist which was made, later on if saved the data
+ * can be loaded and printed.It allows the user to manage the trip easily.
  */
 
 public class TripMaker {
@@ -24,15 +29,26 @@ public class TripMaker {
     private Trips trip;
     private List<DestinationItinerary> destinationItinerary;
     private Checklist checklist;
+    private JsonWriter jsonWriterTrip;
+    private JsonReader jsonReaderTrip;
+    private JsonWriter jsonWriterChecklist;
+    private JsonReader jsonReaderChecklist;
+    private Checklist checkistData;
+    private Trips tripData;
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
-    // checklist to manage the checklist and
-    // Calls the run() method to start the application.
+    // checklist to manage the checklist, Initializes JSON readers and writers for trip and checklist data
+    //and calls the run() method to start the application.
     public TripMaker() {
         scanner = new Scanner(System.in);
         destinationItinerary = new ArrayList<>();
         checklist = new Checklist();
+        jsonWriterTrip = new JsonWriter("./data/myTrip.json");
+        jsonReaderTrip = new JsonReader("./data/myTrip.json");
+        jsonReaderChecklist = new JsonReader("./data/myChecklist.json");
+        jsonWriterChecklist = new JsonWriter("./data/myChecklist.json");
+
         run();
     }
 
@@ -75,7 +91,11 @@ public class TripMaker {
         System.out.println("5:View the Checklist of all the items");
         System.out.println("6:Edit the checklist");
         System.out.println("7:Check if you went over budget and analyze your data");
-        System.out.println("8:Exit the application");
+        System.out.println("8:Save the Trip which is made to a file");
+        System.out.println("9:Save the Checklist which is made to a file");
+        System.out.println("10:Load and print Trip data from the file");
+        System.out.println("11:Load and print Checklist data from the file");
+        System.out.println("12:Exit the application");
     }
     // EFFECTS: allows the user to choose between different choices by taking
     // integer input from the user.
@@ -124,6 +144,22 @@ public class TripMaker {
                 break;
 
             case 8:
+                saveTrip();
+                break;
+
+            case 9:
+                saveChecklist();
+                break;
+
+            case 10:
+                loadTrip();
+                break;
+
+            case 11:
+                loadChecklist();
+                break;
+
+            case 12:
                 System.out.println("Exiting the Application");
                 System.exit(0);
 
@@ -134,6 +170,120 @@ public class TripMaker {
 
         }
     }
+
+    // REQUIRES:The `trip` object must be initialized and not null.
+    // EFFECTS: saves the Trip to a json file and print a statement stating the trip
+    // is saved.
+    public void saveTrip() {
+        try {
+            jsonWriterTrip.open();
+            jsonWriterTrip.writeTrips(trip);
+            jsonWriterTrip.close();
+            System.out.println("Saved trip data to ./data/myTrip.json");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save trip data");
+        }
+
+    }
+
+    // REQUIRES: The checklist object must be initialized and not null.
+    // EFFECTS:saves the Checklist to a json file and print a statement stating the
+    // Checklist is saved.
+    public void saveChecklist() {
+        if (checklist == null) {
+            System.out.println("Cannot save: Checklist is not initialized.");
+            return;
+        } else {
+            try {
+                jsonWriterChecklist.open();
+                jsonWriterChecklist.writeChecklist(checklist);
+                jsonWriterChecklist.close();
+                System.out.println("Saved checklist data to ./data/myChecklist.json");
+            } catch (FileNotFoundException e) {
+                System.out.println("Unable to save checklist data");
+            }
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: If the checklist is successfully loaded, the current checklist will
+    // be updated with the loaded data,
+    // and the details of each item , the name and packing status will be printed.
+    // If no checklist found , a message
+    // conveying that is printed.If an IOException occurs while reading the file,
+    // an appropriate statment conveying that is printed for that as well.
+    public void loadChecklist() {
+        try {
+            checkistData = jsonReaderChecklist.readChecklist();
+            if (checklist != null) {
+                checklist = checkistData;
+
+                for (Item item : checkistData.getChecklist()) {
+                    System.out.println("Item name " + item.getName() + " , Item is packed? " + item.getStatus());
+                }
+            } else {
+                System.out.println("Please create a checklist first");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Unable to load checklist data");
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: If the trip is successfully loaded, the current trip is updated with
+    // the loaded data,
+    // and details (city, country, trip type, itinerary, and activities) are
+    // printed.
+    // If no itinerary is found, a message conveying that is printed.
+    // If no trip is found in the file, a message conveying the same is printed.
+    // If an IOException occurs while reading the file, an appropriate printed for
+    // that as well .*/
+    @SuppressWarnings("methodlength")
+    public void loadTrip() {
+        try {
+            tripData = jsonReaderTrip.readTrips();
+            if (tripData != null) {
+                trip = tripData;
+
+                System.out.println("City: " + trip.getCity());
+                System.out.println("Country name: " + trip.getCountry());
+                System.out.println("Trip Type: " + trip.getTripType());
+                if (trip.getDestinationItinerary() == null) {
+                    System.out.println("No itinerary found please add the itinerary");
+                } else {
+                    for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
+                        for (Activity activity : itinerary.getActivity()) {
+                            System.out.println("The name of the activity: " + activity.getActivityName());
+                            System.out.println("The location of the activity: " + activity.getLocation());
+                            System.out.println("The date of the activity: " + activity.getDate());
+                            System.out.println("The duration of the activity: " + activity.getDuration());
+                            System.out.println("The time of the activity: " + activity.getTime());
+                            System.out.println("The description of the activity: " + activity.getDescription());
+                            System.out.println("The cost of the activity: " + activity.getCost());
+                            System.out
+                                    .println("The status (completed or not) of the activity: " + activity.getStatus());
+                            System.out.println(
+                                    "The budget (Limit) of the activity: " + activity.getBudget().getBudgetLimit());
+                            System.out
+                                    .println("The amount of money spent: "
+                                            + activity.getBudget().getCurrentExpenditure());
+                        }
+                    }
+
+                }
+
+            } else {
+                System.out.println("No trip found in the file.");
+            }
+        } catch (IOException e) {
+            System.out.println("Unable to load Trip data");
+        }
+
+    }
+
     // REQUIRES: String cityName ,String countryName and String tripType are all not
     // null
     // MODIFIES: The trip variable is updated with a new Trips object.
