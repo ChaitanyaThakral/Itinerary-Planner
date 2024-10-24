@@ -24,7 +24,7 @@ public class JsonReaderTest {
     public void testInvalidFile() {
         JsonReader reader = new JsonReader("my\\0illegalFile.json");
         try {
-            Trips trip = reader.readTrips();
+            reader.readTrips();
             fail("IOException expected");
         } catch (IOException e) {
             //pass
