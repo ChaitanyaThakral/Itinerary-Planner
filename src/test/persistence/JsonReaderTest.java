@@ -1,20 +1,18 @@
 package persistence;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 
-import java.util.List;
+
 
 import model.Activity;
-import model.Budget;
 import model.Checklist;
 import model.DestinationItinerary;
 import model.Item;
@@ -29,7 +27,7 @@ public class JsonReaderTest {
             Trips trip = reader.readTrips();
             fail("IOException expected");
         } catch (IOException e) {
-
+            //pass
         }
     }
 

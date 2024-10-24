@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
+
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+
 
 import model.Activity;
 import model.Budget;
@@ -25,7 +25,6 @@ import model.Trips;
 public class JsonWriterTest {
 
     private JsonWriter writer;
-    private String destination;
     private Trips trip;
     private JsonReader reader;
     private Activity a1;
@@ -74,7 +73,6 @@ public class JsonWriterTest {
         }
     }
 
-    
 
     @Test
     public void testTripWithItinerary() {

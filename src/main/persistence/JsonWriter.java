@@ -11,12 +11,14 @@ import model.Trips;
 
 /*
 Represents a JSONWriter that will help in writing the JSON representation of Trip Itinerary and checklist into a file.
+The class manages the proper opening, closing and saving the work inside a json file.
 */
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
 
+    // REQUIRES: destination must be a String and a valid file path.
     // EFFECTS: constructs a writer that will help to write into a required
     // destination.
     public JsonWriter(String destination) {
@@ -42,14 +44,15 @@ public class JsonWriter {
         writer.print(json);
     }
 
+    // REQUIRES: checklist should not be null.
     // MODIFIES: this
     // EFFECTS: writes JSON representation of checklist to file.
     public void writeChecklist(Checklist checklist) {
         JSONObject json = checklist.toJson();
         save(json.toString(TAB));
     }
-    
 
+    // REQUIRES: Trips should not be null.
     // MODIFIES: this
     // EFFECTS: writes JSON representation of trips to file.
     public void writeTrips(Trips trip) {
@@ -58,4 +61,3 @@ public class JsonWriter {
     }
 
 }
-
