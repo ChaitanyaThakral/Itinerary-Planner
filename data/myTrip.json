@@ -1,0 +1,23 @@
+{
+    "Trip Type": "Solo",
+    "Country": "Canada",
+    "itinerary": [{
+        "date": "2024-09-10",
+        "activities": [{
+            "date": "2024-09-10",
+            "duration": 60,
+            "cost": 100,
+            "activityName": "Surfing",
+            "description": "Did surfing with family",
+            "location": "Vancouver",
+            "time": "10:00 AM",
+            "status": true,
+            "budget": {
+                "currentExpenditure": 0,
+                "budgetLimit": 1000
+            }
+        }],
+        "dayNumber": 1
+    }],
+    "City": "Vancouver"
+}

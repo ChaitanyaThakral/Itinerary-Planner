@@ -157,7 +157,6 @@ public class Activity implements Writeable  {
         activityObject.put("description", this.description);
         activityObject.put("cost", this.cost);
         activityObject.put("status", this.status);
-        activityObject.put("status", this.status);
         activityObject.put("budget", this.budget.toJson());
 
         return activityObject;

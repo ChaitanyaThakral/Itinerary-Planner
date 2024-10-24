@@ -1,0 +1,14 @@
+{"checklist": [
+    {
+        "name": "Passport",
+        "status": false
+    },
+    {
+        "name": "Sunglasses",
+        "status": false
+    },
+    {
+        "name": "Book",
+        "status": true
+    }
+]}

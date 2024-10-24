@@ -2,6 +2,7 @@ package persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -39,32 +40,10 @@ public class JsonWriterTest {
     private JsonReader readerChecklist;
     private Checklist emptyChecklist;
 
-    @BeforeEach
-    public void runBefore() {
-        writer = new JsonWriter("./data/myFile.json");
-        trip = new Trips("Vancouver", "Canada", "Solo");
-        reader = new JsonReader("./data/myFile.json");
-        b1 = new Budget(1000, 0);
-        a1 = new Activity("Surfing", "Vancouver", "2024-09-10",
-                60, "10:00 AM", "Did surfing with family", 100.0, true, b1);
-        activity = new ArrayList<Activity>();
-        activity.add(a1);
-        i1 = new DestinationItinerary("2024-09-10", 1, activity);
-        trip.addDestinationItineraries(i1);
-        checklist = new Checklist();
-        emptyChecklist = new Checklist();
-        item1 = new Item("Passport", false);
-        i2 = new Item("Sunglasses", false);
-        i4 = new Item("Book", true);
-        checklist.addItem(item1);
-        checklist.addItem(i2);
-        checklist.addItem(i4);
-        writerChecklist = new JsonWriter("./data/myChecklist.json");
-        readerChecklist = new JsonReader("./data/myChecklist.json");
-    }
 
     @Test
     public void testInvalidFile() {
+        
         try {
             JsonWriter writer1 = new JsonWriter("my\\0illegalFile.json");
             writer1.open();
@@ -76,12 +55,16 @@ public class JsonWriterTest {
 
     @Test
     public void testEmptyTrip() {
+        trip = new Trips("Vancouver", "Canada", "Solo");
+        writer = new JsonWriter("./data/myTripEmpty.json");
+        reader = new JsonReader("./data/myTripEmpty.json");
         try {
             writer.open();
             writer.writeTrips(trip);
             writer.close();
 
             Trips tripRead = reader.readTrips();
+            assertNotNull(tripRead, "tripRead should not be null");
             assertEquals("Canada", tripRead.getCountry());
             assertEquals("Vancouver", tripRead.getCity());
             assertEquals("Solo", tripRead.getTripType());
@@ -95,6 +78,18 @@ public class JsonWriterTest {
 
     @Test
     public void testTripWithItinerary() {
+        trip = new Trips("Vancouver", "Canada", "Solo");
+       
+        b1 = new Budget(1000, 0);
+        a1 = new Activity("Surfing", "Vancouver", "2024-09-10",
+                60, "10:00 AM", "Did surfing with family", 100.0, true, b1);
+        activity = new ArrayList<Activity>();
+        activity.add(a1);
+        i1 = new DestinationItinerary("2024-09-10", 1, activity);
+        trip.addDestinationItineraries(i1);
+
+        writer = new JsonWriter("./data/myTrip.json");
+        reader = new JsonReader("./data/myTrip.json");
         try {
             writer.open();
             writer.writeTrips(trip);
@@ -131,6 +126,9 @@ public class JsonWriterTest {
 
     @Test
     public void testEmptyChecklist() {
+        emptyChecklist = new Checklist();
+        writerChecklist = new JsonWriter("./data/myChecklistEmpty.json");
+        readerChecklist = new JsonReader("./data/myChecklistEmpty.json");
         try {
             writerChecklist.open();
             writerChecklist.writeChecklist(emptyChecklist);
@@ -148,6 +146,16 @@ public class JsonWriterTest {
 
     @Test
     public void testChecklist() {
+        writerChecklist = new JsonWriter("./data/myChecklist.json");
+        readerChecklist = new JsonReader("./data/myChecklist.json");
+        checklist = new Checklist();
+        
+        item1 = new Item("Passport", false);
+        i2 = new Item("Sunglasses", false);
+        i4 = new Item("Book", true);
+        checklist.addItem(item1);
+        checklist.addItem(i2);
+        checklist.addItem(i4);
         try {
             writerChecklist.open();
             writerChecklist.writeChecklist(checklist);
@@ -155,7 +163,7 @@ public class JsonWriterTest {
 
             Checklist checklistRead = readerChecklist.readChecklist();
 
-            assertEquals(3, checklistRead.getChecklist().size());
+           assertEquals(3, checklistRead.getChecklist().size());
 
             Item readItem1 = checklistRead.getChecklist().get(0);
             assertEquals("Passport", readItem1.getName());
@@ -167,7 +175,7 @@ public class JsonWriterTest {
 
             Item readItem3 = checklistRead.getChecklist().get(2);
             assertEquals("Book", readItem3.getName());
-            assertFalse(readItem3.getStatus());
+            assertTrue(readItem3.getStatus());
 
         } catch (IOException e) {
             fail("IOException should not have been thrown");

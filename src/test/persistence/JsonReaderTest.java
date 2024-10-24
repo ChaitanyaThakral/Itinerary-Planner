@@ -35,7 +35,7 @@ public class JsonReaderTest {
 
     @Test
     public void testEmptyTrip() {
-        JsonReader reader = new JsonReader("./data/myEmptyTrip.json");
+        JsonReader reader = new JsonReader("./data/myTripEmpty.json");
         try {
             Trips trip = reader.readTrips();
             assertTrue(trip != null);
@@ -75,7 +75,7 @@ public class JsonReaderTest {
 
     @Test
     public void testReadEmptyChecklist() {
-        JsonReader reader = new JsonReader("./data/myEmptyChecklist.json");
+        JsonReader reader = new JsonReader("./data/myChecklistEmpty.json");
         try {
             Checklist checklist = reader.readChecklist();
             assertTrue(checklist != null);
@@ -103,7 +103,7 @@ public class JsonReaderTest {
 
             Item readItem3 = checklist.getChecklist().get(2);
             assertEquals("Book", readItem3.getName());
-            assertFalse(readItem3.getStatus());
+            assertTrue(readItem3.getStatus());
 
         } catch (IOException e) {
             fail("Unable to read file");
