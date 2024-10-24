@@ -20,37 +20,42 @@ public class JsonWriter {
     // EFFECTS: constructs a writer that will help to write into a required
     // destination.
     public JsonWriter(String destination) {
-        // stub
+        this.destination = destination;
     }
 
     // MODIFIES: this
     // EFFECTS: Opens the writer and throws a FileNotFoundException
     // if the destination file cannot be accessed for writing.
     public void open() throws FileNotFoundException {
-        // stub
+        writer = new PrintWriter(new File(destination));
     }
 
     // MODIFIES: this
     // EFFECTS: closes the writer.
     public void close() {
-        // stub
+        writer.close();
     }
 
     // MODIFIES: this
     // EFFECTS: saves the given string to the file.
     private void save(String json) {
-        // stub
+        writer.print(json);
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of checklist to file.
     public void writeChecklist(Checklist checklist) {
-        // stub
+        JSONObject json = checklist.toJson();
+        save(json.toString(TAB));
     }
+    
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of trips to file.
     public void writeTrips(Trips trip) {
-        // stub
+        JSONObject json = trip.toJson();
+        save(json.toString(TAB));
     }
+
 }
+

@@ -59,8 +59,8 @@ public class JsonWriterTest {
         checklist.addItem(item1);
         checklist.addItem(i2);
         checklist.addItem(i4);
-        writerChecklist=new JsonWriter("./data/myChecklist.json");
-        readerChecklist=new JsonReader("./data/myChecklist.json");
+        writerChecklist = new JsonWriter("./data/myChecklist.json");
+        readerChecklist = new JsonReader("./data/myChecklist.json");
     }
 
     @Test
@@ -90,6 +90,8 @@ public class JsonWriterTest {
             fail("IOException should not have been thrown");
         }
     }
+
+    
 
     @Test
     void testTripWithItinerary() {
@@ -128,7 +130,7 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testEmptyChecklist(){
+    void testEmptyChecklist() {
         try {
             writerChecklist.open();
             writerChecklist.writeChecklist(emptyChecklist);
@@ -152,11 +154,9 @@ public class JsonWriterTest {
             writerChecklist.close();
 
             Checklist checklistRead = readerChecklist.readChecklist();
-            
-            
+
             assertEquals(3, checklistRead.getChecklist().size());
 
-            
             Item readItem1 = checklistRead.getChecklist().get(0);
             assertEquals("Passport", readItem1.getName());
             assertFalse(readItem1.getStatus());
