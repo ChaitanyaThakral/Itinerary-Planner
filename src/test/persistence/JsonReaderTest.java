@@ -1,22 +1,20 @@
 package persistence;
 
-import org.junit.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
-
+import org.junit.jupiter.api.Test;
 
 import model.Activity;
 import model.Checklist;
 import model.DestinationItinerary;
 import model.Item;
 import model.Trips;
+
+// Referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 public class JsonReaderTest {
 
@@ -27,7 +25,7 @@ public class JsonReaderTest {
             reader.readTrips();
             fail("IOException expected");
         } catch (IOException e) {
-            //pass
+            // pass
         }
     }
 

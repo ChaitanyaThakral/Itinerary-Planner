@@ -71,18 +71,18 @@ public class TripsTest {
     }
 
     @Test
-    void testToJson(){
+    void testToJson() {
         DestinationItinerary entry = new DestinationItinerary("2024-09-10", 1, activity);
-        trip.addDestinationItineraries(entry); 
+        trip.addDestinationItineraries(entry);
 
         JSONObject tr = trip.toJson();
         JSONArray trItinerary = tr.getJSONArray("itinerary");
 
         assertEquals("Vancouver", tr.getString("City"));
         assertEquals("Canada", tr.getString("Country"));
-        assertEquals("Solo",tr.getString("Trip Type"));
+        assertEquals("Solo", tr.getString("Trip Type"));
         assertTrue(tr.has("itinerary"));
-        assertEquals(1, trItinerary.length()); 
+        assertEquals(1, trItinerary.length());
 
     }
 }

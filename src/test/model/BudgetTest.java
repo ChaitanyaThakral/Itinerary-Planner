@@ -34,13 +34,12 @@ public class BudgetTest {
         assertTrue(budget.budgetExceed());
     }
 
-
     @Test
-    public void testToJson(){
+    public void testToJson() {
         JSONObject budgetJsonObject = budget.toJson();
-        
-        assertEquals(1000.0,budgetJsonObject.getDouble("budgetLimit"));
-        assertEquals(0.0,budgetJsonObject.getDouble("currentExpenditure"));
+
+        assertEquals(1000.0, budgetJsonObject.getDouble("budgetLimit"));
+        assertEquals(0.0, budgetJsonObject.getDouble("currentExpenditure"));
 
     }
 }

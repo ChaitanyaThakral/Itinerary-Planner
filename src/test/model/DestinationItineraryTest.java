@@ -73,16 +73,16 @@ public class DestinationItineraryTest {
     public void testToJson() {
         i1.addActivity(a2);
 
-        JSONObject iJsonObject = i1.toJson();
+        JSONObject iteneraryJsonObject = i1.toJson();
 
         i1.toJson();
 
-        assertEquals("2024-09-10", iJsonObject.getString("date"));
-        assertEquals(1, iJsonObject.getInt("dayNumber"));
-        assertTrue(iJsonObject.has("activities"));
+        assertEquals("2024-09-10", iteneraryJsonObject.getString("date"));
+        assertEquals(1, iteneraryJsonObject.getInt("dayNumber"));
+        assertTrue(iteneraryJsonObject.has("activities"));
 
-        JSONArray iJsonArray = iJsonObject.getJSONArray("activities");
-        assertEquals(2, iJsonArray.length());
+        JSONArray iteneraryJsonArray = iteneraryJsonObject.getJSONArray("activities");
+        assertEquals(2, iteneraryJsonArray.length());
 
         
     }

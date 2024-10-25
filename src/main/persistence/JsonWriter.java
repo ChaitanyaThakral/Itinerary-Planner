@@ -10,6 +10,9 @@ import model.Checklist;
 import model.Trips;
 
 /*
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 Represents a JSONWriter that will help in writing the JSON representation of Trip Itinerary and checklist into a file.
 The class manages the proper opening, closing and saving the work inside a json file.
 */

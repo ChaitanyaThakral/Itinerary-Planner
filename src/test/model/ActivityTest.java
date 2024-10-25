@@ -62,7 +62,7 @@ public class ActivityTest {
     @Test
     public void testSetCost() {
         a1.setCost(90.00);
-        assertEquals(90.00, a1.getCost(),0.0001);
+        assertEquals(90.00, a1.getCost(), 0.0001);
     }
 
     @Test
@@ -85,23 +85,22 @@ public class ActivityTest {
         assertEquals(b1, a1.getBudget());
     }
 
-    
     @Test
-    public void testToJson(){
-        JSONObject aJsonObject = a1.toJson();
-        
-        assertEquals("Surfing",aJsonObject.getString("activityName"));
-        assertEquals("Vancouver",aJsonObject.getString("location"));
-        assertEquals("2024-09-10",aJsonObject.getString("date"));
-        assertEquals(60,aJsonObject.getInt("duration"));
-        assertEquals("10:00 AM",aJsonObject.getString("time"));
-        assertEquals("Did surfing with family",aJsonObject.getString("description"));
-        assertEquals(100.0, aJsonObject.getDouble("cost"),0.0001);
-        assertTrue(aJsonObject.getBoolean("status"));
+    public void testToJson() {
+        JSONObject activityJsonObject = a1.toJson();
 
-        JSONObject budgetObject = aJsonObject.getJSONObject("budget");
-        assertEquals(1000,budgetObject.getDouble("budgetLimit"),0.0001);
-        assertEquals(0,budgetObject.getDouble("currentExpenditure"),0.0001);
+        assertEquals("Surfing", activityJsonObject.getString("activityName"));
+        assertEquals("Vancouver", activityJsonObject.getString("location"));
+        assertEquals("2024-09-10", activityJsonObject.getString("date"));
+        assertEquals(60, activityJsonObject.getInt("duration"));
+        assertEquals("10:00 AM", activityJsonObject.getString("time"));
+        assertEquals("Did surfing with family", activityJsonObject.getString("description"));
+        assertEquals(100.0, activityJsonObject.getDouble("cost"), 0.0001);
+        assertTrue(activityJsonObject.getBoolean("status"));
+
+        JSONObject budgetObject = activityJsonObject.getJSONObject("budget");
+        assertEquals(1000, budgetObject.getDouble("budgetLimit"), 0.0001);
+        assertEquals(0, budgetObject.getDouble("currentExpenditure"), 0.0001);
 
     }
 

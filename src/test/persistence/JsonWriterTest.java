@@ -1,19 +1,12 @@
 package persistence;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-import org.junit.Test;
-
 
 import model.Activity;
 import model.Budget;
@@ -21,6 +14,9 @@ import model.Checklist;
 import model.DestinationItinerary;
 import model.Item;
 import model.Trips;
+
+// Referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 public class JsonWriterTest {
 
@@ -39,10 +35,9 @@ public class JsonWriterTest {
     private JsonReader readerChecklist;
     private Checklist emptyChecklist;
 
-
     @Test
     public void testInvalidFile() {
-        
+
         try {
             JsonWriter writer1 = new JsonWriter("my\\0illegalFile.json");
             writer1.open();
@@ -73,11 +68,11 @@ public class JsonWriterTest {
         }
     }
 
-
+    @SuppressWarnings("methodlength")
     @Test
     public void testTripWithItinerary() {
         trip = new Trips("Vancouver", "Canada", "Solo");
-       
+
         b1 = new Budget(1000, 0);
         a1 = new Activity("Surfing", "Vancouver", "2024-09-10",
                 60, "10:00 AM", "Did surfing with family", 100.0, true, b1);
@@ -142,12 +137,13 @@ public class JsonWriterTest {
 
     }
 
+    @SuppressWarnings("methodlength")
     @Test
     public void testChecklist() {
         writerChecklist = new JsonWriter("./data/myChecklist.json");
         readerChecklist = new JsonReader("./data/myChecklist.json");
         checklist = new Checklist();
-        
+
         item1 = new Item("Passport", false);
         i2 = new Item("Sunglasses", false);
         i4 = new Item("Book", true);
@@ -161,7 +157,7 @@ public class JsonWriterTest {
 
             Checklist checklistRead = readerChecklist.readChecklist();
 
-           assertEquals(3, checklistRead.getChecklist().size());
+            assertEquals(3, checklistRead.getChecklist().size());
 
             Item readItem1 = checklistRead.getChecklist().get(0);
             assertEquals("Passport", readItem1.getName());

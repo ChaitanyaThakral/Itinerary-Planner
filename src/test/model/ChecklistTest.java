@@ -64,15 +64,14 @@ public class ChecklistTest {
 
     }
 
-    @Test 
-    public void testToJason(){
+    @Test
+    public void testToJason() {
         JSONObject checklistJsonObject = checklist.toJson();
 
         JSONArray checkArray = checklistJsonObject.getJSONArray("checklist");
         assertTrue(checklistJsonObject.has("checklist"));
-        assertEquals(3, checkArray.length()); 
+        assertEquals(3, checkArray.length());
 
-        
     }
 
 }
