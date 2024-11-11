@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.*;
+import java.awt.*;
 
 /*
  * The trip maker allows a user to make a console based interface 
@@ -35,6 +37,8 @@ public class TripMaker {
     private JsonReader jsonReaderChecklist;
     private Checklist checkistData;
     private Trips tripData;
+    private JFrame window;
+    
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
@@ -49,7 +53,8 @@ public class TripMaker {
         jsonReaderTrip = new JsonReader("./data/myTrip.json");
         jsonReaderChecklist = new JsonReader("./data/myChecklist.json");
         jsonWriterChecklist = new JsonWriter("./data/myChecklist.json");
-
+        mainWindow();
+       
         run();
     }
 
@@ -191,7 +196,6 @@ public class TripMaker {
 
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: If the trip is successfully loaded, the current trip is updated with
@@ -616,4 +620,13 @@ public class TripMaker {
         }
     }
 
+    // MODIFIES The state of the main window.
+    // EFFECTS: makes the main window, with title, given size and default close operation
+    // and makes it visible to the user.
+    public void mainWindow() {
+       //stub
+    }
+
+    
+ 
 }
