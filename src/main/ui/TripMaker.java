@@ -38,7 +38,6 @@ public class TripMaker {
     private Checklist checkistData;
     private Trips tripData;
     private JFrame window;
-    
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
@@ -54,7 +53,7 @@ public class TripMaker {
         jsonReaderChecklist = new JsonReader("./data/myChecklist.json");
         jsonWriterChecklist = new JsonWriter("./data/myChecklist.json");
         mainWindow();
-       
+
         run();
     }
 
@@ -621,7 +620,8 @@ public class TripMaker {
     }
 
     // MODIFIES The state of the main window.
-    // EFFECTS: makes the main window, with title, given size and default close operation
+    // EFFECTS: makes the main window, with title, given size and default close
+    // operation
     // and makes it visible to the user.
     public void mainWindow() {
         window = new JFrame();
@@ -632,6 +632,13 @@ public class TripMaker {
         window.setVisible(true);
     }
 
-    
- 
+    // REQUIRES: The parent window is initialized and able to display new panels.
+    // MODIFIES: The state of the panel.
+    // EFFECTS: create a panel, add buttons in the panel for the specific actions
+    // which needs to be performed like creating trip, add ititnerary, view
+    // itinerary, save trip and load trip.
+    public void createPanel() {
+        // stub
+    }
+
 }
