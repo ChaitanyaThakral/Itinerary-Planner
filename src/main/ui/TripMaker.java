@@ -624,7 +624,12 @@ public class TripMaker {
     // EFFECTS: makes the main window, with title, given size and default close operation
     // and makes it visible to the user.
     public void mainWindow() {
-       //stub
+        window = new JFrame();
+        window.setTitle("Travel Itinerary Planner");
+        window.setSize(800, 500);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
     
