@@ -53,7 +53,7 @@ public class TripMaker {
         jsonReaderChecklist = new JsonReader("./data/myChecklist.json");
         jsonWriterChecklist = new JsonWriter("./data/myChecklist.json");
         mainWindow();
-
+        createPanel();
         run();
     }
 
@@ -638,7 +638,37 @@ public class TripMaker {
     // which needs to be performed like creating trip, add ititnerary, view
     // itinerary, save trip and load trip.
     public void createPanel() {
-        // stub
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.BLACK);
+
+        JButton createTripButton = new JButton("Create a new Trip");
+        JButton addDestinationButton = new JButton("Add Destination to the Trip");
+        JButton viewTasksButton = new JButton("View Tasks");
+        JButton saveButton = new JButton("Save the Trip");
+        JButton loadButton = new JButton("Load Trip");
+
+        Dimension buttonSize = new Dimension(200, 40);
+        createTripButton.setMaximumSize(buttonSize);
+        addDestinationButton.setMaximumSize(buttonSize);
+        viewTasksButton.setMaximumSize(buttonSize);
+        saveButton.setMaximumSize(buttonSize);
+        loadButton.setMaximumSize(buttonSize);
+
+        panel.add(Box.createVerticalStrut(30));
+        panel.add(createTripButton);
+        panel.add(Box.createVerticalStrut(30));
+        panel.add(addDestinationButton);
+        panel.add(Box.createVerticalStrut(30));
+        panel.add(viewTasksButton);
+        panel.add(Box.createVerticalStrut(30));
+        panel.add(saveButton);
+        panel.add(Box.createVerticalStrut(30));
+        panel.add(loadButton);
+
+        window.add(panel, BorderLayout.CENTER);
     }
+
 
 }
