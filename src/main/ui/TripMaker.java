@@ -651,7 +651,7 @@ public class TripMaker {
         finalMessage.setForeground(Color.WHITE);
 
         JButton createTripButton = createTripButton(finalMessage);
-        JButton addDestinationButton = new JButton("Add Destination to the Trip");
+        JButton addDestinationButton = createAddDestinationItineraryButton(finalMessage);
         JButton viewTasksButton = new JButton("View Tasks");
         JButton saveButton = new JButton("Save the Trip");
         JButton loadButton = new JButton("Load Trip");
@@ -717,10 +717,10 @@ public class TripMaker {
         inputPanel.add(new JLabel("Trip Type (Solo, Family, Business):"));
         inputPanel.add(tripType);
 
-        int option = JOptionPane.showConfirmDialog(window, inputPanel, "Create your Trip",
+        int choice = JOptionPane.showConfirmDialog(window, inputPanel, "Create your Trip",
                 JOptionPane.OK_CANCEL_OPTION);
 
-        if (option == JOptionPane.OK_OPTION) {
+        if (choice == JOptionPane.OK_OPTION) {
 
             String cityString = city.getText();
             String countryString = country.getText();
@@ -732,8 +732,17 @@ public class TripMaker {
                     + ") is created");
 
         }
+    }
 
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the itinerary for the trip and add fucntionality to it
+    // using actionlistener and perform the action of adding the destination
+    // itinerary for that trip by calling a
+    // new function that will input the data for the GUI.
+    public JButton createAddDestinationItineraryButton(JLabel finalMessage) {
 
+        return null;
     }
 
 }
