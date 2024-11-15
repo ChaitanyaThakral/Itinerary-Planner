@@ -703,7 +703,37 @@ public class TripMaker {
     // country, and trip type. After the user has entered all the details it prints
     // the final message, that the trip has been created onto the GUI.
     public void tripCreationGUI(JLabel finalMessage) {
-       //stub
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(3, 2));
+
+        JTextField city = new JTextField();
+        JTextField country = new JTextField();
+        JTextField tripType = new JTextField();
+
+        inputPanel.add(new JLabel("Enter City:"));
+        inputPanel.add(city);
+        inputPanel.add(new JLabel("Enter Country:"));
+        inputPanel.add(country);
+        inputPanel.add(new JLabel("Trip Type (Solo, Family, Business):"));
+        inputPanel.add(tripType);
+
+        int option = JOptionPane.showConfirmDialog(window, inputPanel, "Create your Trip",
+                JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+
+            String cityString = city.getText();
+            String countryString = country.getText();
+            String tripTypeString = tripType.getText();
+
+            trip = new Trips(cityString, countryString, tripTypeString);
+
+            finalMessage.setText(" Your New Trip to " + cityString + " in " + countryString + " ( " + tripTypeString
+                    + ") is created");
+
+        }
+
+
     }
 
 }
