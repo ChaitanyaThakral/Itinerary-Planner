@@ -741,8 +741,15 @@ public class TripMaker {
     // itinerary for that trip by calling a
     // new function that will input the data for the GUI.
     public JButton createAddDestinationItineraryButton(JLabel finalMessage) {
+        JButton addDestinationButton = new JButton("Add Destination to the Trip");
+        addDestinationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addDestinationToTripGUI(finalMessage);
+            }
+        });
+        return addDestinationButton;
 
-        return null;
     }
 
 }
