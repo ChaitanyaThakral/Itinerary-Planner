@@ -756,11 +756,73 @@ public class TripMaker {
     // MODIFIES: finalMessage
     // EFFECTS: Opens a dialog box allowing the user to enter the trip's destination
     // itinerary with date, day and activity with the inputted
-    // name,location, date,duratiom,time,description,cost,status(activity completed or not),
+    // name,location, date,duratiom,time,description,cost,status(activity completed
+    // or not),
     // and budget.After the user has entered all the details it prints
     // the final message, that the destination Itinerary has been added.
     public void addDestinationToTripGUI(JLabel finalMessage) {
-        // stub
+        if (trip == null) {
+            finalMessage.setText("Please create a trip first before adding an itinerary");
+            return;
+        }
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(3, 2));
+
+        JTextField date = new JTextField();
+        JTextField day = new JTextField();
+
+        inputPanel.add(new JLabel("Please enter the date "));
+        inputPanel.add(date);
+        inputPanel.add(new JLabel("Please enter the day Number (like Day 1 or Day 2 , an integer)"));
+        inputPanel.add(day);
+
+        int option = JOptionPane.showConfirmDialog(window, inputPanel, "Add Destination to Trip",
+                JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String dateString = date.getText();
+            int dayNumber = Integer.parseInt(day.getText());
+            List<Activity> activitiyList = new ArrayList<>();
+
+            boolean choice = true;
+
+            while (choice) {
+                String activityName = JOptionPane.showInputDialog("Please enter the name of the Activity");
+                String location = JOptionPane.showInputDialog("Please enter the Location of the Activity");
+                String activityDate = JOptionPane.showInputDialog("Please enter the Date of the Activity");
+                int duration = Integer.parseInt(JOptionPane
+                        .showInputDialog("Please enter the Duration (in minutes (integer)) of the Activity"));
+                String time = JOptionPane.showInputDialog("Please enter the Time of the Activity (like 10:00AM)");
+                String description = JOptionPane.showInputDialog("Please enter the Descrition of the Activity");
+                double cost = Double.parseDouble(JOptionPane.showInputDialog("Please enter the Cost of the Activity"));
+                int result = JOptionPane.showConfirmDialog(window,
+                        "Is this activity completed?", "Activity Status",
+                        JOptionPane.YES_NO_OPTION);
+                boolean status = (result == JOptionPane.YES_OPTION);
+
+                // Prompt for budget details
+                double budgetLimit = Double
+                        .parseDouble(JOptionPane.showInputDialog("Please enter the budget limit for this activity"));
+                double currentExpenditure = Double.parseDouble(JOptionPane
+                        .showInputDialog("Please enter the Current spending you have done for this activity"));
+                Budget budget = new Budget(budgetLimit, currentExpenditure);
+
+                Activity activity = new Activity(activityName, location, activityDate, duration, time, description,
+                        cost, status, budget);
+                activitiyList.add(activity);
+
+                int addMore = JOptionPane.showConfirmDialog(window, "Do you want to add another activity?");
+                choice = (addMore == JOptionPane.YES_OPTION);
+            }
+
+            DestinationItinerary destinationItinerary = new DestinationItinerary(dateString, dayNumber, activitiyList);
+
+            trip.addDestinationItineraries(destinationItinerary);
+
+        }
+        finalMessage.setText("Destination and Activities added successfully!");
+
     }
 
 }
