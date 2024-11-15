@@ -683,7 +683,18 @@ public class TripMaker {
     // using actionlistener and perform the action of making a new trip by calling a
     // new function that will input the data for the GUI.
     public JButton createTripButton(JLabel finalMessage) {
-        return null;
+        JButton createTripButton = new JButton("Create a new Trip");
+    
+        createTripButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tripCreationGUI(finalMessage);
+            }
+        });
+    
+        return createTripButton;
     }
+
+    
 
 }
