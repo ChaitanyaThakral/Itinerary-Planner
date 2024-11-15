@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.module.ModuleDescriptor.Opens;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -684,17 +686,24 @@ public class TripMaker {
     // new function that will input the data for the GUI.
     public JButton createTripButton(JLabel finalMessage) {
         JButton createTripButton = new JButton("Create a new Trip");
-    
+
         createTripButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tripCreationGUI(finalMessage);
             }
         });
-    
+
         return createTripButton;
     }
 
-    
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Opens a dialog box allowing the user to enter the trip's city,
+    // country, and trip type. After the user has entered all the details it prints
+    // the final message, that the trip has been created onto the GUI.
+    public void tripCreationGUI(JLabel finalMessage) {
+       //stub
+    }
 
 }
