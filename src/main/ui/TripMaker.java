@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /*
  * The trip maker allows a user to make a console based interface 
@@ -643,7 +645,10 @@ public class TripMaker {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.BLACK);
 
-        JButton createTripButton = new JButton("Create a new Trip");
+        JLabel finalMessage = new JLabel("");
+        finalMessage.setForeground(Color.WHITE);
+
+        JButton createTripButton = createTripButton(finalMessage);
         JButton addDestinationButton = new JButton("Add Destination to the Trip");
         JButton viewTasksButton = new JButton("View Tasks");
         JButton saveButton = new JButton("Save the Trip");
@@ -666,9 +671,19 @@ public class TripMaker {
         panel.add(saveButton);
         panel.add(Box.createVerticalStrut(30));
         panel.add(loadButton);
+        panel.add(Box.createVerticalStrut(40));
+        panel.add(finalMessage);
 
         window.add(panel, BorderLayout.CENTER);
     }
 
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the "Create a new Trip" button and add fucntionality to it
+    // using actionlistener and perform the action of making a new trip by calling a
+    // new function that will input the data for the GUI.
+    public JButton createTripButton(JLabel finalMessage) {
+        return null;
+    }
 
 }
