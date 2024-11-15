@@ -699,6 +699,24 @@ public class TripMaker {
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
+    // EFFECTS: Creates the itinerary for the trip GUI and add fucntionality to it
+    // using actionlistener and perform the action of adding the destination
+    // itinerary for that trip by calling a
+    // new function that will input the data for the GUI.
+    public JButton createAddDestinationItineraryButton(JLabel finalMessage) {
+        JButton addDestinationButton = new JButton("Add Destination to the Trip");
+        addDestinationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addDestinationToTripGUI(finalMessage);
+            }
+        });
+        return addDestinationButton;
+
+    }
+
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
     // EFFECTS: Opens a dialog box allowing the user to enter the trip's city,
     // country, and trip type. After the user has entered all the details it prints
     // the final message, that the trip has been created onto the GUI.
@@ -736,20 +754,13 @@ public class TripMaker {
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
-    // EFFECTS: Creates the itinerary for the trip and add fucntionality to it
-    // using actionlistener and perform the action of adding the destination
-    // itinerary for that trip by calling a
-    // new function that will input the data for the GUI.
-    public JButton createAddDestinationItineraryButton(JLabel finalMessage) {
-        JButton addDestinationButton = new JButton("Add Destination to the Trip");
-        addDestinationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addDestinationToTripGUI(finalMessage);
-            }
-        });
-        return addDestinationButton;
-
+    // EFFECTS: Opens a dialog box allowing the user to enter the trip's destination
+    // itinerary with date, day and activity with the inputted
+    // name,location, date,duratiom,time,description,cost,status(activity completed or not),
+    // and budget.After the user has entered all the details it prints
+    // the final message, that the destination Itinerary has been added.
+    public void addDestinationToTripGUI(JLabel finalMessage) {
+        // stub
     }
 
 }
