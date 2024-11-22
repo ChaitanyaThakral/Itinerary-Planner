@@ -773,7 +773,17 @@ public class TripMaker {
     // trip.and add functionality to it using actionlistener and perform the
     // action of calling the function that will save the 
     public JButton createSaveButton(JLabel finalMessage) {
-       return null;
+        JButton saveButton = new JButton("Save Trip");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                saveTrip(finalMessage);
+            }
+        });
+
+        return saveButton;
+
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -1005,6 +1015,9 @@ public class TripMaker {
         }
     }
 
-    
+    public void saveTrip(JLabel finalMessage) {
+
+    }
+
 
 }
