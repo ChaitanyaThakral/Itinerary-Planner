@@ -789,9 +789,8 @@ public class TripMaker {
         });
 
         return budgetAnalysisButton;
-        
-    }
 
+    }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
@@ -1060,11 +1059,13 @@ public class TripMaker {
         }
     }
 
-    public void analyzeBudget(JLabel finalMessage){
-        //stub
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Performs the budget analysis for the trip and provide a detailed
+    // description of the finding.
+    public void analyzeBudget(JLabel finalMessage) {
+        // stub
     }
-
-
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
