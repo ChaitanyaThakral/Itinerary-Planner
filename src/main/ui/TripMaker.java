@@ -666,7 +666,7 @@ public class TripMaker {
         JButton viewTasksButton = createViewTasksButton(finalMessage);
         JButton removeActivity = createRemoveActivity(finalMessage);
         JButton highlightActivtiy = new JButton("Highlight important activtity");
-        JButton saveButton = new JButton("Save the Trip");
+        JButton saveButton = createSaveButton(finalMessage);
         JButton loadButton = new JButton("Load Trip");
 
         createTripButton.setBounds(20, 50, 200, 40);
@@ -771,7 +771,7 @@ public class TripMaker {
     // MODIFIES: finalMessage
     // EFFECTS: Creates the button which will help the user to save the state of the
     // trip.and add functionality to it using actionlistener and perform the
-    // action of calling the function that will save the 
+    // action of calling the function that will save the
     public JButton createSaveButton(JLabel finalMessage) {
         JButton saveButton = new JButton("Save Trip");
         saveButton.addActionListener(new ActionListener() {
@@ -991,7 +991,7 @@ public class TripMaker {
 
         String activityName = JOptionPane.showInputDialog(window,
                 "Enter the name of the Activity which you want to remove");
-        if (activityName == null || activityName.trim().isEmpty()) {
+        if (activityName == null) {
             finalMessage.setText("Please enter a valid Activity name");
             return;
         }
@@ -1015,9 +1015,12 @@ public class TripMaker {
         }
     }
 
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Save the current state of the trip and displays a message conveying
+    // whether the trip has been saved or not.
     public void saveTrip(JLabel finalMessage) {
-
+        //stub
     }
-
 
 }
