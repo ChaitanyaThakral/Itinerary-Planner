@@ -737,9 +737,19 @@ public class TripMaker {
     // using actionlistener and perform the action of displaying itinerary by
     // calling the function used for displaying.
     public JButton createViewTasksButton(JLabel finalMessage) {
-        //stub
-        return null;
+        JButton viewTasksButton = new JButton("View Tasks");
+
+        viewTasksButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                viewTasksForDay(finalMessage);
+            }
+        });
+
+        return viewTasksButton;
     }
+
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
@@ -849,6 +859,10 @@ public class TripMaker {
         }
         finalMessage.setText("Destination and Activities added successfully!");
 
+    }
+
+    public void viewTasksForDay(JLabel finalMessage) {
+        
     }
 
 }
