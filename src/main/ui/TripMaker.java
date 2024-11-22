@@ -715,8 +715,7 @@ public class TripMaker {
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
     // EFFECTS: Creates the itinerary for the trip GUI and add fucntionality to it
-    // using actionlistener and perform the action of adding the destination
-    // itinerary for that trip by calling a
+    // using actionlistener and perform the action of calling a
     // new function that will input the data for the GUI.
     public JButton createAddDestinationItineraryButton(JLabel finalMessage) {
         JButton addDestinationButton = new JButton("Add Itinerary to the Trip");
@@ -734,8 +733,7 @@ public class TripMaker {
     // MODIFIES: finalMessage
     // EFFECTS: Creates the button which will help the user to view itinerary, and
     // add fucntionality to it
-    // using actionlistener and perform the action of displaying itinerary by
-    // calling the function used for displaying.
+    // using actionlistener and perform the action of function used for displaying.
     public JButton createViewTasksButton(JLabel finalMessage) {
         JButton viewTasksButton = new JButton("View Tasks");
 
@@ -754,7 +752,7 @@ public class TripMaker {
     // MODIFIES: finalMessage
     // EFFECTS: Creates the button which will help the user to remove a particular
     // itinerary, and add functionality to it using actionlistener and perform the
-    // action of removing a particular itinerary, and calling the function that
+    // action of calling the function that
     // perform the task of removing the itinerary.
     public JButton createRemoveActivity(JLabel finalMessage) {
         JButton removeActivity = new JButton("Remove itinerary");
@@ -767,6 +765,15 @@ public class TripMaker {
         });
 
         return removeActivity;
+    }
+
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the button which will help the user to save the state of the
+    // trip.and add functionality to it using actionlistener and perform the
+    // action of calling the function that will save the 
+    public JButton createSaveButton(JLabel finalMessage) {
+       return null;
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -957,7 +964,6 @@ public class TripMaker {
         }
 
         int dayNumber = Integer.parseInt(dayInput.trim());
-        
 
         DestinationItinerary toRemoveItinerary = null;
         for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
@@ -972,32 +978,33 @@ public class TripMaker {
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-     
-        String activityName = JOptionPane.showInputDialog(window, "Enter the name of the Activity which you want to remove");
+
+        String activityName = JOptionPane.showInputDialog(window,
+                "Enter the name of the Activity which you want to remove");
         if (activityName == null || activityName.trim().isEmpty()) {
             finalMessage.setText("Please enter a valid Activity name");
             return;
         }
 
         Activity activityToRemove = null;
-    for (Activity activity : toRemoveItinerary.getActivity()) {
-        if (activity.getActivityName().equalsIgnoreCase(activityName.trim())) {
-            activityToRemove = activity;
-            break;
+        for (Activity activity : toRemoveItinerary.getActivity()) {
+            if (activity.getActivityName().equalsIgnoreCase(activityName.trim())) {
+                activityToRemove = activity;
+                break;
+            }
+        }
+
+        if (activityToRemove != null) {
+            toRemoveItinerary.getActivity().remove(activityToRemove);
+            JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' is removed successfully.",
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+            finalMessage.setText("Activity '" + activityName + "' removed for the Day Number " + dayNumber);
+        } else {
+            JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' not found in Day " + dayNumber,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    if (activityToRemove != null) {
-        toRemoveItinerary.getActivity().remove(activityToRemove);
-        JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' is removed successfully.",
-                "Success", JOptionPane.INFORMATION_MESSAGE);
-        finalMessage.setText("Activity '" + activityName + "' removed for the Day Number " + dayNumber);
-    } else {
-        JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' not found in Day " + dayNumber,
-                "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
-
-
+    
 
 }
