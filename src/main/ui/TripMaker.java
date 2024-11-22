@@ -751,7 +751,7 @@ public class TripMaker {
     // add fucntionality to it
     // using actionlistener and perform the action of function used for displaying.
     public JButton createViewTasksButton(JLabel finalMessage) {
-        JButton viewTasksButton = new JButton("View Tasks");
+        JButton viewTasksButton = new JButton("View Itinerary");
 
         viewTasksButton.addActionListener(new ActionListener() {
             @Override
@@ -1131,16 +1131,15 @@ public class TripMaker {
 
         int dayNumber = Integer.parseInt(dayInput.trim());
 
-        DestinationItinerary budgetItinerary = null;
+        List<Activity> activitiesForDay = new ArrayList<>();
         for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
             if (itinerary.getDayNumber() == dayNumber) {
-                budgetItinerary = itinerary;
-                break;
+                activitiesForDay.addAll(itinerary.getActivity());
             }
         }
 
-        if (budgetItinerary == null) {
-            JOptionPane.showMessageDialog(window, "No itinerary found " + dayNumber,
+        if (activitiesForDay.isEmpty()) {
+            JOptionPane.showMessageDialog(window, "No itinerary found for Day " + dayNumber,
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -1152,7 +1151,7 @@ public class TripMaker {
 
         textArea.append("Budget Analysis for the Day Number: " + dayNumber + ":\n\n");
 
-        for (Activity activity : budgetItinerary.getActivity()) {
+        for (Activity activity : activitiesForDay) {
             Budget budget = activity.getBudget();
             double budgetLimit = budget.getBudgetLimit();
             double currentExpenditure = budget.getCurrentExpenditure();
@@ -1163,11 +1162,11 @@ public class TripMaker {
 
             if (budget.budgetExceed()) {
                 double exceeded = currentExpenditure - budgetLimit;
-                textArea.append("You have exceeded your budget Limit for the Day. \n"
-                        + "You exceeded the Budet Limit by $" + exceeded);
+                textArea.append("You have exceeded your budget limit for " + activity.getActivityName() + "\n"
+                        + "You exceeded the budget limit by $" + exceeded);
             } else {
                 double remaining = budgetLimit - currentExpenditure;
-                textArea.append("You were under the Budget limit\n" + "Remaining Budget: $" + remaining + "\n");
+                textArea.append("You were under the budget limit\n" + "Remaining Budget: $" + remaining + "\n");
             }
 
             textArea.append("\n");
