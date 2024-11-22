@@ -862,11 +862,54 @@ public class TripMaker {
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
     // EFFECTS: Displays the details of all activities in the trip's destination
-    // itineraries using a scrollable dialog box. If the trip is not found , or the itineraries
+    // itineraries using a scrollable dialog box. If the trip is not found , or the
+    // itineraries
     // not found it displays an error message for the same
     // gives a final message conveying that the Itineraries have been displayed.
     public void viewTasksForDay(JLabel finalMessage) {
 
+        if (trip == null) {
+            JOptionPane.showMessageDialog(window, "No Trip found",
+                    "View Itineraries", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (trip.getDestinationItinerary() == null || trip.getDestinationItinerary().isEmpty()) {
+            JOptionPane.showMessageDialog(window, "No Itinerary found for the trip.",
+                    "Display Itineraries", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+
+        for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
+            textArea.append(
+                    " Activities for Day Number: " + itinerary.getDayNumber() + " (" + itinerary.getDate() + "):\n");
+
+            for (Activity activity : itinerary.getActivity()) {
+                textArea.append("\nActivity Name: " + activity.getActivityName() +
+                        "\nLocation: " + activity.getLocation() +
+                        "\nDuration: " + activity.getDuration() +
+                        "\nTime: " + activity.getTime() +
+                        "\nDescription: " + activity.getDescription() +
+                        "\nCost: $" + activity.getCost() +
+                        "\nStatus: " + (activity.getStatus() ? "Completed" : "Pending") +
+                        "\nBudget Limit: $" + activity.getBudget().getBudgetLimit() +
+                        "\nCurrent Expenditure: $" + activity.getBudget().getCurrentExpenditure() +
+                        "\n");
+            }
+            textArea.append("\n---------------------------------------------\n");
+        }
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        JOptionPane.showMessageDialog(window, scrollPane, "View Itinerary Details", JOptionPane.INFORMATION_MESSAGE);
+
+        finalMessage.setText("Displaying details of the trip");
     }
 
 }
