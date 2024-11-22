@@ -770,8 +770,8 @@ public class TripMaker {
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
     // EFFECTS: Creates the button which will help the user to save the state of the
-    // trip.and add functionality to it using actionlistener and perform the
-    // action of calling the function that will save the
+    // trip and add functionality to it using actionlistener and perform the
+    // action of calling the function that will save the state of the trip.
     public JButton createSaveButton(JLabel finalMessage) {
         JButton saveButton = new JButton("Save Trip");
         saveButton.addActionListener(new ActionListener() {
@@ -784,6 +784,16 @@ public class TripMaker {
 
         return saveButton;
 
+    }
+
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the button which will help the user to load the state of the
+    // trip.and add functionality to it using actionlistener and perform the
+    // action of calling the function that will load the state of the trip which it
+    // had after saving and before closing.
+    public JButton createLoadButton(JLabel finalMessage) {
+        return null;
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -1035,7 +1045,6 @@ public class TripMaker {
         } catch (FileNotFoundException e) {
             finalMessage.setText("File not Found Exception occured.");
         }
-
 
     }
 
