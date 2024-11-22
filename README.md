@@ -37,9 +37,12 @@ As an international student with a passion for travel, I often find myself needi
 - As a user, I want the option to load the previously saved state of my itinerary from a file, allowing me to resume exactly where I left off.
 
 # Instructions for End User
-
-- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the button named "Remove itinerary", by inputting the day and name of the activity which is to removed. By pressing OK the activtiy for that day and name is removed.
-- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking on the button named "Get a Budget Analysis" user can input the day for which the Budget analysis is to obtained and the required analysis is displayed to the user.
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking on the "Create a new Trip",and  entering the input required like city, country, trip type and press ok to create the trip.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking on the "Add Itinerary to the Trip", and entering the required input like date, day Number, and activity details like name of the activity,location of the activity, date,
+duration,time taken to complete the activity, description, cost, Status of completion of the activity and budget. And selecting whether you want to add more activtiy for that particular activity by selected OK or cancel. if selected ok it adds one more activity, if selected cancel it directs the user to the main menu of GUI.
+- You can generate the third required action related to the user story "adding multiple Xs to a Y" by clicking the "View Itinerary".After selecting it displays the itinerary for the trip for all the days.
+- You can generate the forth required action related to the user story "adding multiple Xs to a Y" by clicking the button named "Remove itinerary", by inputting the day and name of the activity which is to removed. By pressing OK the activtiy for that day and name is removed.
+- You can generate the fifth required action related to the user story "adding multiple Xs to a Y" by clicking on the button named "Get a Budget Analysis" user can input the day for which the Budget analysis is to obtained and the required analysis is displayed to the user.
 - You can locate my visual component by going to the data folder, this is the path "data\Background Image.jpeg" for the image.
 - You can save the state of my application by clicking on the "Save Trip" button and it will save the state of the Trip.
 - You can reload the state of my application by clicking on the "Load Trip" button and it will load the state of the Trip.
