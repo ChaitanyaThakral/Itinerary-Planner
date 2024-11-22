@@ -670,7 +670,7 @@ public class TripMaker {
         JButton addDestinationButton = createAddDestinationItineraryButton(finalMessage);
         JButton viewTasksButton = createViewTasksButton(finalMessage);
         JButton removeActivity = createRemoveActivity(finalMessage);
-        JButton budgetAnalysisButton = new JButton("Highlight important activtity");
+        JButton budgetAnalysisButton = createBudgetAnalysisButton(finalMessage);
         JButton saveButton = createSaveButton(finalMessage);
         JButton loadButton = createLoadButton(finalMessage);
 
@@ -779,7 +779,7 @@ public class TripMaker {
     // action of calling the function that
     // perform the task of budget analysis of the trip.
     public JButton createBudgetAnalysisButton(JLabel finalMessage) {
-        JButton budgetAnalysisButton = new JButton("Give a Budget Analysis of the Trip");
+        JButton budgetAnalysisButton = new JButton("Get a Budget Analysis");
         budgetAnalysisButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1064,7 +1064,71 @@ public class TripMaker {
     // EFFECTS: Performs the budget analysis for the trip and provide a detailed
     // description of the finding.
     public void analyzeBudget(JLabel finalMessage) {
-        // stub
+        if (trip == null) {
+            JOptionPane.showMessageDialog(window, "No Trip found",
+                    "Budget Analysis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (trip.getDestinationItinerary() == null || trip.getDestinationItinerary().isEmpty()) {
+            JOptionPane.showMessageDialog(window, "No Itinerary found for the trip.",
+                    "Budget Analysis", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String dayInput = JOptionPane.showInputDialog(window,
+                "Enter the day number for which you want to get the Budget Analysis for ?");
+        if (dayInput == null) {
+            finalMessage.setText("Please Enter a valid Day Number");
+            return;
+        }
+
+        int dayNumber = Integer.parseInt(dayInput.trim());
+
+        DestinationItinerary budgetItinerary = null;
+        for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
+            if (itinerary.getDayNumber() == dayNumber) {
+                budgetItinerary = itinerary;
+                break;
+            }
+        }
+
+        if (budgetItinerary == null) {
+            JOptionPane.showMessageDialog(window, "No itinerary found " + dayNumber,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+
+        textArea.append("Budget Analysis for the Day Number: " + dayNumber + ":\n\n");
+
+        for (Activity activity : budgetItinerary.getActivity()) {
+            Budget budget = activity.getBudget();
+            double budgetLimit = budget.getBudgetLimit();
+            double currentExpenditure = budget.getCurrentExpenditure();
+
+            textArea.append("Activity Name: " + activity.getActivityName() + "\n");
+            textArea.append("Budget Limit: " + budgetLimit + "\n");
+            textArea.append("Current Expenditure: " + currentExpenditure + "\n");
+
+            if (budget.budgetExceed()) {
+                textArea.append("You have exceeded your budget Limit for the Day. \n");
+            } else {
+                double remaining = budgetLimit - currentExpenditure;
+                textArea.append("Remaining Budget: " + remaining + "\n");
+            }
+
+            textArea.append("\n");
+        }
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        JOptionPane.showMessageDialog(window, scrollPane, "Budget Analysis", JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
