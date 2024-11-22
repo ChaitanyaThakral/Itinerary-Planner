@@ -750,7 +750,6 @@ public class TripMaker {
         return viewTasksButton;
     }
 
-
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
     // EFFECTS: Opens a dialog box allowing the user to enter the trip's city,
@@ -837,7 +836,6 @@ public class TripMaker {
                         JOptionPane.YES_NO_OPTION);
                 boolean status = (result == JOptionPane.YES_OPTION);
 
-                // Prompt for budget details
                 double budgetLimit = Double
                         .parseDouble(JOptionPane.showInputDialog("Please enter the budget limit for this activity"));
                 double currentExpenditure = Double.parseDouble(JOptionPane
@@ -861,8 +859,14 @@ public class TripMaker {
 
     }
 
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Displays the details of all activities in the trip's destination
+    // itineraries using a scrollable dialog box. If the trip is not found , or the itineraries
+    // not found it displays an error message for the same
+    // gives a final message conveying that the Itineraries have been displayed.
     public void viewTasksForDay(JLabel finalMessage) {
-        
+
     }
 
 }
