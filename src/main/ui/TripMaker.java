@@ -13,13 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.module.ModuleDescriptor.Opens;
 
 import javax.swing.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +27,9 @@ import java.awt.event.ActionListener;
  * Make a checklist for the all items which is to be carried, View the Checklist of all the items,
  * Check if you went over budget and analyze your data of the budget and Exit the application.
  * It also allows the user to save the trip and checklist which was made, later on if saved the data
- * can be loaded and printed. It allows the user to manage the trip easily.
+ * can be loaded and printed. Creates a GUI interface to create trip, add itinerary to the trip, 
+ * display the activties, remove itinerary,Budget analyis , loading and saving the state of the trip. 
+ * It allows the user to manage the trip easily.
  */
 
 public class TripMaker {
@@ -53,6 +50,9 @@ public class TripMaker {
     // checklist to manage the checklist, Initializes JSON readers and writers for
     // trip and checklist data
     // and calls the run() method to start the application.
+    // calls the mainWindow() method to create the main Window for the GUI, and
+    // CreatePanel to
+    // create all the required background image and the buttons for the GUI.
     public TripMaker() {
         scanner = new Scanner(System.in);
         destinationItinerary = new ArrayList<>();
@@ -628,7 +628,7 @@ public class TripMaker {
         }
     }
 
-    // MODIFIES The state of the main window.
+    // MODIFIES main window.
     // EFFECTS: makes the main window, with title, given size and default close
     // operation
     // and makes it visible to the user.
@@ -641,11 +641,22 @@ public class TripMaker {
         window.setVisible(true);
     }
 
-    // REQUIRES: The parent window is initialized and able to display new panels.
-    // MODIFIES: The state of the panel.
-    // EFFECTS: create a panel, add buttons in the panel for the specific actions
+    @SuppressWarnings("methodlength")
+    // REQUIRES: The parent window is initialized and able to display all the new
+    // panels.
+
+    // MODIFIES: The state of the panel and components such as buttons and labels.
+
+    // EFFECTS: create a panel , set up a background panel with a background
+    // image,which fit the window size of (800x500).
+    // add buttons in the panel for the specific actions
     // which needs to be performed like creating trip, add ititnerary, view
-    // itinerary, save trip and load trip.
+    // itinerary, removing an itinerary, getting a budget analysis, save trip and
+    // load trip.
+    // it Sets positions and sizes for each button. Adds the buttons and labels to
+    // the panel.
+    // Displays the final message at the bottom of the window for convenience of the
+    // user.
     public void createPanel() {
         JLayeredPane backgroundPanel = new JLayeredPane();
         backgroundPanel.setPreferredSize(new Dimension(800, 500));
@@ -700,7 +711,7 @@ public class TripMaker {
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
-    // MODIFIES: finalMessage
+    // MODIFIES: finalMessage,trip
     // EFFECTS: Creates the "Create a new Trip" button and add fucntionality to it
     // using actionlistener and perform the action of making a new trip by calling a
     // new function that will input the data for the GUI.
@@ -803,7 +814,7 @@ public class TripMaker {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                saveTrip(finalMessage);
+                saveTripGUI(finalMessage);
             }
         });
 
@@ -823,7 +834,7 @@ public class TripMaker {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                loadTrip(finalMessage);
+                loadTripGUI(finalMessage);
             }
         });
 
@@ -831,7 +842,7 @@ public class TripMaker {
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
-    // MODIFIES: finalMessage
+    // MODIFIES: finalMessage, trip
     // EFFECTS: Opens a dialog box allowing the user to enter the trip's city,
     // country, and trip type. After the user has entered all the details it prints
     // the final message, that the trip has been created onto the GUI.
@@ -867,9 +878,11 @@ public class TripMaker {
         }
     }
 
+    @SuppressWarnings("methodlength")
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
-    // MODIFIES: finalMessage
-    // EFFECTS: Opens a dialog box allowing the user to enter the trip's destination
+    // MODIFIES: finalMessage, Destination Itinerary.
+    // EFFECTS:If no trip is found, an error message "No Trip found" is displayed.
+    // Opens a dialog box allowing the user to enter the trip's destination
     // itinerary with date, day and activity with the inputted
     // name,location, date,duratiom,time,description,cost,status(activity completed
     // or not),
@@ -939,9 +952,15 @@ public class TripMaker {
 
     }
 
-    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    @SuppressWarnings("methodlength")
+    // REQUIRES: finalMessage is a non-null JLabel to display messages, trip not
+    // null,DestinationItinerary not null.
     // MODIFIES: finalMessage
-    // EFFECTS: Displays the details of all activities in the trip's destination
+    // EFFECTS:
+    // If no trip is found, an error message "No Trip found" is displayed.
+    // If no itinerary exists, an error message "No Itinerary found for the trip" is
+    // displayed. After that it displays the details of all activities in the trip's
+    // destination
     // itineraries using a scrollable dialog box. If the trip is not found , or the
     // itineraries
     // not found it displays an error message for the same
@@ -970,16 +989,16 @@ public class TripMaker {
                     " Activities for Day Number: " + itinerary.getDayNumber() + " (" + itinerary.getDate() + "):\n");
 
             for (Activity activity : itinerary.getActivity()) {
-                textArea.append("\nActivity Name: " + activity.getActivityName() +
-                        "\nLocation: " + activity.getLocation() +
-                        "\nDuration: " + activity.getDuration() +
-                        "\nTime: " + activity.getTime() +
-                        "\nDescription: " + activity.getDescription() +
-                        "\nCost: $" + activity.getCost() +
-                        "\nStatus: " + (activity.getStatus() ? "Completed" : "Pending") +
-                        "\nBudget Limit: $" + activity.getBudget().getBudgetLimit() +
-                        "\nCurrent Expenditure: $" + activity.getBudget().getCurrentExpenditure() +
-                        "\n");
+                textArea.append("\nActivity Name: " + activity.getActivityName()
+                        + "\nLocation: " + activity.getLocation()
+                        + "\nDuration: " + activity.getDuration()
+                        + "\nTime: " + activity.getTime()
+                        + "\nDescription: " + activity.getDescription()
+                        + "\nCost: $" + activity.getCost()
+                        + "\nStatus: " + (activity.getStatus() ? "Completed" : "Pending")
+                        + "\nBudget Limit: $" + activity.getBudget().getBudgetLimit()
+                        + "\nCurrent Expenditure: $" + activity.getBudget().getCurrentExpenditure()
+                        + "\n");
             }
             textArea.append("\n---------------------------------------------\n");
         }
@@ -992,10 +1011,21 @@ public class TripMaker {
         finalMessage.setText("Displaying details of the trip");
     }
 
-    // REQUIRES: finalMessage is a non-null JLabel to display messages.
-    // MODIFIES: finalMessage
-    // EFFECTS: Remove activity for a particular day, by asking user for the input.
-    // Give a required message if the particular activity is not found.
+    @SuppressWarnings("methodlength")
+    // REQUIRES: finalMessage is a non-null JLabel to display messages, trip not
+    // null, DestinationItinerary not null, valid day Number.
+
+    // MODIFIES: finalMessage, Destination Itinerary.
+
+    // EFFECTS:
+    // If no trip is found, an error message "No Trip found" is displayed.
+    // If no itinerary exists, an error message "No Itinerary found for the trip" is
+    // displayed.
+    // The user is asked to enter a day number. If no valid input is provided, a
+    // message "Please Enter a valid Day Number" is displayed.
+    // If no itinerary exists for the given day number, an error message "No
+    // itinerary found " is displayed. After that it removes activity for a
+    // particular day,
     // gives a final message conveying that the required activity has been removed.
     public void removeItinerary(JLabel finalMessage) {
         if (trip == null) {
@@ -1059,10 +1089,26 @@ public class TripMaker {
         }
     }
 
-    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    @SuppressWarnings("methodlength")
+    // REQUIRES: finalMessage is a non-null JLabel to display messages, trip not
+    // null, DestinationItinerary not null, valid day Number.
+
     // MODIFIES: finalMessage
+
     // EFFECTS: Performs the budget analysis for the trip and provide a detailed
-    // description of the finding.
+    // description of the finding. if trip is not found appropriate message is
+    // conveyed for the same. if Destination Itinerary is not found appropriate
+    // message is conveyed for the same.
+    // Ask the user to input the day for which the budget analysis is to be made. If
+    // itinerary found for that day the analysis is printed with the help of JText.
+    // The analysis include The activity name, The budget limit for that activity,
+    // The current expenditure for the activity.
+    // If the budget is exceeded, a message stating "You have exceeded your budget
+    // limit for the Day" is displayed.
+    // Otherwise, the remaining budget for the activity is shown.
+    // The budget analysis is displayed in a scrollable Jtext area within a dialog
+    // box with the title "Budget Analysis".
+
     public void analyzeBudget(JLabel finalMessage) {
         if (trip == null) {
             JOptionPane.showMessageDialog(window, "No Trip found",
@@ -1116,10 +1162,11 @@ public class TripMaker {
             textArea.append("Current Expenditure: " + currentExpenditure + "\n");
 
             if (budget.budgetExceed()) {
-                textArea.append("You have exceeded your budget Limit for the Day. \n");
+                double exceeded = currentExpenditure - budgetLimit;
+                textArea.append("You have exceeded your budget Limit for the Day. \n" + "You exceeded the Budet Limit by $" + exceeded);
             } else {
                 double remaining = budgetLimit - currentExpenditure;
-                textArea.append("Remaining Budget: " + remaining + "\n");
+                textArea.append("You were under the Budget limit\n" + "Remaining Budget: $" + remaining + "\n");
             }
 
             textArea.append("\n");
@@ -1133,9 +1180,11 @@ public class TripMaker {
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
-    // EFFECTS: Save the current state of the trip and displays a message conveying
-    // whether the trip has been saved or not.
-    public void saveTrip(JLabel finalMessage) {
+    // EFFECTS: Save the current state of the trip to the given path and displays a
+    // message conveying
+    // whether the trip has been saved or not.Throws an IOException if file not
+    // found.
+    public void saveTripGUI(JLabel finalMessage) {
         String path = "data\\myTrip.json";
         JsonWriter writer = new JsonWriter(path);
 
@@ -1156,9 +1205,11 @@ public class TripMaker {
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
-    // EFFECTS: Load the current state of the trip and displays a message conveying
-    // whether the trip has been loaded or not.
-    public void loadTrip(JLabel finalMessage) {
+    // EFFECTS: Load the current state of the trip from the given path and displays
+    // a message conveying
+    // whether the trip has been loaded or not. Throws an IOException if file not
+    // found.
+    public void loadTripGUI(JLabel finalMessage) {
         String path = "data\\myTrip.json";
         JsonReader reader = new JsonReader(path);
         try {

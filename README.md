@@ -36,6 +36,12 @@ As an international student with a passion for travel, I often find myself needi
 - As a user, I want the option to save the entire state of my itinerary, including trips, activities, budgets, and checklists to a file.
 - As a user, I want the option to load the previously saved state of my itinerary from a file, allowing me to resume exactly where I left off.
 
+# Instructions for End User
 
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the button named "Remove itinerary", by inputting the day and name of the activity which is to removed. By pressing OK the activtiy for that day and name is removed.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking on the button named "Get a Budget Analysis" user can input the day for which the Budget analysis is to obtained and the required analysis is displayed to the user.
+- You can locate my visual component by going to the data folder, this is the path "data\Background Image.jpeg" for the image.
+- You can save the state of my application by clicking on the "Save Trip" button and it will save the state of the Trip.
+- You can reload the state of my application by clicking on the "Load Trip" button and it will load the state of the Trip.
 
 

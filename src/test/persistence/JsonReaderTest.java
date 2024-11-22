@@ -20,7 +20,7 @@ public class JsonReaderTest {
 
     @Test
     public void testInvalidFile() {
-        JsonReader reader = new JsonReader("my\\0illegalFile.json");
+        JsonReader reader = new JsonReader("my\\onlyEmptyandIllegalTripForTest.json");
         try {
             reader.readTrips();
             fail("IOException expected");
