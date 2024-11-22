@@ -937,7 +937,67 @@ public class TripMaker {
     // Give a required message if the particular activity is not found.
     // gives a final message conveying that the required activity has been removed.
     public void removeItinerary(JLabel finalMessage) {
-        // stub
+        if (trip == null) {
+            JOptionPane.showMessageDialog(window, "No Trip found",
+                    "Remvove Itineraries", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (trip.getDestinationItinerary() == null || trip.getDestinationItinerary().isEmpty()) {
+            JOptionPane.showMessageDialog(window, "No Itinerary found for the trip.",
+                    "Remvove Itineraries", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String dayInput = JOptionPane.showInputDialog(window,
+                "Enter the day number for which you want to remove the Activity");
+        if (dayInput == null) {
+            finalMessage.setText("Please Enter a valid Day Number");
+            return;
+        }
+
+        int dayNumber = Integer.parseInt(dayInput.trim());
+        
+
+        DestinationItinerary toRemoveItinerary = null;
+        for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
+            if (itinerary.getDayNumber() == dayNumber) {
+                toRemoveItinerary = itinerary;
+                break;
+            }
+        }
+
+        if (toRemoveItinerary == null) {
+            JOptionPane.showMessageDialog(window, "No itinerary found " + dayNumber,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+     
+        String activityName = JOptionPane.showInputDialog(window, "Enter the name of the Activity which you want to remove");
+        if (activityName == null || activityName.trim().isEmpty()) {
+            finalMessage.setText("Please enter a valid Activity name");
+            return;
+        }
+
+        Activity activityToRemove = null;
+    for (Activity activity : toRemoveItinerary.getActivity()) {
+        if (activity.getActivityName().equalsIgnoreCase(activityName.trim())) {
+            activityToRemove = activity;
+            break;
+        }
     }
+
+    if (activityToRemove != null) {
+        toRemoveItinerary.getActivity().remove(activityToRemove);
+        JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' is removed successfully.",
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+        finalMessage.setText("Activity '" + activityName + "' removed for the Day Number " + dayNumber);
+    } else {
+        JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' not found in Day " + dayNumber,
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
 
 }
