@@ -757,9 +757,20 @@ public class TripMaker {
     // action of removing a particular itinerary, and calling the function that
     // perform the task of removing the itinerary.
     public JButton createRemoveActivity(JLabel finalMessage) {
-        //stub
-      return null;
+        JButton removeActivity = new JButton("Remove itinerary");
+        removeActivity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                removeItinerary(finalMessage);
+            }
+        });
+
+        return removeActivity;
     }
+
+
+
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
