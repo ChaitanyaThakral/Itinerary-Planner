@@ -769,9 +769,6 @@ public class TripMaker {
         return removeActivity;
     }
 
-
-
-
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
     // EFFECTS: Opens a dialog box allowing the user to enter the trip's city,
@@ -892,7 +889,7 @@ public class TripMaker {
 
         if (trip == null) {
             JOptionPane.showMessageDialog(window, "No Trip found",
-                    "View Itineraries", JOptionPane.ERROR_MESSAGE);
+                    "Display Itineraries", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -934,7 +931,13 @@ public class TripMaker {
         finalMessage.setText("Displaying details of the trip");
     }
 
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Remove activity for a particular day, by asking user for the input.
+    // Give a required message if the particular activity is not found.
+    // gives a final message conveying that the required activity has been removed.
     public void removeItinerary(JLabel finalMessage) {
-
+        // stub
     }
+
 }
