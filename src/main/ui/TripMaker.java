@@ -1030,13 +1030,13 @@ public class TripMaker {
     public void removeItinerary(JLabel finalMessage) {
         if (trip == null) {
             JOptionPane.showMessageDialog(window, "No Trip found",
-                    "Remvove Itineraries", JOptionPane.ERROR_MESSAGE);
+                    "Remove Itineraries", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (trip.getDestinationItinerary() == null || trip.getDestinationItinerary().isEmpty()) {
             JOptionPane.showMessageDialog(window, "No Itinerary found for the trip.",
-                    "Remvove Itineraries", JOptionPane.ERROR_MESSAGE);
+                    "Remove Itineraries", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -1049,16 +1049,15 @@ public class TripMaker {
 
         int dayNumber = Integer.parseInt(dayInput.trim());
 
-        DestinationItinerary toRemoveItinerary = null;
+        List<DestinationItinerary> itinerariesForDay = new ArrayList<>();
         for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
             if (itinerary.getDayNumber() == dayNumber) {
-                toRemoveItinerary = itinerary;
-                break;
+                itinerariesForDay.add(itinerary);
             }
         }
 
-        if (toRemoveItinerary == null) {
-            JOptionPane.showMessageDialog(window, "No itinerary found " + dayNumber,
+        if (itinerariesForDay.isEmpty()) {
+            JOptionPane.showMessageDialog(window, "No itinerary found for Day " + dayNumber,
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -1070,19 +1069,28 @@ public class TripMaker {
             return;
         }
 
-        Activity activityToRemove = null;
-        for (Activity activity : toRemoveItinerary.getActivity()) {
-            if (activity.getActivityName().equalsIgnoreCase(activityName.trim())) {
-                activityToRemove = activity;
-                break;
+        int removedCount = 0;
+
+        for (DestinationItinerary itinerary : itinerariesForDay) {
+            Activity activityToRemove = null;
+            for (Activity activity : itinerary.getActivity()) {
+                if (activity.getActivityName().equalsIgnoreCase(activityName)) {
+                    activityToRemove = activity;
+                    break;
+                }
+            }
+
+            if (activityToRemove != null) {
+                itinerary.getActivity().remove(activityToRemove);
+                removedCount++;
             }
         }
 
-        if (activityToRemove != null) {
-            toRemoveItinerary.getActivity().remove(activityToRemove);
-            JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' is removed successfully.",
+        if (removedCount > 0) {
+            JOptionPane.showMessageDialog(window,
+                    "Activity '" + activityName + "' removed successfully from Day " + dayNumber,
                     "Success", JOptionPane.INFORMATION_MESSAGE);
-            finalMessage.setText("Activity '" + activityName + "' removed for the Day Number " + dayNumber);
+            finalMessage.setText("Activity '" + activityName + "' removed for Day Number " + dayNumber);
         } else {
             JOptionPane.showMessageDialog(window, "Activity '" + activityName + "' not found in Day " + dayNumber,
                     "Error", JOptionPane.ERROR_MESSAGE);
