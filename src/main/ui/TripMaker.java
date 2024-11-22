@@ -1020,7 +1020,23 @@ public class TripMaker {
     // EFFECTS: Save the current state of the trip and displays a message conveying
     // whether the trip has been saved or not.
     public void saveTrip(JLabel finalMessage) {
-        //stub
+        String path = "data\\myTrip.json";
+        JsonWriter jsonWriter = new JsonWriter(path);
+
+        try {
+            jsonWriter.open();
+            if (trip != null) {
+                jsonWriter.writeTrips(trip);
+                jsonWriter.close();
+                finalMessage.setText("Trip saved to " + path);
+            } else {
+                finalMessage.setText("Trip not found ");
+            }
+        } catch (FileNotFoundException e) {
+            finalMessage.setText("File not Found Exception occured.");
+        }
+
+
     }
 
 }
