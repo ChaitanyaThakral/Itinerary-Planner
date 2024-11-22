@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.lang.module.ModuleDescriptor.Opens;
 
 import javax.swing.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -667,7 +672,7 @@ public class TripMaker {
         JButton removeActivity = createRemoveActivity(finalMessage);
         JButton highlightActivtiy = new JButton("Highlight important activtity");
         JButton saveButton = createSaveButton(finalMessage);
-        JButton loadButton = new JButton("Load Trip");
+        JButton loadButton = createLoadButton(finalMessage);
 
         createTripButton.setBounds(20, 50, 200, 40);
         addDestinationButton.setBounds(20, 100, 200, 40);
@@ -1040,13 +1045,13 @@ public class TripMaker {
     // whether the trip has been saved or not.
     public void saveTrip(JLabel finalMessage) {
         String path = "data\\myTrip.json";
-        JsonWriter jsonWriter = new JsonWriter(path);
+        JsonWriter writer = new JsonWriter(path);
 
         try {
-            jsonWriter.open();
+            writer.open();
             if (trip != null) {
-                jsonWriter.writeTrips(trip);
-                jsonWriter.close();
+                writer.writeTrips(trip);
+                writer.close();
                 finalMessage.setText("Trip saved to " + path);
             } else {
                 finalMessage.setText("Trip not found ");
@@ -1062,7 +1067,18 @@ public class TripMaker {
     // EFFECTS: Load the current state of the trip and displays a message conveying
     // whether the trip has been loaded or not.
     public void loadTrip(JLabel finalMessage) {
-        //stub
+        String path = "data\\myTrip.json";
+        JsonReader reader = new JsonReader(path);
+        try {
+            trip = reader.readTrips();
+            if (trip != null) {
+                finalMessage.setText("Trip loaded  from " + path);
+            } else {
+                finalMessage.setText("No trip found");
+            }
+        } catch (IOException e) {
+            finalMessage.setText("File not Found Exception occured.");
+        }
     }
 
 }
