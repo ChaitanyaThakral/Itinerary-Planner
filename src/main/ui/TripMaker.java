@@ -779,9 +779,19 @@ public class TripMaker {
     // action of calling the function that
     // perform the task of budget analysis of the trip.
     public JButton createBudgetAnalysisButton(JLabel finalMessage) {
-        return null;
+        JButton budgetAnalysisButton = new JButton("Give a Budget Analysis of the Trip");
+        budgetAnalysisButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                analyzeBudget(finalMessage);
+            }
+        });
+
+        return budgetAnalysisButton;
+        
     }
+
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
@@ -1049,6 +1059,12 @@ public class TripMaker {
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void analyzeBudget(JLabel finalMessage){
+        //stub
+    }
+
+
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
