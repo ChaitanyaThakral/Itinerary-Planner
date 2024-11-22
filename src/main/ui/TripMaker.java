@@ -642,41 +642,56 @@ public class TripMaker {
     // which needs to be performed like creating trip, add ititnerary, view
     // itinerary, save trip and load trip.
     public void createPanel() {
+        JLayeredPane backgroundPanel = new JLayeredPane();
+        backgroundPanel.setPreferredSize(new Dimension(800, 500));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.BLACK);
+        ImageIcon bg = new ImageIcon("data\\Background Image.jpeg");
+        JLabel background = new JLabel(new ImageIcon(bg.getImage()
+                .getScaledInstance(800, 500, Image.SCALE_SMOOTH)));
+        background.setBounds(0, 0, 800, 500);
+        backgroundPanel.add(background, Integer.valueOf(0));
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(null);
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBounds(0, 0, 800, 500);
 
         JLabel finalMessage = new JLabel("");
-        finalMessage.setForeground(Color.WHITE);
+        finalMessage.setBounds(20, 400, 760, 40);
+        finalMessage.setForeground(Color.BLACK);
+        finalMessage.setFont(new Font("Arial", Font.BOLD, 20));
 
         JButton createTripButton = createTripButton(finalMessage);
         JButton addDestinationButton = createAddDestinationItineraryButton(finalMessage);
-        JButton viewTasksButton = new JButton("View Tasks");
+        JButton viewTasksButton = createViewTasksButton(finalMessage);
+        JButton removeActivity = new JButton("Remove itinerary");
+        JButton highlightActivtiy = new JButton("Highlight important activtity");
         JButton saveButton = new JButton("Save the Trip");
         JButton loadButton = new JButton("Load Trip");
 
-        Dimension buttonSize = new Dimension(200, 40);
-        createTripButton.setMaximumSize(buttonSize);
-        addDestinationButton.setMaximumSize(buttonSize);
-        viewTasksButton.setMaximumSize(buttonSize);
-        saveButton.setMaximumSize(buttonSize);
-        loadButton.setMaximumSize(buttonSize);
+        createTripButton.setBounds(20, 50, 200, 40);
+        addDestinationButton.setBounds(20, 100, 200, 40);
+        viewTasksButton.setBounds(20, 150, 200, 40);
+        removeActivity.setBounds(20, 200, 200, 40);
+        highlightActivtiy.setBounds(20, 250, 200, 40);
+        saveButton.setBounds(20, 300, 200, 40);
+        loadButton.setBounds(20, 350, 200, 40);
 
-        panel.add(Box.createVerticalStrut(30));
-        panel.add(createTripButton);
-        panel.add(Box.createVerticalStrut(30));
-        panel.add(addDestinationButton);
-        panel.add(Box.createVerticalStrut(30));
-        panel.add(viewTasksButton);
-        panel.add(Box.createVerticalStrut(30));
-        panel.add(saveButton);
-        panel.add(Box.createVerticalStrut(30));
-        panel.add(loadButton);
-        panel.add(Box.createVerticalStrut(40));
-        panel.add(finalMessage);
+        buttonPanel.add(createTripButton);
+        buttonPanel.add(addDestinationButton);
+        buttonPanel.add(viewTasksButton);
+        buttonPanel.add(removeActivity);
+        buttonPanel.add(highlightActivtiy);
+        buttonPanel.add(saveButton);
+        buttonPanel.add(loadButton);
 
-        window.add(panel, BorderLayout.CENTER);
+        backgroundPanel.add(buttonPanel, Integer.valueOf(1));
+        backgroundPanel.add(finalMessage, Integer.valueOf(2));
+
+        window.add(backgroundPanel);
+        window.revalidate();
+        window.repaint();
+
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -704,7 +719,7 @@ public class TripMaker {
     // itinerary for that trip by calling a
     // new function that will input the data for the GUI.
     public JButton createAddDestinationItineraryButton(JLabel finalMessage) {
-        JButton addDestinationButton = new JButton("Add Destination to the Trip");
+        JButton addDestinationButton = new JButton("Add Itinerary to the Trip");
         addDestinationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -713,6 +728,17 @@ public class TripMaker {
         });
         return addDestinationButton;
 
+    }
+
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the button which will help the user to view itinerary, and
+    // add fucntionality to it
+    // using actionlistener and perform the action of displaying itinerary by
+    // calling the function used for displaying.
+    public JButton createViewTasksButton(JLabel finalMessage) {
+        //stub
+        return null;
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
