@@ -793,7 +793,16 @@ public class TripMaker {
     // action of calling the function that will load the state of the trip which it
     // had after saving and before closing.
     public JButton createLoadButton(JLabel finalMessage) {
-        return null;
+        JButton loadButton = new JButton("Load Trip");
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                loadTrip(finalMessage);
+            }
+        });
+
+        return loadButton;
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -1046,6 +1055,9 @@ public class TripMaker {
             finalMessage.setText("File not Found Exception occured.");
         }
 
+    }
+
+    public void loadTrip(JLabel finalMessage) {
     }
 
 }
