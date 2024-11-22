@@ -1163,7 +1163,8 @@ public class TripMaker {
 
             if (budget.budgetExceed()) {
                 double exceeded = currentExpenditure - budgetLimit;
-                textArea.append("You have exceeded your budget Limit for the Day. \n" + "You exceeded the Budet Limit by $" + exceeded);
+                textArea.append("You have exceeded your budget Limit for the Day. \n"
+                        + "You exceeded the Budet Limit by $" + exceeded);
             } else {
                 double remaining = budgetLimit - currentExpenditure;
                 textArea.append("You were under the Budget limit\n" + "Remaining Budget: $" + remaining + "\n");
