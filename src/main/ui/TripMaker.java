@@ -1057,7 +1057,12 @@ public class TripMaker {
 
     }
 
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Load the current state of the trip and displays a message conveying
+    // whether the trip has been loaded or not.
     public void loadTrip(JLabel finalMessage) {
+        //stub
     }
 
 }
