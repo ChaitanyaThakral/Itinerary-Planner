@@ -664,7 +664,7 @@ public class TripMaker {
         JButton createTripButton = createTripButton(finalMessage);
         JButton addDestinationButton = createAddDestinationItineraryButton(finalMessage);
         JButton viewTasksButton = createViewTasksButton(finalMessage);
-        JButton removeActivity = new JButton("Remove itinerary");
+        JButton removeActivity = createRemoveActivity(finalMessage);
         JButton highlightActivtiy = new JButton("Highlight important activtity");
         JButton saveButton = new JButton("Save the Trip");
         JButton loadButton = new JButton("Load Trip");
@@ -748,6 +748,17 @@ public class TripMaker {
         });
 
         return viewTasksButton;
+    }
+
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the button which will help the user to remove a particular
+    // itinerary, and add functionality to it using actionlistener and perform the
+    // action of removing a particular itinerary, and calling the function that
+    // perform the task of removing the itinerary.
+    public JButton createRemoveActivity(JLabel finalMessage) {
+        //stub
+      return null;
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -912,4 +923,7 @@ public class TripMaker {
         finalMessage.setText("Displaying details of the trip");
     }
 
+    public void removeItinerary(JLabel finalMessage) {
+
+    }
 }
