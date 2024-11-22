@@ -670,7 +670,7 @@ public class TripMaker {
         JButton addDestinationButton = createAddDestinationItineraryButton(finalMessage);
         JButton viewTasksButton = createViewTasksButton(finalMessage);
         JButton removeActivity = createRemoveActivity(finalMessage);
-        JButton highlightActivtiy = new JButton("Highlight important activtity");
+        JButton budgetAnalysisButton = new JButton("Highlight important activtity");
         JButton saveButton = createSaveButton(finalMessage);
         JButton loadButton = createLoadButton(finalMessage);
 
@@ -678,7 +678,7 @@ public class TripMaker {
         addDestinationButton.setBounds(20, 100, 200, 40);
         viewTasksButton.setBounds(20, 150, 200, 40);
         removeActivity.setBounds(20, 200, 200, 40);
-        highlightActivtiy.setBounds(20, 250, 200, 40);
+        budgetAnalysisButton.setBounds(20, 250, 200, 40);
         saveButton.setBounds(20, 300, 200, 40);
         loadButton.setBounds(20, 350, 200, 40);
 
@@ -686,7 +686,7 @@ public class TripMaker {
         buttonPanel.add(addDestinationButton);
         buttonPanel.add(viewTasksButton);
         buttonPanel.add(removeActivity);
-        buttonPanel.add(highlightActivtiy);
+        buttonPanel.add(budgetAnalysisButton);
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
 
@@ -770,6 +770,17 @@ public class TripMaker {
         });
 
         return removeActivity;
+    }
+
+    // REQUIRES: finalMessage is a non-null JLabel to display messages.
+    // MODIFIES: finalMessage
+    // EFFECTS: Creates the button which will help the user to a get an analysis of
+    // the budget.and add functionality to it using actionlistener and perform the
+    // action of calling the function that
+    // perform the task of budget analysis of the trip.
+    public JButton createBudgetAnalysisButton(JLabel finalMessage) {
+        return null;
+
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
