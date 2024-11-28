@@ -99,9 +99,9 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the trip creation with an
     // appropriate detailed message conveying the same
     public void loggingTripCreation() {
-        String logDetail = "The Trip to " + getCity() + " in " + getCountry() + " of Trip Type " + getTripType()
+        String logDetailTrip = "The Trip to " + getCity() + " in " + getCountry() + " of Trip Type " + getTripType()
                 + " was successfully created";
-        EventLog.getInstance().logEvent(new Event(logDetail));
+        EventLog.getInstance().logEvent(new Event(logDetailTrip));
     }
 
     // REQUIRES: A destination Itinerary has already been created with appropriated
@@ -110,7 +110,10 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the destination Itinerary added
     // to the Trip an appropriate detailed message conveying the same
     public void loggingAddItineraryToTrip() {
-        // stub
+        DestinationItinerary destinationItinerary = itinerary.get(0);
+        String logDetailItinerary = "Destination Itinerary for Day Number " + destinationItinerary.getDayNumber()
+                + " was added Successfully";
+        EventLog.getInstance().logEvent(new Event(logDetailItinerary));
     }
 
 }
