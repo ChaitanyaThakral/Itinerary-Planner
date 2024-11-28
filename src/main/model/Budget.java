@@ -22,7 +22,9 @@ public class Budget implements Writeable {
 
     // EFFETCS: return the amount of money spent till now.
     public double getCurrentExpenditure() {
+        loggingBudgetAnalysis();
         return this.currentExpenditure;
+        
     }
 
     // EFFETCS: retun the budget limit set for the activity.
@@ -63,6 +65,14 @@ public class Budget implements Writeable {
         budgetObject.put("currentExpenditure", this.currentExpenditure);
 
         return budgetObject;
+    }
+
+    // REQUIRES: a budget has already been set up with appropriate inputs.
+    // MODIFIES:EventLog instance by adding event.
+    // EFFECTS: Log an event to the event log about the Budget analysis with an
+    // appropriate detailed message conveying the same
+    public void loggingBudgetAnalysis() {
+       //Stub
     }
 
 }
