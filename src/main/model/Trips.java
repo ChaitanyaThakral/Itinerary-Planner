@@ -99,7 +99,10 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the trip creation with an
     // appropriate detailed message conveying the same/
     public void loggingTripCreation() {
-       //stub
+        String logDetail = "The Trip to " + getCity() + " in " + getCountry() + " of Trip Type " + getTripType()
+                + " was successfully created";
+        EventLog.getInstance().logEvent(new Event(logDetail));
+
 
     }
 
