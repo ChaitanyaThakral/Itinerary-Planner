@@ -51,6 +51,7 @@ public class Trips implements Writeable {
     // EFFECTS: add the given activity to our list of destination itinerary.
     public void addDestinationItineraries(DestinationItinerary activity) {
         itinerary.add(activity);
+        loggingAddItineraryToTrip();
     }
 
     public String getCity() {
