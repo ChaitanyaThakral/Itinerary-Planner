@@ -26,6 +26,7 @@ public class Trips implements Writeable {
         this.country = country;
         this.tripType = tripType;
         itinerary = new ArrayList<DestinationItinerary>();
+        loggingTripCreation();
     }
 
     // MODIFIES: this
@@ -89,6 +90,16 @@ public class Trips implements Writeable {
         tr.put("itinerary", trItinerary);
 
         return tr;
+
+    }
+
+    // REQUIRES: a trip has already been created with appropriate City, Country and
+    // Trip Type.
+    // MODIFIES:EventLog instance by adding event.
+    // EFFECTS: Log an event to the event log about the trip creation with an
+    // appropriate detailed message conveying the same/
+    public void loggingTripCreation() {
+       //stub
 
     }
 
