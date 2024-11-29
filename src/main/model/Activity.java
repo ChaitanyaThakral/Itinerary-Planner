@@ -53,7 +53,6 @@ public class Activity implements Writeable {
     }
 
     public String getLocation() {
-        loggingViewActivity();
         return this.location;
     }
 
@@ -162,16 +161,6 @@ public class Activity implements Writeable {
         activityObject.put("budget", this.budget.toJson());
 
         return activityObject;
-    }
-
-    // REQUIRES: Destination Itinerary to be displayed should not be null
-    // MODIFIES: EventLog instance by adding event.
-    // EFFECTS: Log an event to the event log about displaying the itinerary with an
-    // appropriate detailed message conveying the
-    // same
-    private void loggingViewActivity() {
-        String logDetailItinerary = "Destination Itinerary was displayed.";
-        EventLog.getInstance().logEvent(new Event(logDetailItinerary));
     }
 
 }

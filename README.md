@@ -47,4 +47,10 @@ duration,time taken to complete the activity, description, cost, Status of compl
 - You can save the state of my application by clicking on the "Save Trip" button and it will save the state of the Trip.
 - You can reload the state of my application by clicking on the "Load Trip" button and it will load the state of the Trip.
 
-
+# Phase 4: Task 2
+Event Log:
+Thu Nov 28 18:16:21 PST 2024: The Trip to Delhi in India of Trip Type Solo was successfully created
+Thu Nov 28 18:17:14 PST 2024: Destination Itinerary for Day Number 1 was added Successfully
+Thu Nov 28 18:17:30 PST 2024: Destination Itinerary for Day Number 2 was added Successfully
+Thu Nov 28 18:17:42 PST 2024: The activity 'Golf' was removed from the Destination Itinerary.
+Thu Nov 28 18:17:45 PST 2024: The Budget Analysis for the requested Day with Budget limit and Current Expenditure was displayed
