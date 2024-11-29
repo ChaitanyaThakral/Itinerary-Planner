@@ -77,7 +77,7 @@ public class Trips implements Writeable {
     // EFFECTS: returns a JSONObject representation of this Trips instance,
     // including all the details and fields like
     // city, country, type of the trip and list of itinerary.
-    //and calls loggingSaveTrip() method.
+    // and calls loggingSaveTrip() method.
     @Override
     public JSONObject toJson() {
         JSONObject tr = new JSONObject();
@@ -126,17 +126,17 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the trip being created with
     // an appropriate detailed message conveying the same
     public void loggingSaveTrip() {
-        String logSave = "The Trip to "+ getCity() +" was Saved" ;
+        String logSave = "The Trip to " + getCity() + " was Saved";
         EventLog.getInstance().logEvent(new Event(logSave));
-    }    
+    }
 
     // REQUIRES: The trip should already been saved earlier.
     // MODIFIES: EventLog instance by adding event.
     // EFFECTS: Log an event to the event log about the trip being loaded
     // an appropriate detailed message conveying the same
     public void loggingLoadTrip() {
-        String logLoad = "The Trip to "+ getCity() +" was Loaded";
+        String logLoad = "The Trip to " + getCity() + " was Loaded";
         EventLog.getInstance().logEvent(new Event(logLoad));
-    }    
+    }
 
 }
