@@ -26,7 +26,6 @@ public class Trips implements Writeable {
         this.country = country;
         this.tripType = tripType;
         itinerary = new ArrayList<DestinationItinerary>();
-        loggingLoadTrip();
         loggingTripCreation();
     }
 
@@ -91,7 +90,6 @@ public class Trips implements Writeable {
         }
 
         tr.put("itinerary", trItinerary);
-        loggingSaveTrip();
 
         return tr;
 
@@ -121,22 +119,6 @@ public class Trips implements Writeable {
         EventLog.getInstance().logEvent(new Event(logDetailItinerary));
     }
 
-    // REQUIRES: The trip should already be created with appropriate data.
-    // MODIFIES: EventLog instance by adding event.
-    // EFFECTS: Log an event to the event log about the trip being created with
-    // an appropriate detailed message conveying the same
-    public void loggingSaveTrip() {
-        String logSave = "The Trip to " + getCity() + " was Saved";
-        EventLog.getInstance().logEvent(new Event(logSave));
-    }
-
-    // REQUIRES: The trip should already been saved earlier.
-    // MODIFIES: EventLog instance by adding event.
-    // EFFECTS: Log an event to the event log about the trip being loaded
-    // an appropriate detailed message conveying the same
-    public void loggingLoadTrip() {
-        String logLoad = "The Trip to " + getCity() + " was Loaded";
-        EventLog.getInstance().logEvent(new Event(logLoad));
-    }
+    
 
 }
