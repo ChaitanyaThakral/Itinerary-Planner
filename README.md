@@ -49,11 +49,18 @@ duration,time taken to complete the activity, description, cost, Status of compl
 
 # Phase 4: Task 2
 Event Log:
-Thu Nov 28 18:16:21 PST 2024: The Trip to Delhi in India of Trip Type Solo was successfully created
-Thu Nov 28 18:17:14 PST 2024: Destination Itinerary for Day Number 1 was added Successfully
-Thu Nov 28 18:17:30 PST 2024: Destination Itinerary for Day Number 2 was added Successfully
-Thu Nov 28 18:17:42 PST 2024: The activity 'Golf' was removed from the Destination Itinerary
-Thu Nov 28 18:17:45 PST 2024: The Budget Analysis for the requested Day with Budget limit and Current Expenditure was displayed
+Fri Nov 29 11:00:58 PST 2024: The Trip to Vancouver was Loaded
+Fri Nov 29 11:00:58 PST 2024: The Trip to Vancouver in Canada of Trip Type Solo was successfully created
+Fri Nov 29 11:01:16 PST 2024: Destination Itinerary for Day Number 1 was added Successfully
+Fri Nov 29 11:01:37 PST 2024: Destination Itinerary for Day Number 2 was added Successfully
+Fri Nov 29 11:01:51 PST 2024: The activity 'Golf' was removed from the Destination Itinerary.
+Fri Nov 29 11:02:09 PST 2024: The Budget Analysis for the requested Day with Budget limit and Current Expenditure was displayed
+Fri Nov 29 11:02:13 PST 2024: The Trip to Vancouver was Saved
+if after saving the application is run again Than
+Fri Nov 29 11:03:38 PST 2024: The Trip to Vancouver was Loaded
+Fri Nov 29 11:03:38 PST 2024: The Trip to Vancouver in Canada of Trip Type Solo was successfully created
+Fri Nov 29 11:03:38 PST 2024: Destination Itinerary for Day Number 1 was added Successfully
+Fri Nov 29 11:03:38 PST 2024: Destination Itinerary for Day Number 2 was added Successfully
 
 # Phase 4: Task 3
 The TripMaker class currently is performing the dual function of both the console and GUI interface. This makes the trip maker really long and difficult to debug. Refactoring can be done to seperate the functionalities of the trip Maker class into 2 more classes like ConsoleUI class and GUI class. By this refactoring the functionalities of both the GUI and the console will be seperate making the UI class easier to debug. As in this case ConsoleUI will  manage all input/output interactions for the console-based application and GUI class will handle graphical user interface interactions.
