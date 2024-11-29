@@ -20,7 +20,7 @@ import persistence.Writeable;
  * budget: an instance of the Budget class representing the budget for this activity.
 */
 
-public class Activity implements Writeable  {
+public class Activity implements Writeable {
     private String activityName;
     private String location;
     private String date;
@@ -53,6 +53,7 @@ public class Activity implements Writeable  {
     }
 
     public String getLocation() {
+        loggingViewActivity();
         return this.location;
     }
 
@@ -142,7 +143,8 @@ public class Activity implements Writeable  {
 
     // REQUIRES: the Acitivity instance should not be null.
     // EFFECTS: returns a JSONObject representation of this Acitivity instance with
-    // its name, location of the activity, date, duratiom, time taken to complete the
+    // its name, location of the activity, date, duratiom, time taken to complete
+    // the
     // activity, description,cost, Status of completion (boolean) and budget.
 
     @Override
@@ -160,6 +162,16 @@ public class Activity implements Writeable  {
         activityObject.put("budget", this.budget.toJson());
 
         return activityObject;
+    }
+
+    // REQUIRES: Destination Itinerary to be displayed should not be null
+    // MODIFIES: EventLog instance by adding event.
+    // EFFECTS: Log an event to the event log about displaying the itinerary with an
+    // appropriate detailed message conveying the
+    // same
+    private void loggingViewActivity() {
+        String logDetailItinerary = "Destination Itinerary was displayed.";
+        EventLog.getInstance().logEvent(new Event(logDetailItinerary));
     }
 
 }
