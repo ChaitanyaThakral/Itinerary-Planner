@@ -126,7 +126,7 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the trip being created with
     // an appropriate detailed message conveying the same
     public void loggingSaveTrip() {
-        String logSave = "Your Trip was Saved Successfully";
+        String logSave = "Your Trip was Saved Successfully for " + getCity();
         EventLog.getInstance().logEvent(new Event(logSave));
     }    
 
@@ -135,7 +135,7 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the trip being loaded
     // an appropriate detailed message conveying the same
     public void loggingLoadTrip() {
-        String logLoad = "Your Trip was Loaded Successfully";
+        String logLoad = "Your Trip was Loaded Successfully for " + getCity();
         EventLog.getInstance().logEvent(new Event(logLoad));
     }    
 
