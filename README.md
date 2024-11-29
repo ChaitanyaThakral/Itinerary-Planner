@@ -52,5 +52,10 @@ Event Log:
 Thu Nov 28 18:16:21 PST 2024: The Trip to Delhi in India of Trip Type Solo was successfully created
 Thu Nov 28 18:17:14 PST 2024: Destination Itinerary for Day Number 1 was added Successfully
 Thu Nov 28 18:17:30 PST 2024: Destination Itinerary for Day Number 2 was added Successfully
-Thu Nov 28 18:17:42 PST 2024: The activity 'Golf' was removed from the Destination Itinerary.
+Thu Nov 28 18:17:42 PST 2024: The activity 'Golf' was removed from the Destination Itinerary
 Thu Nov 28 18:17:45 PST 2024: The Budget Analysis for the requested Day with Budget limit and Current Expenditure was displayed
+
+# Phase 4: Task 3
+The TripMaker class currently is performing the dual function of both the console and GUI interface. This makes the trip maker really long and difficult to debug. Refactoring can be done to seperate the functionalities of the trip Maker class into 2 more classes like ConsoleUI class and GUI class. By this refactoring the functionalities of both the GUI and the console will be seperate making the UI class easier to debug. As in this case ConsoleUI will  manage all input/output interactions for the console-based application and GUI class will handle graphical user interface interactions.
+
+Moreover, some of the methods in TripMaker like analyzeBudget(), removeItinerary(), are really big because they are checking if the input entered by the user is valid and than performing their respective task of analyzing the budget or removing the activity from itinerary. By refactoring these methods it will be ensured that they perform their sole task only and are not performing multiple things which makes the code less cohesive and difficult to debug. This will improve the readibility of the code also.
