@@ -1111,7 +1111,7 @@ public class TripMaker {
             }
 
             if (activityToRemove != null) {
-                itinerary.removeActivity(activityToRemove);
+                itinerary.loggingFunctionForRemoveActivity(activityToRemove);
                 removedCount++;
             }
         }

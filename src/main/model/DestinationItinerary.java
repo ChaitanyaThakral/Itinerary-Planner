@@ -69,7 +69,7 @@ public class DestinationItinerary implements Writeable {
     // REQUIRES: activity is not null
     // MODIFIES: this
     // EFFECTS: Removes the specified activity from the list of activities
-    public String removeActivity(Activity act) {
+    public String loggingFunctionForRemoveActivity(Activity act) {
 
         this.activity.remove(act);
         loggingRemoveActivity(act);
