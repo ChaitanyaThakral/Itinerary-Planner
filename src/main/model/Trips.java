@@ -111,7 +111,8 @@ public class Trips implements Writeable {
     // EFFECTS: Log an event to the event log about the destination Itinerary added
     // to the Trip an appropriate detailed message conveying the same
     public void loggingAddItineraryToTrip() {
-        DestinationItinerary destinationItinerary = itinerary.get(0);
+       
+        DestinationItinerary destinationItinerary = itinerary.get(itinerary.size() -1);
         String logDetailItinerary = "Destination Itinerary for Day Number " + destinationItinerary.getDayNumber()
                 + " was added Successfully";
         EventLog.getInstance().logEvent(new Event(logDetailItinerary));
