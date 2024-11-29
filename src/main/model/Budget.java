@@ -22,7 +22,7 @@ public class Budget implements Writeable {
 
     // EFFETCS: return the amount of money spent till now.
     public double getCurrentExpenditure() {
-        loggingBudgetAnalysis();
+        
         return this.currentExpenditure;
         
     }
@@ -47,6 +47,7 @@ public class Budget implements Writeable {
     // EFFECTS: check if the user has exceeded the limit set for the activity.
     // If budget is exceeded it returns true, otherwise returns false.
     public Boolean budgetExceed() {
+        loggingBudgetAnalysis();
         if (this.currentExpenditure > this.budgetLimit) {
             return true;
         } else {
@@ -72,7 +73,8 @@ public class Budget implements Writeable {
     // EFFECTS: Log an event to the event log about the Budget analysis with an
     // appropriate detailed message conveying the same
     public void loggingBudgetAnalysis() {
-       //Stub
+        String logDetailBudget = "The Budget Analysis with Budget limit and Current Expenditure was displayed ";
+        EventLog.getInstance().logEvent(new Event(logDetailBudget));
     }
 
 }
