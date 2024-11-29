@@ -6,9 +6,11 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 import model.Activity;
 import model.DestinationItinerary;
+import model.EventLog;
 import model.Budget;
 import model.Checklist;
 import model.Item;
+import model.Event;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
@@ -29,6 +31,7 @@ import java.awt.event.ActionListener;
  * It also allows the user to save the trip and checklist which was made, later on if saved the data
  * can be loaded and printed. Creates a GUI interface to create trip, add itinerary to the trip, 
  * display the activties, remove itinerary,Budget analyis , loading and saving the state of the trip. 
+ * Once the user exits the application it displays the log events onto the console.
  * It allows the user to manage the trip easily.
  */
 
@@ -636,9 +639,30 @@ public class TripMaker {
         window = new JFrame();
         window.setTitle("Travel Itinerary Planner");
         window.setSize(800, 500);
+
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        window.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                logDisplay();
+            }
+        });
+
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+    // REQUIRES: EventLog is properly initialized
+    // EFFECTS: Displays all events in the EventLog to the console
+    // and then terminates the program.
+
+    public void logDisplay() {
+        System.out.println("Event Log:");
+        for (Event event : EventLog.getInstance()) {
+
+            System.out.println(event.getDate() + ": " + event.getDescription());
+        }
+        System.exit(0);
     }
 
     @SuppressWarnings("methodlength")
@@ -661,7 +685,7 @@ public class TripMaker {
         JLayeredPane backgroundPanel = new JLayeredPane();
         backgroundPanel.setPreferredSize(new Dimension(800, 500));
 
-        ImageIcon bg = new ImageIcon("data\\Background Image.jpeg");
+        ImageIcon bg = new ImageIcon("data/Background Image.jpeg");
         JLabel background = new JLabel(new ImageIcon(bg.getImage()
                 .getScaledInstance(800, 500, Image.SCALE_SMOOTH)));
         background.setBounds(0, 0, 800, 500);
@@ -1047,7 +1071,13 @@ public class TripMaker {
             return;
         }
 
-        int dayNumber = Integer.parseInt(dayInput.trim());
+        int dayNumber;
+        try {
+            dayNumber = Integer.parseInt(dayInput.trim());
+        } catch (NumberFormatException e) {
+            finalMessage.setText("Invalid Day Number format. Please enter a numeric value.");
+            return;
+        }
 
         List<DestinationItinerary> itinerariesForDay = new ArrayList<>();
         for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
@@ -1081,7 +1111,7 @@ public class TripMaker {
             }
 
             if (activityToRemove != null) {
-                itinerary.getActivity().remove(activityToRemove);
+                itinerary.removeActivity(activityToRemove);
                 removedCount++;
             }
         }
