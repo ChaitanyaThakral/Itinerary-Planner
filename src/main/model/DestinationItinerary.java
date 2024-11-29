@@ -66,8 +66,19 @@ public class DestinationItinerary implements Writeable {
         return sum;
     }
 
+    // REQUIRES: activity is not null
+    // MODIFIES: this
+    // EFFECTS: Removes the specified activity from the list of activities
+    public String removeActivity(Activity act) {
+
+        this.activity.remove(act);
+        loggingRemoveActivity(act);
+        return act.getActivityName();
+    }
+
     // REQUIRES: the DestinationItinerary instance should not be null.
-    // EFFECTS: returns a JSONObject representation of this Destination Itinerary instance
+    // EFFECTS: returns a JSONObject representation of this Destination Itinerary
+    // instance
     // with date, dayNumber and List of all the activities.
     @Override
     public JSONObject toJson() {
@@ -80,10 +91,20 @@ public class DestinationItinerary implements Writeable {
             diArray.put(act.toJson());
         }
 
-        di.put("activities",diArray);
+        di.put("activities", diArray);
 
         return di;
 
     }
 
+    // REQUIRES: Required activity to remove is not null.
+    // MODIFIES: EventLog instance by adding event.
+    // EFFECTS: Log an event to the event log about the removing an activity from
+    // the destination Itinerary with an appropriate detailed message conveying the
+    // same
+    private void loggingRemoveActivity(Activity act) {
+        String logDetailItinerary = "The activity '" + act.getActivityName()
+                + "' was removed from the Destination Itinerary.";
+        EventLog.getInstance().logEvent(new Event(logDetailItinerary));
+    }
 }
