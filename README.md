@@ -65,4 +65,3 @@ The consoleUI class currently has many methods which are performing a lot of com
 
 The consoleUI class also has removeItem() method which is performing the action of removing the item from the checklist. This is not actually the responsibility of the consoleUI as console should just perform the action interaction with the user. We can refactor the method into checklist class although we have some methods which perform the action of removing they don't actually return the name of the item removed. So by refactoring this method into checklist class and returning the string of the item to be removed we can refactor this method. And only the printing of the removed item takes place in the ConsoleUI class.
 
-The GUI class has a 
