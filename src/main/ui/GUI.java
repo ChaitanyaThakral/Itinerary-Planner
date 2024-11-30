@@ -488,7 +488,9 @@ public class GUI {
     // EFFECTS:Find the itineraries for the given day, and activtiy for that day and
     // provide with appropriate final message about the operation.
     private void removeActivity(int dayNumber, String activityName, JLabel finalMessage) {
+
         List<DestinationItinerary> itinerariesForDay = new ArrayList<>();
+
         for (DestinationItinerary itinerary : trip.getDestinationItinerary()) {
             if (itinerary.getDayNumber() == dayNumber) {
                 itinerariesForDay.add(itinerary);
@@ -496,8 +498,10 @@ public class GUI {
         }
 
         int removedCount = 0;
+
         for (DestinationItinerary itinerary : itinerariesForDay) {
             Activity activityToRemove = null;
+
             for (Activity activity : itinerary.getActivity()) {
                 if (activity.getActivityName().equalsIgnoreCase(activityName)) {
                     activityToRemove = activity;
@@ -506,6 +510,9 @@ public class GUI {
             }
 
             if (activityToRemove != null) {
+
+                itinerary.loggingFunctionForRemoveActivity(activityToRemove);
+
                 itinerary.getActivity().remove(activityToRemove);
                 removedCount++;
             }
