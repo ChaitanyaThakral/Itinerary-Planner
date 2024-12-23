@@ -121,20 +121,23 @@ public class GUI {
         JButton budgetAnalysisButton = createBudgetAnalysisButton(finalMessage);
         JButton saveButton = createSaveButton(finalMessage);
         JButton loadButton = createLoadButton(finalMessage);
+        JButton createChecklist = createChecklistButton(finalMessage);
 
         createTripButton.setBounds(20, 50, 200, 40);
         addDestinationButton.setBounds(20, 100, 200, 40);
         viewTasksButton.setBounds(20, 150, 200, 40);
         removeActivity.setBounds(20, 200, 200, 40);
         budgetAnalysisButton.setBounds(20, 250, 200, 40);
-        saveButton.setBounds(20, 300, 200, 40);
-        loadButton.setBounds(20, 350, 200, 40);
+        createChecklist.setBounds(20, 300, 200, 40);
+        saveButton.setBounds(20, 350, 200, 40);
+        loadButton.setBounds(20, 400, 200, 40);
 
         buttonPanel.add(createTripButton);
         buttonPanel.add(addDestinationButton);
         buttonPanel.add(viewTasksButton);
         buttonPanel.add(removeActivity);
         buttonPanel.add(budgetAnalysisButton);
+        buttonPanel.add(createChecklist);
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
 
@@ -144,6 +147,21 @@ public class GUI {
         window.add(backgroundPanel);
         window.revalidate();
         window.repaint();
+
+    }
+
+    public JButton createChecklistButton(JLabel finalMessage) {
+        JButton createChecklisButton = new JButton("Create a Checklist");
+
+        createChecklisButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                checklistOperation(finalMessage);
+            }
+        });
+        return createChecklisButton;
+    }
+
+    public void checklistOperation(JLabel finalMessage) {
 
     }
 
