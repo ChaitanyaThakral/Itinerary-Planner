@@ -33,6 +33,7 @@ public class GUI {
     private Trips trip;
     private JFrame window;
     private List<Item> checklist;
+    private Checklist check;
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
@@ -46,6 +47,7 @@ public class GUI {
         mainWindow();
         createPanel();
         checklist = new ArrayList();
+
     }
 
     // MODIFIES main window.
@@ -172,16 +174,15 @@ public class GUI {
         checklistFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         checklistFrame.setSize(800, 500);
         checklistFrame.setLocation(370, 160);
-    
-        
+
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setLayout(null); 
-    
+        layeredPane.setLayout(null);
+
         ImageIcon bgIcon = new ImageIcon("data/Background Image.jpeg");
         Image bgImage = bgIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
         JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
         backgroundLabel.setBounds(0, 0, 800, 500);
-    
+
         JButton checklistButton = createTheChecklistButton(finalMessage);
         JButton checklistViewButton = createChecklistViewButton(finalMessage);
         JButton removeItemButton = createRemoveItemButton(finalMessage);
@@ -189,7 +190,7 @@ public class GUI {
         JButton remainItemNumberButton = createRemainItemNumberButton(finalMessage);
         JButton changeStatusButton = createChangeStatusButton(finalMessage);
         JButton exitCheckListOperationButton = createExitCheckListButton(finalMessage);
-    
+
         checklistButton.setBounds(20, 25, 200, 40);
         addButton.setBounds(20, 75, 200, 40);
         checklistViewButton.setBounds(20, 125, 200, 40);
@@ -197,8 +198,7 @@ public class GUI {
         remainItemNumberButton.setBounds(20, 225, 200, 40);
         changeStatusButton.setBounds(20, 275, 200, 40);
         exitCheckListOperationButton.setBounds(20, 325, 200, 40);
-    
-        
+
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(checklistButton, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(addButton, JLayeredPane.PALETTE_LAYER);
@@ -207,21 +207,18 @@ public class GUI {
         layeredPane.add(remainItemNumberButton, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(changeStatusButton, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(exitCheckListOperationButton, JLayeredPane.PALETTE_LAYER);
-    
+
         checklistFrame.setContentPane(layeredPane);
-    
-        
+
         checklistFrame.revalidate();
         checklistFrame.repaint();
-    
+
         window.setVisible(false);
         checklistFrame.setVisible(true);
     }
-    
-    
 
     public JButton createExitCheckListButton(JLabel finalMessage) {
-        JButton exitCheckListOperationButton = new JButton("Exit Checklist and Head to main menu");
+        JButton exitCheckListOperationButton = new JButton("Exit Checklist");
         exitCheckListOperationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -232,18 +229,8 @@ public class GUI {
         return exitCheckListOperationButton;
     }
 
-    public void exitOperation(JLabel finalMessage) {
-        
-        JFrame checklistFrame = (JFrame) SwingUtilities.getWindowAncestor(finalMessage);
-        checklistFrame.setVisible(false);
-    
-        
-        window.setVisible(true);
-    
-        
-        finalMessage.setText("Returned to main menu.");
-    }
-
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // EFFECTS: creates the button to change the status of item in the checklist.
 
     public JButton createChangeStatusButton(JLabel finalMessage) {
         JButton changeStatusButton = new JButton("Change status of items");
@@ -257,25 +244,9 @@ public class GUI {
         return changeStatusButton;
     }
 
-    public void changeStatusOperation(JLabel finalMessage) {
-        String checkName = JOptionPane.showInputDialog("Enter the name of item for which the status has to be changed ?");
-        String status = JOptionPane.showInputDialog("Enter the new status of item (yes/no)");
-        for (Item i : checklist) {
-            if (i.getName().equals(checkName)) {
-                checklist.remove(i);
-                Boolean choice;
-                if (status.equals("yes") || status.equals("Yes")) {
-                    choice= true;
-                }
-                else{
-                    choice=false;
-                }
-                Item item = new Item(checkName,choice);
-                checklist.add(item);
-            }
-        }
-        finalMessage.setText("Item remove Successfully");
-    }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // EFFECTS: creates the button to count the number of items which are not packed
+    // in the checklist.
 
     public JButton createRemainItemNumberButton(JLabel finalMessage) {
         JButton remainItemNumberButton = new JButton("Find No. of items in Checklist");
@@ -288,6 +259,8 @@ public class GUI {
 
         return remainItemNumberButton;
     }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // EFFECTS:create the button to create a checklist.
 
     public JButton createTheChecklistButton(JLabel finalMessage) {
         JButton checklistButton = new JButton("Create a Checklist");
@@ -300,6 +273,9 @@ public class GUI {
 
         return checklistButton;
     }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+
+    // EFFECTS: creates a button to add item in the checklist.
 
     public JButton createAddButton(JLabel finalMessage) {
         JButton addButton = new JButton("Add item to Checklist");
@@ -312,6 +288,61 @@ public class GUI {
 
         return addButton;
     }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // EFFECTS:creates a button to remove item in the checklist.
+
+    public JButton createRemoveItemButton(JLabel finalMessage) {
+        JButton removeItemButton = new JButton("Remove item from Checklist");
+        removeItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeItem(finalMessage);
+            }
+        });
+
+        return removeItemButton;
+    }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // EFFECTS: creates a button to display items of the checklist.
+
+    public JButton createChecklistViewButton(JLabel finalMessage) {
+        JButton checklistViewButton = new JButton("View the Checklist");
+        checklistViewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                checklistView(finalMessage);
+            }
+        });
+
+        return checklistViewButton;
+    }
+
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS:change the status of the given item name.
+
+    public void changeStatusOperation(JLabel finalMessage) {
+        String checkName = JOptionPane
+                .showInputDialog("Enter the name of item for which the status has to be changed ?");
+        String status = JOptionPane.showInputDialog("Enter the new status of item (yes/no)");
+        for (Item i : checklist) {
+            if (i.getName().equals(checkName)) {
+                checklist.remove(i);
+                Boolean choice;
+                if (status.equals("yes") || status.equals("Yes")) {
+                    choice = true;
+                } else {
+                    choice = false;
+                }
+                Item item = new Item(checkName, choice);
+                checklist.add(item);
+            }
+        }
+        finalMessage.setText("Item remove Successfully");
+    }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS:add item of the given name and status to the checklist.
 
     public void addItemOperation(JLabel finalMessage) {
         String checkName = JOptionPane.showInputDialog("Enter the name of item to pack:");
@@ -329,6 +360,10 @@ public class GUI {
         finalMessage.setText("Item added successfully!");
     }
 
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS: Gives the count of remaining item in the checklist.
+
     public void remainItemNumberOperation(JLabel finalMessage) {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
@@ -341,6 +376,10 @@ public class GUI {
         JOptionPane.showMessageDialog(window, scrollPane, "Display Checklist Details", JOptionPane.INFORMATION_MESSAGE);
         finalMessage.setText("Checklist operation of count done successfully!");
     }
+
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS: creates a checklist and add items into it.
 
     public void createChecklistOperation(JLabel finalMessage) {
         JPanel inputPanel = new JPanel();
@@ -370,29 +409,9 @@ public class GUI {
 
     }
 
-    public JButton createChecklistViewButton(JLabel finalMessage) {
-        JButton checklistViewButton = new JButton("View the Checklist");
-        checklistViewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checklistView(finalMessage);
-            }
-        });
-
-        return checklistViewButton;
-    }
-
-    public JButton createRemoveItemButton(JLabel finalMessage) {
-        JButton removeItemButton = new JButton("Remove item from Checklist");
-        removeItemButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                removeItem(finalMessage);
-            }
-        });
-
-        return removeItemButton;
-    }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS: display the checklist.
 
     public void checklistView(JLabel finalMessage) {
         JTextArea textArea = new JTextArea();
@@ -415,6 +434,10 @@ public class GUI {
 
     }
 
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS:remove the item of given name from the checklist.
+
     public void removeItem(JLabel finalMessage) {
         Boolean choice = true;
         while (choice) {
@@ -433,6 +456,20 @@ public class GUI {
 
         finalMessage.setText("Items removed successfully!");
 
+    }
+
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // MODIFIES:finalMessage,checklist
+    // EFFECTS: exit the checklist operation and head to the main menu.
+
+    public void exitOperation(JLabel finalMessage) {
+
+        JFrame checklistFrame = (JFrame) SwingUtilities.getWindowAncestor(finalMessage);
+        checklistFrame.setVisible(false);
+
+        window.setVisible(true);
+
+        finalMessage.setText("Returned to main menu.");
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
@@ -896,12 +933,14 @@ public class GUI {
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
-    // EFFECTS: Save the current state of the trip from the given path and displays
+    // EFFECTS: Save the current state of the trip and the checklist from the given
+    // path and displays
     // a message conveying Throws an IOException if file not found.
-
     public void saveTripGUI(JLabel finalMessage) {
         String path = "data\\myTrip.json";
+        String checklistPath = "data\\myChecklist.json";
         JsonWriter writer = new JsonWriter(path);
+        JsonWriter writerChecklist = new JsonWriter(checklistPath);
 
         try {
             writer.open();
@@ -910,32 +949,66 @@ public class GUI {
                 writer.close();
                 finalMessage.setText("Trip saved to " + path);
             } else {
-                finalMessage.setText("Trip not found ");
+                finalMessage.setText("Trip not found.");
             }
         } catch (FileNotFoundException e) {
-            finalMessage.setText("File not Found Exception occured.");
+            finalMessage.setText("File not found exception occurred while saving trip.");
         }
 
+        try {
+            writerChecklist.open();
+            if (checklist != null && !checklist.isEmpty()) {
+                Checklist check = new Checklist();
+                for (Item i : checklist) {
+                    check.addItem(i);
+                }
+                writerChecklist.writeChecklist(check);
+                writerChecklist.close();
+                finalMessage.setText(finalMessage.getText() + " Checklist saved to " + checklistPath);
+            } else {
+                finalMessage.setText("No checklist found to save.");
+            }
+        } catch (FileNotFoundException e) {
+            finalMessage.setText("File not found exception occurred while saving checklist.");
+        }
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage
-    // EFFECTS: Load the current state of the trip from the given path and displays
+    // EFFECTS: Load the current state of the trip and the checklist from the given
+    // path and displays
     // a message conveying
     // whether the trip has been loaded or not. Throws an IOException if file not
     // found.
+
     public void loadTripGUI(JLabel finalMessage) {
         String path = "data\\myTrip.json";
+        String checklistPath = "data\\myChecklist.json";
         JsonReader reader = new JsonReader(path);
+        JsonReader readerChecklist = new JsonReader(checklistPath);
+
         try {
             trip = reader.readTrips();
             if (trip != null) {
-                finalMessage.setText("Trip loaded  from " + path);
+                finalMessage.setText("Trip loaded from " + path);
             } else {
-                finalMessage.setText("No trip found");
+                finalMessage.setText("No trip found.");
             }
         } catch (IOException e) {
-            finalMessage.setText("File not Found Exception occured.");
+            finalMessage.setText("File not found exception occurred while loading trip.");
+        }
+
+        try {
+            Checklist check = readerChecklist.readChecklist();
+            if (check != null) {
+                checklist = check.getChecklist();
+                finalMessage.setText(finalMessage.getText() + " Checklist loaded from " + checklistPath);
+            } else {
+                finalMessage.setText(finalMessage.getText() + " No checklist found.");
+            }
+        } catch (IOException e) {
+            finalMessage
+                    .setText(finalMessage.getText() + " File not found exception occurred while loading checklist.");
         }
     }
 
