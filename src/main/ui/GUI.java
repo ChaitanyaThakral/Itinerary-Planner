@@ -32,7 +32,7 @@ public class GUI {
 
     private Trips trip;
     private JFrame window;
-    private Checklist checklist;
+    private List<Item> checklist;
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
@@ -45,7 +45,7 @@ public class GUI {
     public GUI() {
         mainWindow();
         createPanel();
-        checklist = new Checklist();
+        checklist = new ArrayList();
     }
 
     // MODIFIES main window.
@@ -172,26 +172,121 @@ public class GUI {
         checklistFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         checklistFrame.setSize(800, 500);
         checklistFrame.setLocation(370, 160);
-        checklistFrame.setLayout(null);
-
+    
+        
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setLayout(null); 
+    
         ImageIcon bgIcon = new ImageIcon("data/Background Image.jpeg");
         Image bgImage = bgIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
         JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
         backgroundLabel.setBounds(0, 0, 800, 500);
-
+    
         JButton checklistButton = createTheChecklistButton(finalMessage);
         JButton checklistViewButton = createChecklistViewButton(finalMessage);
-
-
+        JButton removeItemButton = createRemoveItemButton(finalMessage);
+        JButton addButton = createAddButton(finalMessage);
+        JButton remainItemNumberButton = createRemainItemNumberButton(finalMessage);
+        JButton changeStatusButton = createChangeStatusButton(finalMessage);
+        JButton exitCheckListOperationButton = createExitCheckListButton(finalMessage);
+    
         checklistButton.setBounds(20, 25, 200, 40);
-        checklistViewButton.setBounds(20,75,200,40);
-
-        checklistFrame.setVisible(true);
-        checklistFrame.add(backgroundLabel);
-
-        checklistFrame.add(checklistButton);
-        checklistFrame.add(checklistViewButton);
+        addButton.setBounds(20, 75, 200, 40);
+        checklistViewButton.setBounds(20, 125, 200, 40);
+        removeItemButton.setBounds(20, 175, 200, 40);
+        remainItemNumberButton.setBounds(20, 225, 200, 40);
+        changeStatusButton.setBounds(20, 275, 200, 40);
+        exitCheckListOperationButton.setBounds(20, 325, 200, 40);
+    
+        
+        layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(checklistButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(addButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(checklistViewButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(removeItemButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(remainItemNumberButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(changeStatusButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(exitCheckListOperationButton, JLayeredPane.PALETTE_LAYER);
+    
+        checklistFrame.setContentPane(layeredPane);
+    
+        
+        checklistFrame.revalidate();
+        checklistFrame.repaint();
+    
         window.setVisible(false);
+        checklistFrame.setVisible(true);
+    }
+    
+    
+
+    public JButton createExitCheckListButton(JLabel finalMessage) {
+        JButton exitCheckListOperationButton = new JButton("Exit Checklist and Head to main menu");
+        exitCheckListOperationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exitOperation(finalMessage);
+            }
+
+        });
+        return exitCheckListOperationButton;
+    }
+
+    public void exitOperation(JLabel finalMessage) {
+        
+        JFrame checklistFrame = (JFrame) SwingUtilities.getWindowAncestor(finalMessage);
+        checklistFrame.setVisible(false);
+    
+        
+        window.setVisible(true);
+    
+        
+        finalMessage.setText("Returned to main menu.");
+    }
+
+
+    public JButton createChangeStatusButton(JLabel finalMessage) {
+        JButton changeStatusButton = new JButton("Change status of items");
+        changeStatusButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeStatusOperation(finalMessage);
+            }
+
+        });
+        return changeStatusButton;
+    }
+
+    public void changeStatusOperation(JLabel finalMessage) {
+        String checkName = JOptionPane.showInputDialog("Enter the name of item for which the status has to be changed ?");
+        String status = JOptionPane.showInputDialog("Enter the new status of item (yes/no)");
+        for (Item i : checklist) {
+            if (i.getName().equals(checkName)) {
+                checklist.remove(i);
+                Boolean choice;
+                if (status.equals("yes") || status.equals("Yes")) {
+                    choice= true;
+                }
+                else{
+                    choice=false;
+                }
+                Item item = new Item(checkName,choice);
+                checklist.add(item);
+            }
+        }
+        finalMessage.setText("Item remove Successfully");
+    }
+
+    public JButton createRemainItemNumberButton(JLabel finalMessage) {
+        JButton remainItemNumberButton = new JButton("Find No. of items in Checklist");
+        remainItemNumberButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remainItemNumberOperation(finalMessage);
+            }
+        });
+
+        return remainItemNumberButton;
     }
 
     public JButton createTheChecklistButton(JLabel finalMessage) {
@@ -204,6 +299,47 @@ public class GUI {
         });
 
         return checklistButton;
+    }
+
+    public JButton createAddButton(JLabel finalMessage) {
+        JButton addButton = new JButton("Add item to Checklist");
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addItemOperation(finalMessage);
+            }
+        });
+
+        return addButton;
+    }
+
+    public void addItemOperation(JLabel finalMessage) {
+        String checkName = JOptionPane.showInputDialog("Enter the name of item to pack:");
+        String choicemid = JOptionPane
+                .showInputDialog("Enter the status of the item whether packed or not (yes/no) ?");
+        Boolean checkStatus;
+        if (choicemid.equals("yes")) {
+            checkStatus = true;
+        } else {
+            checkStatus = false;
+        }
+
+        Item item = new Item(checkName, checkStatus);
+        checklist.add(item);
+        finalMessage.setText("Item added successfully!");
+    }
+
+    public void remainItemNumberOperation(JLabel finalMessage) {
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+        textArea.append("There are " + checklist.size() + " items in the list");
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(300, 200));
+
+        JOptionPane.showMessageDialog(window, scrollPane, "Display Checklist Details", JOptionPane.INFORMATION_MESSAGE);
+        finalMessage.setText("Checklist operation of count done successfully!");
     }
 
     public void createChecklistOperation(JLabel finalMessage) {
@@ -223,7 +359,7 @@ public class GUI {
             }
 
             Item item = new Item(checkName, checkStatus);
-            checklist.addItem(item);
+            checklist.add(item);
 
             int addMore = JOptionPane.showConfirmDialog(window, "Do you want to add another item to the Checklist?",
                     "Add more items?", JOptionPane.YES_NO_OPTION);
@@ -233,7 +369,6 @@ public class GUI {
         finalMessage.setText("Checklist created successfully!");
 
     }
-
 
     public JButton createChecklistViewButton(JLabel finalMessage) {
         JButton checklistViewButton = new JButton("View the Checklist");
@@ -247,11 +382,58 @@ public class GUI {
         return checklistViewButton;
     }
 
+    public JButton createRemoveItemButton(JLabel finalMessage) {
+        JButton removeItemButton = new JButton("Remove item from Checklist");
+        removeItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeItem(finalMessage);
+            }
+        });
+
+        return removeItemButton;
+    }
+
     public void checklistView(JLabel finalMessage) {
-        
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+
+        for (Item i : checklist)
+            textArea.append(
+                    "Item Name: " + i.getName() +
+                            "\nPacking Status: " + i.getStatus() +
+                            "\n------------------------------------\n");
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(300, 200));
+
+        JOptionPane.showMessageDialog(window, scrollPane, "View Checklist Details", JOptionPane.INFORMATION_MESSAGE);
+
+        finalMessage.setText("Displaying details of the Checklist");
 
     }
 
+    public void removeItem(JLabel finalMessage) {
+        Boolean choice = true;
+        while (choice) {
+            String checkName = JOptionPane.showInputDialog("Enter the name of item to remove from the Checklist:");
+            for (Item i : checklist) {
+                if (i.getName().equals(checkName)) {
+                    checklist.remove(i);
+                }
+            }
+
+            int addMore = JOptionPane.showConfirmDialog(window,
+                    "Do you want to remove another item from the Checklist?",
+                    "remove more items?", JOptionPane.YES_NO_OPTION);
+            choice = (addMore == JOptionPane.YES_OPTION);
+        }
+
+        finalMessage.setText("Items removed successfully!");
+
+    }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage,trip
