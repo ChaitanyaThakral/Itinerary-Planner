@@ -84,6 +84,8 @@ public class GUI {
         System.exit(0);
     }
 
+    
+
     @SuppressWarnings("methodlength")
     // REQUIRES: The parent window is initialized and able to display all the new
     // panels.
