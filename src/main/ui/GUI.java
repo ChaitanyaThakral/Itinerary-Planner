@@ -6,7 +6,9 @@ import persistence.JsonWriter;
 import model.Activity;
 import model.DestinationItinerary;
 import model.EventLog;
+import model.Item;
 import model.Budget;
+import model.Checklist;
 import model.Event;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class GUI {
 
     private Trips trip;
     private JFrame window;
+    private Checklist checklist;
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
@@ -42,6 +45,7 @@ public class GUI {
     public GUI() {
         mainWindow();
         createPanel();
+        checklist = new Checklist();
     }
 
     // MODIFIES main window.
@@ -96,6 +100,7 @@ public class GUI {
     // user.
     public void createPanel() {
         JLayeredPane backgroundPanel = new JLayeredPane();
+        backgroundPanel.setLocation(100, 100);
         backgroundPanel.setPreferredSize(new Dimension(800, 500));
 
         ImageIcon bg = new ImageIcon("data/Background Image.jpeg");
@@ -110,7 +115,7 @@ public class GUI {
         buttonPanel.setBounds(0, 0, 800, 500);
 
         JLabel finalMessage = new JLabel("");
-        finalMessage.setBounds(20, 400, 760, 40);
+        finalMessage.setBounds(20, 415, 760, 40);
         finalMessage.setForeground(Color.BLACK);
         finalMessage.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -121,23 +126,23 @@ public class GUI {
         JButton budgetAnalysisButton = createBudgetAnalysisButton(finalMessage);
         JButton saveButton = createSaveButton(finalMessage);
         JButton loadButton = createLoadButton(finalMessage);
-        JButton createChecklist = createChecklistButton(finalMessage);
+        JButton createChecklisOperationtButton = createChecklistButton(finalMessage);
 
-        createTripButton.setBounds(20, 50, 200, 40);
-        addDestinationButton.setBounds(20, 100, 200, 40);
-        viewTasksButton.setBounds(20, 150, 200, 40);
-        removeActivity.setBounds(20, 200, 200, 40);
-        budgetAnalysisButton.setBounds(20, 250, 200, 40);
-        createChecklist.setBounds(20, 300, 200, 40);
-        saveButton.setBounds(20, 350, 200, 40);
-        loadButton.setBounds(20, 400, 200, 40);
+        createTripButton.setBounds(20, 25, 200, 40);
+        addDestinationButton.setBounds(20, 75, 200, 40);
+        viewTasksButton.setBounds(20, 125, 200, 40);
+        removeActivity.setBounds(20, 175, 200, 40);
+        budgetAnalysisButton.setBounds(20, 225, 200, 40);
+        createChecklisOperationtButton.setBounds(20, 275, 200, 40);
+        saveButton.setBounds(20, 325, 200, 40);
+        loadButton.setBounds(20, 375, 200, 40);
 
         buttonPanel.add(createTripButton);
         buttonPanel.add(addDestinationButton);
         buttonPanel.add(viewTasksButton);
         buttonPanel.add(removeActivity);
         buttonPanel.add(budgetAnalysisButton);
-        buttonPanel.add(createChecklist);
+        buttonPanel.add(createChecklisOperationtButton);
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
 
@@ -151,19 +156,102 @@ public class GUI {
     }
 
     public JButton createChecklistButton(JLabel finalMessage) {
-        JButton createChecklisButton = new JButton("Create a Checklist");
+        JButton createChecklistButtonLabel = new JButton("Operate on Checklist");
 
-        createChecklisButton.addActionListener(new ActionListener() {
+        createChecklistButtonLabel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                checklistOperation(finalMessage);
+                createChecklistStart(finalMessage);
             }
         });
-        return createChecklisButton;
+        return createChecklistButtonLabel;
     }
 
-    public void checklistOperation(JLabel finalMessage) {
+    public void createChecklistStart(JLabel finalMessage) {
+
+        JFrame checklistFrame = new JFrame("Checklist Operations");
+        checklistFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        checklistFrame.setSize(800, 500);
+        checklistFrame.setLocation(370, 160);
+        checklistFrame.setLayout(null);
+
+        ImageIcon bgIcon = new ImageIcon("data/Background Image.jpeg");
+        Image bgImage = bgIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
+        backgroundLabel.setBounds(0, 0, 800, 500);
+
+        JButton checklistButton = createTheChecklistButton(finalMessage);
+        JButton checklistViewButton = createChecklistViewButton(finalMessage);
+
+
+        checklistButton.setBounds(20, 25, 200, 40);
+        checklistViewButton.setBounds(20,75,200,40);
+
+        checklistFrame.setVisible(true);
+        checklistFrame.add(backgroundLabel);
+
+        checklistFrame.add(checklistButton);
+        checklistFrame.add(checklistViewButton);
+        window.setVisible(false);
+    }
+
+    public JButton createTheChecklistButton(JLabel finalMessage) {
+        JButton checklistButton = new JButton("Create a Checklist");
+        checklistButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createChecklistOperation(finalMessage);
+            }
+        });
+
+        return checklistButton;
+    }
+
+    public void createChecklistOperation(JLabel finalMessage) {
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(3, 2));
+
+        Boolean choice = true;
+        while (choice) {
+            String checkName = JOptionPane.showInputDialog("Enter the name of item to pack:");
+            String choicemid = JOptionPane
+                    .showInputDialog("Enter the status of the item whether packed or not (yes/no) ?");
+            Boolean checkStatus;
+            if (choicemid.equals("yes")) {
+                checkStatus = true;
+            } else {
+                checkStatus = false;
+            }
+
+            Item item = new Item(checkName, checkStatus);
+            checklist.addItem(item);
+
+            int addMore = JOptionPane.showConfirmDialog(window, "Do you want to add another item to the Checklist?",
+                    "Add more items?", JOptionPane.YES_NO_OPTION);
+            choice = (addMore == JOptionPane.YES_OPTION);
+
+        }
+        finalMessage.setText("Checklist created successfully!");
 
     }
+
+
+    public JButton createChecklistViewButton(JLabel finalMessage) {
+        JButton checklistViewButton = new JButton("View the Checklist");
+        checklistViewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                checklistView(finalMessage);
+            }
+        });
+
+        return checklistViewButton;
+    }
+
+    public void checklistView(JLabel finalMessage) {
+        
+
+    }
+
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
     // MODIFIES: finalMessage,trip
