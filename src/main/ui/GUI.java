@@ -34,7 +34,7 @@ public class GUI {
     private JFrame window;
     private List<Item> checklist;
     private Checklist check;
-     private JLabel textLabel;
+    private JLabel textLabel;
 
     // EFFECTS: constructs a TripMaker object with Scanner to take input from the
     // user, destinationItinerary list to manage the itinerary of the trip.
@@ -47,7 +47,7 @@ public class GUI {
     public GUI() {
         mainWindow();
         createPanel();
-        checklist = new ArrayList();
+        checklist = new ArrayList<Item>();
 
     }
 
@@ -85,8 +85,6 @@ public class GUI {
         System.exit(0);
     }
 
-    
-
     @SuppressWarnings("methodlength")
     // REQUIRES: The parent window is initialized and able to display all the new
     // panels.
@@ -107,25 +105,23 @@ public class GUI {
         JLayeredPane backgroundPanel = new JLayeredPane();
         backgroundPanel.setLocation(100, 100);
         backgroundPanel.setPreferredSize(new Dimension(800, 500));
-    
-        // Background image
+
         ImageIcon bg = new ImageIcon("data/Background Image.jpeg");
         JLabel background = new JLabel(new ImageIcon(bg.getImage()
                 .getScaledInstance(800, 500, Image.SCALE_SMOOTH)));
         background.setBounds(0, 0, 800, 500);
         backgroundPanel.add(background, Integer.valueOf(0));
-    
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(null);
         buttonPanel.setOpaque(false);
         buttonPanel.setBounds(0, 0, 800, 500);
-    
+
         JLabel finalMessage = new JLabel("");
         finalMessage.setBounds(20, 415, 760, 40);
         finalMessage.setForeground(Color.BLACK);
         finalMessage.setFont(new Font("Arial", Font.BOLD, 20));
-    
-        // Create buttons
+
         JButton createTripButton = createTripButton(finalMessage);
         JButton addDestinationButton = createAddDestinationItineraryButton(finalMessage);
         JButton viewTasksButton = createViewTasksButton(finalMessage);
@@ -134,7 +130,7 @@ public class GUI {
         JButton saveButton = createSaveButton(finalMessage);
         JButton loadButton = createLoadButton(finalMessage);
         JButton createChecklisOperationtButton = createChecklistButton(finalMessage);
-    
+
         createTripButton.setBounds(20, 25, 200, 40);
         addDestinationButton.setBounds(20, 75, 200, 40);
         viewTasksButton.setBounds(20, 125, 200, 40);
@@ -143,7 +139,7 @@ public class GUI {
         createChecklisOperationtButton.setBounds(20, 275, 200, 40);
         saveButton.setBounds(20, 325, 200, 40);
         loadButton.setBounds(20, 375, 200, 40);
-    
+
         buttonPanel.add(createTripButton);
         buttonPanel.add(addDestinationButton);
         buttonPanel.add(viewTasksButton);
@@ -152,31 +148,27 @@ public class GUI {
         buttonPanel.add(createChecklisOperationtButton);
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
-    
+
         backgroundPanel.add(buttonPanel, Integer.valueOf(1));
         backgroundPanel.add(finalMessage, Integer.valueOf(2));
-    
-        
+
         JLabel quoteLabel = new JLabel("Travel Itinerary Planner");
         quoteLabel.setBounds(300, 85, 700, 40);
         quoteLabel.setForeground(Color.BLACK);
         quoteLabel.setFont(new Font("Serif", Font.BOLD, 40));
-    
-        
+
         JLabel textLabel = new JLabel("A perfect tool for all your travel needs.");
-        textLabel.setBounds(270, 125, 700, 40);  
+        textLabel.setBounds(270, 125, 700, 40);
         textLabel.setForeground(Color.BLACK);
         textLabel.setFont(new Font("Serif", Font.BOLD, 30));
-    
-        
+
         backgroundPanel.add(quoteLabel, Integer.valueOf(2));
         backgroundPanel.add(textLabel, Integer.valueOf(2));
-    
+
         window.add(backgroundPanel);
         window.revalidate();
         window.repaint();
     }
-    
 
     public JButton createChecklistButton(JLabel finalMessage) {
         JButton createChecklistButtonLabel = new JButton("Operate on Checklist");
@@ -200,10 +192,10 @@ public class GUI {
         layeredPane.setLayout(null);
 
         textLabel = new JLabel("Welcome to Travel Itinerary Planner!");
-        textLabel.setFont(new Font("Arial", Font.BOLD, 16));  // Set font
-        textLabel.setForeground(Color.WHITE);  // Set text color
-        textLabel.setBounds(50, 220, 300, 40);  // Set the position and size of the text
-        textLabel.setHorizontalAlignment(SwingConstants.CENTER);  
+        textLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        textLabel.setForeground(Color.WHITE);
+        textLabel.setBounds(50, 220, 300, 40);
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         ImageIcon bgIcon = new ImageIcon("data/Background Image.jpeg");
         Image bgImage = bgIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
@@ -241,17 +233,14 @@ public class GUI {
         quoteLabel.setBounds(300, 85, 700, 40);
         quoteLabel.setForeground(Color.BLACK);
         quoteLabel.setFont(new Font("Serif", Font.BOLD, 40));
-    
-        
+
         JLabel textLabel = new JLabel("A perfect tool for all your travel needs.");
-        textLabel.setBounds(270, 125, 700, 40);  
+        textLabel.setBounds(270, 125, 700, 40);
         textLabel.setForeground(Color.BLACK);
         textLabel.setFont(new Font("Serif", Font.BOLD, 30));
-    
-        
+
         layeredPane.add(quoteLabel, Integer.valueOf(2));
         layeredPane.add(textLabel, Integer.valueOf(2));
-    
 
         checklistFrame.revalidate();
         checklistFrame.repaint();
@@ -259,6 +248,8 @@ public class GUI {
         window.setVisible(false);
         checklistFrame.setVisible(true);
     }
+    // REQUIRES:finalMessage is a non-null JLabel to display messages.
+    // EFFECTS: creates the button for the exit checklist and head to the main menu.
 
     public JButton createExitCheckListButton(JLabel finalMessage) {
         JButton exitCheckListOperationButton = new JButton("Exit Checklist");
@@ -317,7 +308,6 @@ public class GUI {
         return checklistButton;
     }
     // REQUIRES:finalMessage is a non-null JLabel to display messages.
-
     // EFFECTS: creates a button to add item in the checklist.
 
     public JButton createAddButton(JLabel finalMessage) {
@@ -381,6 +371,7 @@ public class GUI {
                 checklist.add(item);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Status of the item name " + checkName + " is changed."));
         finalMessage.setText("Item remove Successfully");
     }
     // REQUIRES:finalMessage is a non-null JLabel to display messages.
@@ -400,6 +391,7 @@ public class GUI {
 
         Item item = new Item(checkName, checkStatus);
         checklist.add(item);
+        EventLog.getInstance().logEvent(new Event("Item " + checkName + " added to the Checklist."));
         finalMessage.setText("Item added successfully!");
     }
 
@@ -417,6 +409,7 @@ public class GUI {
         scrollPane.setPreferredSize(new Dimension(300, 200));
 
         JOptionPane.showMessageDialog(window, scrollPane, "Display Checklist Details", JOptionPane.INFORMATION_MESSAGE);
+        EventLog.getInstance().logEvent(new Event("Count of remaining items to pack in the checklist Displayed."));
         finalMessage.setText("Checklist operation of count done successfully!");
     }
 
@@ -427,7 +420,7 @@ public class GUI {
     public void createChecklistOperation(JLabel finalMessage) {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(3, 2));
-
+        EventLog.getInstance().logEvent(new Event("New Checklist Created"));
         Boolean choice = true;
         while (choice) {
             String checkName = JOptionPane.showInputDialog("Enter the name of item to pack:");
@@ -442,19 +435,17 @@ public class GUI {
 
             Item item = new Item(checkName, checkStatus);
             checklist.add(item);
+            EventLog.getInstance().logEvent(new Event("Item " + checkName + " added to the Checklist."));
 
             int addMore = JOptionPane.showConfirmDialog(window, "Do you want to add another item to the Checklist?",
                     "Add more items?", JOptionPane.YES_NO_OPTION);
             choice = (addMore == JOptionPane.YES_OPTION);
 
         }
+        
         finalMessage.setText("Checklist created successfully!");
 
     }
-
-    // REQUIRES:finalMessage is a non-null JLabel to display messages.
-    // MODIFIES:finalMessage,checklist
-    // EFFECTS: display the checklist.
 
     public void checklistView(JLabel finalMessage) {
         JTextArea textArea = new JTextArea();
@@ -473,6 +464,7 @@ public class GUI {
 
         JOptionPane.showMessageDialog(window, scrollPane, "View Checklist Details", JOptionPane.INFORMATION_MESSAGE);
 
+        EventLog.getInstance().logEvent(new Event("Items of checklist displayed successfully"));
         finalMessage.setText("Displaying details of the Checklist");
 
     }
@@ -488,6 +480,7 @@ public class GUI {
             for (Item i : checklist) {
                 if (i.getName().equals(checkName)) {
                     checklist.remove(i);
+                    EventLog.getInstance().logEvent(new Event("Item "+ checkName +" removed from the checklist"));
                 }
             }
 
@@ -496,7 +489,7 @@ public class GUI {
                     "remove more items?", JOptionPane.YES_NO_OPTION);
             choice = (addMore == JOptionPane.YES_OPTION);
         }
-
+        
         finalMessage.setText("Items removed successfully!");
 
     }
@@ -511,8 +504,9 @@ public class GUI {
         checklistFrame.setVisible(false);
 
         window.setVisible(true);
+        EventLog.getInstance().logEvent(new Event("Exited the checklist operation Menu and headed to the Main Menu."));
 
-        finalMessage.setText("Returned to main menu.");
+        finalMessage.setText("Returned to Main Menu.");
     }
 
     // REQUIRES: finalMessage is a non-null JLabel to display messages.
