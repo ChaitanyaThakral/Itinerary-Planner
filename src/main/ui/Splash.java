@@ -9,11 +9,11 @@ public class Splash {
 
     public Splash() {
         frame = new JFrame("Splash Screen");
-        frame.setSize(600, 700);
+        frame.setSize(775, 500);
         frame.setLocationRelativeTo(null);
         frame.setUndecorated(true);
 
-        ImageIcon splashImage = new ImageIcon("data\\SplashScreenImage.png");
+        ImageIcon splashImage = new ImageIcon("data\\Splash.jpeg");
 
         label = new JLabel(splashImage);
         frame.add(label, BorderLayout.CENTER);

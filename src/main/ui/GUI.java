@@ -420,7 +420,7 @@ public class GUI {
     public void createChecklistOperation(JLabel finalMessage) {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(3, 2));
-        EventLog.getInstance().logEvent(new Event("New Checklist Created"));
+EventLog.getInstance().logEvent(new Event("New Checklist Created"));
         Boolean choice = true;
         while (choice) {
             String checkName = JOptionPane.showInputDialog("Enter the name of item to pack:");
